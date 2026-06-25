@@ -51,7 +51,7 @@ const AIChat = () => {
     }
     
     if (lowerMessage.includes("contact") || lowerMessage.includes("hire") || lowerMessage.includes("work together")) {
-      return "You can reach Talha at talha.ghafoor@hitecuni.edu.pk or connect with him on LinkedIn at linkedin.com/in/talha-ghafoor-475aa926a. He's currently available for internships and exciting project collaborations!";
+      return "You can reach Talha at talhaghafoor84@gmail.com or connect with him on LinkedIn at linkedin.com/in/talha-ghafoor-475aa926a. He's currently available for internships and exciting project collaborations!";
     }
     
     if (lowerMessage.includes("experience") || lowerMessage.includes("background")) {
