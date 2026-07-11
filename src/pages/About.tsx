@@ -19,9 +19,9 @@ const About = () => {
       company: "Digital Empowerment Network",
       period: "July 2025 – September 2025",
       points: [
-        "Built a mental health detection model using TF-IDF and Logistic Regression on unstructured text data, achieving approximately 84% F1-score after iterative feature engineering and threshold tuning.",
-        "Developed a heart disease detection pipeline; applied SMOTE to address class imbalance in clinical datasets, improving minority-class recall from approximately 71% to 83%.",
-        "Delivered end-of-internship evaluation reports covering accuracy, precision, recall, and AUC-ROC scores to the supervising engineering team."
+        "Designed and executed test cases to validate a mental health detection model (TF-IDF + Logistic Regression) against defined accuracy criteria, achieving ~84% F1-score through iterative test cycles and threshold tuning.",
+        "Identified a class-imbalance defect in a heart disease detection pipeline during test analysis; applied SMOTE as a corrective fix and verified the improvement via regression testing, raising minority-class recall from ~71% to 83%.",
+        "Authored structured QA-style evaluation reports (accuracy, precision, recall, AUC-ROC) and presented findings to the supervising engineering team at project close-out."
       ]
     },
     {
@@ -29,16 +29,16 @@ const About = () => {
       company: "DevelopersHub Corporation",
       period: "June 2025 – July 2025",
       points: [
-        "Trained a CNN-based image classifier achieving approximately 89% validation accuracy through architecture tuning and data augmentation on a dataset of around 6,000 images.",
-        "Cleaned, labeled, and augmented training data to reduce overfitting and improve generalization across unseen test samples.",
-        "Documented model performance across training runs and submitted structured weekly progress reports."
+        "Conducted systematic testing and validation of a CNN-based image classifier across multiple training iterations, confirming ~89% validation accuracy against target benchmarks.",
+        "Performed data quality testing on a ~6,000-image dataset – cleaning, labeling, and flagging inconsistencies – to catch defects before training and reduce overfitting.",
+        "Documented test results and defect/error patterns across training runs in structured weekly progress reports."
       ]
     }
   ];
 
   const interests = [
-    "Artificial Intelligence", "Machine Learning", "Data Science", 
-    "Frontend Development", "Gen AI", "Research", "Innovation", "Technology"
+    "Software Quality Assurance", "Automation Testing", "Artificial Intelligence", "Machine Learning", 
+    "Frontend Development", "Gen AI", "Research", "Technology"
   ];
 
   return (
@@ -84,9 +84,8 @@ const About = () => {
                 <div className="flex-1 text-center md:text-left">
                   <h2 className="text-3xl font-bold mb-4 hero-text">Talha Ghafoor</h2>
                   <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                    I'm a Software Engineer focused on AI systems, NLP, and cloud-native ML deployment. 
-                    I have strong experience building full-stack AI applications using Python, FastAPI, React, Docker, and AWS. 
-                    My passion lies in ML pipeline development, serverless infrastructure, and end-to-end product engineering.
+                    I'm a Software Engineering student with hands-on experience in both software quality assurance and applied AI/ML engineering. 
+                    I focus on manual and automated testing (Cypress, Postman, AI-assisted automation) as well as model evaluation, NLP, computer vision, and full-stack development (Python, FastAPI, React, AWS, Docker).
                   </p>
                   <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                     <div className="flex items-center gap-2 text-sm">

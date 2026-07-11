@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Database, Palette, Cpu, BarChart3 } from "lucide-react";
+import { Brain, Code, Database, Palette, Cpu, BarChart3, ShieldCheck } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import FloatingElements from "@/components/FloatingElements";
 import AIChat from "@/components/AIChat";
@@ -19,6 +19,18 @@ const Skills = () => {
         { name: "Computer Vision", level: 85 },
         { name: "HuggingFace", level: 80 },
         { name: "OpenCV", level: 82 }
+      ]
+    },
+    {
+      title: "Quality Assurance & Testing",
+      icon: <ShieldCheck className="h-6 w-6" />,
+      skills: [
+        { name: "Manual & Exploratory Testing", level: 90 },
+        { name: "Cypress (E2E Automation)", level: 88 },
+        { name: "API Testing (Postman)", level: 88 },
+        { name: "Regression Testing", level: 85 },
+        { name: "AI-Assisted Test Automation", level: 80 },
+        { name: "Model & Data Evaluation", level: 85 }
       ]
     },
     {
@@ -60,8 +72,8 @@ const Skills = () => {
   ];
 
   const tools = [
-    "VS Code", "Jupyter Notebook", "Git", "GitHub", "Docker", "AWS (ECS, Lambda, S3, API Gateway)",
-    "Oracle Cloud Infrastructure", "Supabase"
+    "Cypress", "Postman", "Git", "GitHub", "Docker", "AWS (ECS, Lambda, S3, API Gateway)",
+    "Oracle Cloud Infrastructure", "Supabase", "VS Code", "Jupyter Notebook"
   ];
 
   const certifications = [
@@ -101,47 +113,51 @@ const Skills = () => {
 
           {/* Skills Categories */}
           <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {skillCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-              >
-                <Card className="glass-card p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-gradient-primary rounded-lg text-primary-foreground">
-                      {category.icon}
+            {skillCategories.map((category, categoryIndex) => {
+              const isLastOdd = categoryIndex === skillCategories.length - 1 && skillCategories.length % 2 !== 0;
+              return (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
+                  className={isLastOdd ? "md:col-span-2" : ""}
+                >
+                  <Card className="glass-card p-6">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-gradient-primary rounded-lg text-primary-foreground">
+                        {category.icon}
+                      </div>
+                      <h3 className="text-xl font-bold hero-text">{category.title}</h3>
                     </div>
-                    <h3 className="text-xl font-bold hero-text">{category.title}</h3>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ 
-                          duration: 0.6, 
-                          delay: categoryIndex * 0.2 + skillIndex * 0.1 
-                        }}
-                        className="space-y-2"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="font-medium">{skill.name}</span>
-                          <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                        </div>
-                        <Progress 
-                          value={skill.level} 
-                          className="h-2 bg-secondary/50"
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+                    
+                    <div className="space-y-4">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ 
+                            duration: 0.6, 
+                            delay: categoryIndex * 0.2 + skillIndex * 0.1 
+                          }}
+                          className="space-y-2"
+                        >
+                          <div className="flex justify-between items-center">
+                            <span className="font-medium">{skill.name}</span>
+                            <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                          </div>
+                          <Progress 
+                            value={skill.level} 
+                            className="h-2 bg-secondary/50"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Tools & Technologies */}

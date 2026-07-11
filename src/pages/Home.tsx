@@ -86,13 +86,15 @@ const Home = () => {
               </div>
               <TypeAnimation
                 sequence={[
+                  'a QA Engineer',
+                  2000,
+                  'an AI/ML Engineer',
+                  2000,
+                  'building automated test suites',
+                  2000,
+                  'designing ML pipelines',
+                  2000,
                   'a passionate Software Engineer',
-                  2000,
-                  'building AI-driven applications',
-                  2000,
-                  'crafting modern web experiences',
-                  2000,
-                  'exploring the limits of ML',
                   2000
                 ]}
                 wrapper="div"

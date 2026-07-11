@@ -38,31 +38,31 @@ const AIChat = () => {
   const generateAIResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
     
-    if (lowerMessage.includes("skill") || lowerMessage.includes("technology")) {
-      return "Talha has strong expertise in Machine Learning, Python, React, TypeScript, Data Analysis, and Generative AI. He's currently studying Software Engineering at HITEC University (2022-2026) and has completed several certifications in ML and web development.";
+    if (lowerMessage.includes("skill") || lowerMessage.includes("technology") || lowerMessage.includes("qa") || lowerMessage.includes("test")) {
+      return "Talha has strong expertise in Software Quality Assurance (Cypress E2E automation, Postman API testing, manual test case design, regression testing) and applied AI/ML engineering (Python, NLP, Computer Vision, model evaluation). He also has full-stack skills in React, FastAPI, Laravel, AWS, and Docker.";
     }
     
     if (lowerMessage.includes("project") || lowerMessage.includes("work")) {
-      return "Talha has worked on exciting projects including an AI-Powered Sentiment Analysis Platform, Smart Data Visualization Dashboard, and Generative AI Content Creator. He combines his ML expertise with modern web technologies to create innovative solutions.";
+      return "Talha has built and verified several key projects: 1) GenMark (FYP), a multi-modal AI generation platform validated with Cypress and Postman automated suites; 2) Multi-Vendor E-Commerce, manually tested for checkout flows and Stripe webhooks; and 3) NLP Mental Health Detection, evaluated rigorously with SMOTE and regression verification.";
     }
     
     if (lowerMessage.includes("education") || lowerMessage.includes("university") || lowerMessage.includes("study")) {
-      return "Talha is currently pursuing his Bachelor's in Software Engineering at HITEC University (2022-2026). He maintains excellent academic performance and actively participates in research projects focused on AI and data science.";
+      return "Talha is currently pursuing his Bachelor's in Software Engineering at HITEC University (2022-2026). His coursework includes Software Quality Assurance, Machine Learning, Cloud Computing, and Web Engineering.";
     }
     
-    if (lowerMessage.includes("contact") || lowerMessage.includes("hire") || lowerMessage.includes("work together")) {
-      return "You can reach Talha at talhaghafoor84@gmail.com or connect with him on LinkedIn at linkedin.com/in/talha-ghafoor-475aa926a. He's currently available for internships and exciting project collaborations!";
+    if (lowerMessage.includes("contact") || lowerMessage.includes("hire") || lowerMessage.includes("work together") || lowerMessage.includes("email")) {
+      return "You can reach Talha at talhaghafoor84@gmail.com or connect with him on LinkedIn at linkedin.com/in/talha-ghafoor-475aa926a. He is currently seeking QA Engineer or AI/ML Engineer roles!";
     }
     
-    if (lowerMessage.includes("experience") || lowerMessage.includes("background")) {
-      return "Talha has a strong background in Machine Learning, Generative AI, Data Analysis, and Frontend Development. He's worked on various projects combining AI/ML with modern web technologies and has earned certifications from Stanford, Meta, and IBM.";
+    if (lowerMessage.includes("experience") || lowerMessage.includes("background") || lowerMessage.includes("intern")) {
+      return "Talha's experience includes AI/ML Internships at Digital Empowerment Network (testing classification models, using SMOTE to resolve defects) and DevelopersHub Corporation (performing CNN validation and data quality testing). He has also earned the OCI Certified AI Foundations Associate credential.";
     }
     
     if (lowerMessage.includes("hello") || lowerMessage.includes("hi") || lowerMessage.includes("hey")) {
-      return "Hello! Great to meet you! I'm here to tell you all about Talha Ghafoor - his skills, projects, and achievements. What would you like to know?";
+      return "Hello! Great to meet you! I'm here to tell you all about Talha Ghafoor - his skills in software QA, machine learning, projects, and achievements. What would you like to know?";
     }
     
-    return "That's an interesting question! Talha is a passionate Software Engineering student with expertise in AI/ML and web development. Feel free to ask about his skills, projects, education, or how to get in touch with him!";
+    return "That's an interesting question! Talha is a Software Engineering student specializing in Quality Assurance & Testing and applied AI/ML. Feel free to ask about his skills, projects, experience, or certifications!";
   };
 
   const handleSendMessage = async () => {

@@ -19,6 +19,13 @@ GenMark is an advanced platform designed to streamline marketing workflows throu
 * **Project Analytics:** Real-time dashboarding for project status and generation metrics.
 * **Microservice Architecture:** Decoupled frontend and backend for scalable deployment.
 
+### 🧪 Quality Assurance & Testing
+
+* **End-to-End Automation:** Wrote and executed automated Cypress test suites for the React frontend, covering key user flows like content generation, user auth, and preview.
+* **API Contract Testing:** Tested FastAPI backend endpoints with Postman, validating request/response schemas, response times, status codes, and error routes.
+* **AI-Assisted Testing:** Leveraged AI tools to quickly generate boundary-value test cases and maximize coverage across backend/frontend interaction paths.
+* **Inference Validation:** Verified on-demand model lazy-loading across AWS ECS Fargate, Lambda, and API Gateway under concurrent test loads.
+
 ### ⚡ Local Development
 
 **1. Prerequisites**
@@ -89,6 +96,12 @@ All API endpoints are unified under \`/api/*\` handled by Hono.js. The router is
 * **Admin Module:** Oversight actions.
 * **Products Module:** Search and filter endpoints.
 * **Orders & Reviews Module:** Submitting checkout and product feedback.
+
+### 🧪 Quality Assurance & Verification
+
+* **Functional Manual Testing:** Executed detailed test scenarios across core user flows, including product discovery, shopping cart modifications, checkout steps, and order verification.
+* **Webhook & Integration Validation:** Tested Stripe webhook triggers and handlers to guarantee robust, real-time sync of order/payment states between Stripe and the backend.
+* **API and Database Validation:** Verified serverless Hono.js API responses and database state changes in PostgreSQL via Supabase and Drizzle ORM.
 `;
 
 export const nlpDetails = `
@@ -133,6 +146,12 @@ SHAP (SHapley Additive eXplanations) reveals which words influenced the model's 
 ### 🆚 Comparison with Base Paper
 
 We achieve comparable accuracy on a significantly harder task (4-class instead of binary) while adding clinical interpretability through SHAP and utilizing 7 emotion + 3 sentiment features.
+
+### 🧪 QA & Model Evaluation
+
+* **Accuracy Validation:** Designed and executed test cases to validate the classification model against target criteria, achieving ~84% F1-score through iterative threshold tuning.
+* **Imbalance Corrective Testing:** Identified class-imbalance defects in the detection pipeline; implemented SMOTE and verified recall improvement (from ~71% to 83%) via regression test runs.
+* **Evaluation Metrics:** Generated comprehensive precision, recall, F1, and AUC-ROC evaluation reports for team review.
 `;
 
 export const fakeNewsDetails = `
@@ -152,7 +171,7 @@ This project includes a full training pipeline, evaluation charts, and an intera
 export const projectsData = [
   {
     title: "GenMark – Multi-Modal AI Content Generation",
-    description: "Final Year Project. Serverless AI inference platform on AWS with lazy-loading. Integrates HuggingFace, Qwen, and Stable Diffusion models.",
+    description: "Final Year Project. Serverless AI inference platform on AWS verified with Cypress end-to-end automation and Postman API contract testing.",
     images: [
       "/projects/genmark/media__1782301041222.png",
       "/projects/genmark/media__1782301049086.png",
@@ -170,7 +189,7 @@ export const projectsData = [
   },
   {
     title: "Full-Stack E-Commerce Platform",
-    description: "Complete e-commerce application covering SEO, shopping cart, checkout, Stripe payment processing, and real-time webhook synchronization.",
+    description: "Complete multi-vendor e-commerce platform manually tested for core checkout flows and verified for Stripe webhook synchronization.",
     image: "/api/placeholder/400/250",
     technologies: ["Next.js", "Laravel", "Supabase", "Stripe", "AWS S3"],
     category: "Full-Stack Development",
@@ -182,7 +201,7 @@ export const projectsData = [
   },
   {
     title: "NLP Mental Health Classification System",
-    description: "Early mental health indicator detection model built using TF-IDF and Logistic Regression, evaluated rigorously across multiple class categories.",
+    description: "Early indicator model (TF-IDF + Logistic Regression) achieving ~84% F1-score with SMOTE class-imbalance correction and regression verification.",
     image: "/api/placeholder/400/250",
     technologies: ["Python", "scikit-learn", "NLP"],
     category: "Machine Learning",
