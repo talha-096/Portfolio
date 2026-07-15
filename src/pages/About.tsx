@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, GraduationCap, Award, User, Download } from "lucide-react";
+import { Calendar, MapPin, GraduationCap, Award, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import FloatingElements from "@/components/FloatingElements";
@@ -78,7 +78,7 @@ const About = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="w-full h-full flex items-center justify-center bg-secondary">
-                    <User className="w-24 h-24 text-muted-foreground" />
+                    <img src="/profile.png" alt="Talha Ghafoor" className="w-full h-full object-cover" />
                   </div>
                 </motion.div>
                 <div className="flex-1 text-center md:text-left">

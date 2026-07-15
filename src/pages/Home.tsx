@@ -5,11 +5,44 @@ import Scene3D from "@/components/Scene3D";
 import Navigation from "@/components/Navigation";
 import FloatingElements from "@/components/FloatingElements";
 import AIChat from "@/components/AIChat";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
-import TechCloud from "@/components/TechCloud";
-
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let touchStartY = 0;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY > 50) {
+        navigate("/about");
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchEndY = e.touches[0].clientY;
+      // swipe up (scroll down)
+      if (touchStartY - touchEndY > 50) {
+        navigate("/about");
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [navigate]);
+
   const socialLinks = [
     { 
       icon: <Github className="h-6 w-6" />, 
@@ -34,11 +67,11 @@ const Home = () => {
       <FloatingElements />
       <Navigation />
       <AIChat />
-      <TechCloud />
       
       {/* Hero Section */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 pt-28 pb-32">
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto text-center flex flex-col items-center">
+          
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
