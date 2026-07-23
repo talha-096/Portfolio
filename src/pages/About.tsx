@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import FloatingElements from "@/components/FloatingElements";
 import AIChat from "@/components/AIChat";
+import { getCvUrl } from "@/lib/utils";
 
 const About = () => {
   const achievements = [
@@ -102,7 +103,7 @@ const About = () => {
                     </div>
                   </div>
                   <div className="mt-6 flex justify-center md:justify-start">
-                    <a href="/CV.pdf" target="_blank" rel="noopener noreferrer">
+                    <a href={getCvUrl()} target="_blank" rel="noopener noreferrer">
                       <Button className="bg-gradient-primary hover:shadow-glow transition-all duration-300 flex items-center gap-2">
                         <Download className="w-4 h-4" />
                         Download / View CV

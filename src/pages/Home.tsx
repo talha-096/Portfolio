@@ -8,6 +8,7 @@ import AIChat from "@/components/AIChat";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { getCvUrl } from "@/lib/utils";
 const Home = () => {
   const navigate = useNavigate();
 
@@ -186,7 +187,7 @@ const Home = () => {
                 </Button>
               </motion.div>
             </Link>
-            <a href="/CV.pdf" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto block">
+            <a href={getCvUrl()} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto block">
               <motion.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
