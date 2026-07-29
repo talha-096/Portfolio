@@ -12,7 +12,7 @@ export const ContactSection = () => {
     // Simulate contact message trigger
     setSubmitted(true);
     setTimeout(() => {
-      window.location.href = `mailto:talhaghafoor096@gmail.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+      window.location.href = `mailto:talhaghafoor84@gmail.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
     }, 1000);
   };
 
@@ -36,7 +36,7 @@ export const ContactSection = () => {
 
           <div className="contact-meta">
             <div className="item">
-              <span className="v mint">talhaghafoor096@gmail.com</span>
+              <span className="v mint">talhaghafoor84@gmail.com</span>
               <span className="l">DIRECT EMAIL</span>
             </div>
             <div className="item">
@@ -125,7 +125,13 @@ export const ContactSection = () => {
               <span className="ping" />
               <span>Designed &amp; Built for Talha Ghafoor</span>
             </div>
-            <div>© {new Date().getFullYear()} Talha Ghafoor · SQA &amp; AI Specialist</div>
+            <div className="flex items-center gap-3">
+              <a href="mailto:talhaghafoor84@gmail.com" className="hover:text-cyan transition-colors">
+                talhaghafoor84@gmail.com
+              </a>
+              <span>·</span>
+              <span>© {new Date().getFullYear()} Talha Ghafoor · SQA &amp; AI Specialist</span>
+            </div>
           </div>
         </footer>
       </div>

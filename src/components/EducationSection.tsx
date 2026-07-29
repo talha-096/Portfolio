@@ -4,9 +4,9 @@ export const EducationSection = () => {
       short: "BS SE",
       title: "Bachelor of Science in Software Engineering",
       inst: "HITEC University, Taxila — Department of Computer Science",
-      period: "2022 - 2026",
+      period: "2022 – 2026",
       isActive: true,
-      desc: "Relevant Coursework: Software Quality Assurance, Machine Learning, Cloud Computing, Web Engineering, Data Structures & Algorithms, Database Systems."
+      desc: "Graduated with BS in Software Engineering (2022 – 2026). Relevant Coursework: Software Quality Assurance, Machine Learning, Cloud Computing, Web Engineering, Data Structures & Algorithms, Database Systems."
     },
     {
       short: "ICS",

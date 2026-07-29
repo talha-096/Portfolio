@@ -136,7 +136,7 @@ export const Navigation = ({ onOpenPalette }: NavigationProps) => {
             </a>
           ))}
           <div className="m-channels">
-            <a href="mailto:talhaghafoor096@gmail.com">talhaghafoor096@gmail.com</a>
+            <a href="mailto:talhaghafoor84@gmail.com">talhaghafoor84@gmail.com</a>
             <a href="https://github.com/talha-096" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://www.linkedin.com/in/talha-ghafoor-475aa926a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>

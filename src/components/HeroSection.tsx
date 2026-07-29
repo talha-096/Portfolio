@@ -73,6 +73,8 @@ export const HeroSection = () => {
               <span>Talha Ghafoor</span>
               <span className="sep">/</span>
               <span>Pakistan</span>
+              <span className="sep">/</span>
+              <span className="text-cyan font-mono text-xs">BS SE (2022 – 2026)</span>
               <span className="ring" title="Available for SQA & AI/ML Opportunities" />
             </div>
 
@@ -122,7 +124,7 @@ export const HeroSection = () => {
             </div>
 
             <p className="hero-desc">
-              Software Engineering student at HITEC University specializing in SQA automation, machine learning model evaluation, and full-stack API development. Experienced in Cypress, Postman, PyTorch, FastAPI, React, AWS, and Docker.{" "}
+              BS in Software Engineering graduate (2022 – 2026) from HITEC University specializing in SQA automation, machine learning model evaluation, and full-stack API development. Experienced in Cypress, Postman, PyTorch, FastAPI, React, AWS, and Docker.{" "}
               <span className="scramble">{scrambledText}</span>
             </p>
 

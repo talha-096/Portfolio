@@ -11,24 +11,24 @@ export const ProjectsSection = () => {
       num: "01",
       catClass: "genai",
       tint: "tint-mint",
-      category: "Generative AI",
-      title: "GenMark – Multi-Modal AI Content Platform",
-      subtitle: "AWS Serverless AI Inference + Cypress & Postman SQA Test Suite",
+      category: "Generative AI & SQA",
+      title: "GenMark: AI-Powered Marketing Generation",
+      subtitle: "AI Model Integration & Microservices + Cypress & Postman SQA Suite",
       img: "/projects/genmark/media__1782301041222.png",
       metrics: [
-        { label: "QA Automation", value: "Cypress E2E" },
-        { label: "API Validation", value: "Postman Contracts" },
-        { label: "Infra", value: "AWS Fargate" }
+        { label: "Primary Role", value: "AI & SQA Engineer" },
+        { label: "AI & Stack", value: "LLMs + Flask + React" },
+        { label: "QA & Infra", value: "Cypress + Postman + AWS" }
       ],
       description:
-        "Final Year Project. GenMark is an AI marketing automation platform leveraging generative models for visual and text marketing content, verified through automated E2E testing and API contract suites.",
+        "Final Year Project. GenMark is an advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration. Engineered with dual AI/Full-Stack and SQA responsibilities.",
       features: [
-        "End-to-End Cypress automation covering React frontend user auth and content generation flows.",
-        "Postman contract testing for FastAPI backend endpoints validating response schemas and status codes.",
-        "Lazy-loading AI model inference on AWS ECS Fargate, Lambda, API Gateway, and S3.",
-        "Automated boundary-value test cases ensuring robust fault tolerance under load."
+        "AI Content Generation & Brand Kit Management: Leveraging LLMs for marketing copy, slogans, and consistent brand identity.",
+        "Decoupled Microservice Architecture built with React, Vite, TypeScript, Flask, FastAPI, MongoDB, JWT, Gunicorn, and Nginx.",
+        "Automated E2E Cypress test suites covering React UI authentication, project workflows, and content generation.",
+        "Postman API contract testing for backend services on AWS (ECS Fargate, Lambda, API Gateway, S3, ECR)."
       ],
-      tech: ["Python", "FastAPI", "React", "AWS", "Docker", "Cypress", "Postman", "MongoDB"],
+      tech: ["Python", "Flask", "FastAPI", "React", "TypeScript", "MongoDB", "JWT", "AWS", "Docker", "Cypress", "Postman", "Nginx"],
       github: "https://github.com/talha-096/GenMark",
       demo: "https://gen-mark-kappa.vercel.app/"
     },

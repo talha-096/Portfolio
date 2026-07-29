@@ -4,27 +4,31 @@ import React from "react";
 export const genMarkDetails = `
 ## GenMark: AI-Powered Marketing Generation
 
-GenMark is an advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration. By leveraging advanced generative models, GenMark provides an end-to-end solution for generating high-quality marketing images and automatically extracting compelling captions, slogans, and descriptions directly from visual content.
+GenMark is an advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration. By leveraging advanced generative models and LLMs, GenMark provides an end-to-end multi-modal solution for generating high-performance marketing copy, maintaining brand consistency, and automatically extracting compelling captions, slogans, and descriptions directly from visual content.
+
+### 👤 Dual Role: AI Engineer & Software Quality Assurance (QA) Lead
+* **AI & Full-Stack Engineering:** Designed and built the AI content generation pipeline, prompt engineering workflows, brand kit context management, and decoupled microservices backend.
+* **Software Quality Assurance (QA):** Authored and executed automated Cypress E2E test suites for React frontend user journeys and Postman API contract testing for backend services on AWS.
 
 ### 🛠️ The Tech Stack
 
 **Frontend:** React, Vite, TypeScript, TailwindCSS  
-**Backend:** Python, FastAPI, Flask, MongoDB, JWT  
-**Infrastructure:** AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Gunicorn, Nginx  
+**Backend:** Python, Flask, FastAPI, MongoDB, JWT  
+**Infrastructure:** Gunicorn, Nginx, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker  
 
 ### 🌟 Key Features
 
-* **AI Content Generation:** Leverage LLMs to generate high-performance marketing copy.
-* **Brand Kit Management:** Maintain consistent brand identity across all generated content.
-* **Project Analytics:** Real-time dashboarding for project status and generation metrics.
-* **Microservice Architecture:** Decoupled frontend and backend for scalable deployment.
+* **AI Content Generation:** Leverage LLMs to generate high-performance marketing copy, slogans, and visual asset descriptions.
+* **Brand Kit Management:** Maintain consistent brand identity, voice, and color palettes across all generated marketing assets.
+* **Project Analytics:** Real-time dashboarding for project status, generation metrics, and system usage.
+* **Microservice Architecture:** Decoupled frontend and backend for scalable, high-availability deployment.
 
 ### 🧪 Quality Assurance & Testing
 
-* **End-to-End Automation:** Wrote and executed automated Cypress test suites for the React frontend, covering key user flows like content generation, user auth, and preview.
-* **API Contract Testing:** Tested FastAPI backend endpoints with Postman, validating request/response schemas, response times, status codes, and error routes.
+* **End-to-End Automation:** Wrote and executed automated Cypress test suites for the React frontend, covering key user flows like AI content generation, brand kit setup, user auth, and asset previews.
+* **API Contract Testing:** Tested Flask/FastAPI backend endpoints with Postman, validating request/response JSON schemas, JWT auth tokens, status codes, and error routes.
 * **AI-Assisted Testing:** Leveraged AI tools to quickly generate boundary-value test cases and maximize coverage across backend/frontend interaction paths.
-* **Inference Validation:** Verified on-demand model lazy-loading across AWS ECS Fargate, Lambda, and API Gateway under concurrent test loads.
+* **Inference & Infra Validation:** Verified model lazy-loading and serverless AWS deployment across ECS Fargate, Lambda, and API Gateway under concurrent test loads.
 
 ### ⚡ Local Development
 

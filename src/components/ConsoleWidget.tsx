@@ -165,6 +165,10 @@ export const ConsoleWidget = () => {
 
       if (q.includes("genmark") || q.includes("aws")) {
         botResponse = "GenMark is Talha's Final Year Project: a multi-modal AI marketing platform. Talha verified its serverless AWS deployment with automated Cypress E2E tests and Postman API contract testing!";
+      } else if (q.includes("education") || q.includes("degree") || q.includes("bs") || q.includes("hitec")) {
+        botResponse = "Talha completed his BS in Software Engineering (2022 - 2026) at HITEC University, specializing in SQA, AI/ML, and Web Engineering.";
+      } else if (q.includes("email") || q.includes("contact") || q.includes("gmail")) {
+        botResponse = "You can contact Talha directly at talhaghafoor84@gmail.com.";
       } else if (q.includes("mental") || q.includes("nlp") || q.includes("shap")) {
         botResponse = "Talha developed a 4-class Mental Health Affective Detection system fusing RoBERTa + Sentiment + Emotion features, achieving 83.83% accuracy and correcting class-imbalance via SMOTE!";
       } else if (q.includes("qa") || q.includes("test") || q.includes("cypress")) {
