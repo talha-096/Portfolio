@@ -1,39 +1,76 @@
-# Talha's Personal Portfolio 🚀
+# Talha Ghafoor — Portfolio 🚀
 
-Welcome to my modern, interactive personal portfolio website! 
+> **Software Quality Assurance (SQA) Engineer · AI & Machine Learning Specialist · Full-Stack Developer**
 
-![Portfolio Screenshot](./public/screenshot.png) *(Note: Please place a screenshot of the website at `public/screenshot.png` to display it here)*
+Welcome to my interactive personal portfolio website! This platform showcases my technical expertise, engineering projects, quality assurance test suites, and academic background.
 
-## 📖 About The Project
+---
 
-This portfolio is built to showcase my skills, projects, and professional experience. It features a sleek design with interactive 3D elements, smooth animations, and a fully responsive layout. 
+## 👤 About Me
 
-### ✨ Key Features
-- **Modern UI/UX**: Designed with Tailwind CSS and Framer Motion for beautiful animations.
-- **Interactive 3D**: Immersive 3D scene using React Three Fiber.
-- **Component-Driven**: Built with reusable React components (Shadcn UI).
-- **Responsive Design**: Flawless experience across desktop, tablet, and mobile devices.
+- **Degree:** Bachelor of Science in Software Engineering (2022 – 2026) — HITEC University, Taxila
+- **Location:** Pakistan
+- **Email:** [talhaghafoor84@gmail.com](mailto:talhaghafoor84@gmail.com)
+- **GitHub:** [github.com/talha-096](https://github.com/talha-096)
+- **LinkedIn:** [Talha Ghafoor](https://www.linkedin.com/in/talha-ghafoor-475aa926a/)
+
+---
+
+## ✨ Portfolio Highlights & Interactive Features
+
+- **Interactive Dev Console & AI Assistant:** Real-time query bot answering questions about projects, test runs, and architecture.
+- **Cypress & Postman Test Runner Simulation:** Live simulation displaying automated E2E and API contract test executions.
+- **Interactive Cloud Architecture Visualizer:** Node-graph breakdown for serverless microservices and AWS cloud deployments.
+- **Command Palette (`Ctrl + K` / `Cmd + K`):** Quick keyboard-driven navigation across all sections.
+- **Responsive Modern UI/UX:** Dark-mode visual architecture with glassmorphic cards, custom animations, and clean grid layouts.
+
+---
+
+## 🛠️ Featured Projects
+
+### 1. 🌟 GenMark: AI-Powered Marketing Generation
+- **Dual Role:** AI & Full-Stack Engineer + SQA & Automation Lead
+- **Description:** Final Year Project. An advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration.
+- **Tech Stack:** React, Vite, TypeScript, TailwindCSS, Python, Flask, FastAPI, MongoDB, JWT, Gunicorn, Nginx, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Cypress, Postman
+- **Key Features:** LLM Marketing Copy Generation, Brand Kit Context Management, Microservices Architecture, Cypress E2E Test Suites, Postman API Contract Testing.
+
+### 2. 🛒 Full-Stack Multi-Vendor E-Commerce Platform
+- **Role:** Full-Stack Developer & QA Engineer
+- **Tech Stack:** Next.js 15, Hono.js, Supabase (PostgreSQL), Drizzle ORM, Stripe Webhooks, TailwindCSS
+- **Key Features:** Role-based dashboards (Customer, Vendor, Admin), OTP verification gates, real-time payment/order synchronization.
+
+### 3. 🧠 NLP Mental Health Classification System
+- **Role:** AI/ML Engineer & QA Analyst
+- **Tech Stack:** Python, scikit-learn, RoBERTa, TF-IDF, SMOTE, Logistic Regression
+- **Key Features:** ~84% F1-Score, SMOTE class-imbalance correction, regression testing verification.
+
+---
 
 ## 🛠️ Built With
 
-- [React](https://reactjs.org/) & [Vite](https://vitejs.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Three.js](https://threejs.org/) / React Three Fiber
-- [Lucide Icons](https://lucide.dev/)
-- [Shadcn UI](https://ui.shadcn.com/)
+- **Frontend:** React 18, Vite, TypeScript, Tailwind CSS, Lucide Icons, Shadcn UI
+- **Animations:** Framer Motion, Three.js / React Three Fiber
+- **Data & Testing:** TanStack React Query, Cypress, Postman API Testing
 
-## 🚀 Run Locally
+---
 
-To run this project on your local machine, follow these steps:
+## ⚡ Quick Start / Local Development
 
 ```bash
-# Install dependencies
+# 1. Clone the repository
+git clone https://github.com/talha-096/Portfolio.git
+cd Portfolio
+
+# 2. Install dependencies
 npm install
 
-# Start the development server
+# 3. Start development server
 npm run dev
+
+# 4. Build for production
+npm run build
 ```
 
-Open [http://localhost:8081](http://localhost:8081) in your browser to view the application.
+---
+
+© 2026 Talha Ghafoor. Built for high performance & reliability.
