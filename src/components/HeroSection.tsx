@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Download, ArrowDown } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import ConsoleWidget from "./ConsoleWidget";
 
 export const HeroSection = () => {
@@ -62,38 +62,58 @@ export const HeroSection = () => {
 
       <div className="container">
         <div className="hero-grid">
-          {/* Left Column: Bio & Headline */}
+          {/* Left Column: Bio, Headline & Profile Photo Card */}
           <div className="hero-left">
             <div className="hero-status">
-              <span className="avatar">TG</span>
+              <img
+                src="/profile.jpg"
+                alt="Talha Ghafoor"
+                className="w-7 h-7 rounded-full object-cover border border-cyan/60 shadow-md"
+              />
               <span>Talha Ghafoor</span>
               <span className="sep">/</span>
               <span>Pakistan</span>
               <span className="ring" title="Available for SQA & AI/ML Opportunities" />
             </div>
 
-            <div className="hero-name mono">
-              SOFTWARE QA · AUTOMATED TESTING · AI/ML ENGINEERING · FULL-STACK
-            </div>
+            <div className="flex flex-col lg:flex-row gap-8 items-start mb-6">
+              {/* Profile Headshot Featured Badge Card */}
+              <div className="relative group shrink-0">
+                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan/40 shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-105 group-hover:border-cyan">
+                  <img
+                    src="/profile.jpg"
+                    alt="Talha Ghafoor Portrait"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-primary opacity-30 blur-md group-hover:opacity-70 transition-opacity" />
+              </div>
 
-            <h1 className="hero-headline">
-              <span className="line">
-                <span>Architecting &amp;</span>
-              </span>
-              <span className="line">
-                <span>
-                  <em>verifying</em> AI systems
-                </span>
-              </span>
-              <span className="line">
-                <span>built to perform in</span>
-              </span>
-              <span className="line">
-                <span>
-                  <em>production.</em>
-                </span>
-              </span>
-            </h1>
+              <div>
+                <div className="hero-name mono">
+                  SOFTWARE QA · AUTOMATED TESTING · AI/ML ENGINEERING · FULL-STACK
+                </div>
+
+                <h1 className="hero-headline text-balance">
+                  <span className="line">
+                    <span>Architecting &amp;</span>
+                  </span>
+                  <span className="line">
+                    <span>
+                      <em>verifying</em> AI systems
+                    </span>
+                  </span>
+                  <span className="line">
+                    <span>built to perform in</span>
+                  </span>
+                  <span className="line">
+                    <span>
+                      <em>production.</em>
+                    </span>
+                  </span>
+                </h1>
+              </div>
+            </div>
 
             <div className="hero-subline">
               <span className="arrow">▸</span>
