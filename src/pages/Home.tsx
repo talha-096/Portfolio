@@ -4,6 +4,9 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import Marquee from "@/components/Marquee";
 import SkillsSection from "@/components/SkillsSection";
+import CypressTestRunner from "@/components/CypressTestRunner";
+import AiModelPlayground from "@/components/AiModelPlayground";
+import ArchitectureVisualizer from "@/components/ArchitectureVisualizer";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import CertificationsSection from "@/components/CertificationsSection";
@@ -50,11 +53,24 @@ export const Home = () => {
       {/* Toolkit / Skills & 3D Planetary Orbit */}
       <SkillsSection />
 
+      <div className="container">
+        {/* Live Interactive Cypress & Postman SQA Test Runner */}
+        <CypressTestRunner />
+
+        {/* Interactive Mental Health NLP Model & SHAP Explainability Playground */}
+        <AiModelPlayground />
+      </div>
+
       {/* Track Record & Experience Timeline */}
       <ExperienceSection />
 
       {/* Selected Work & Case Study Modals */}
       <ProjectsSection />
+
+      <div className="container">
+        {/* Interactive AWS & System Architecture Visualizer */}
+        <ArchitectureVisualizer />
+      </div>
 
       {/* Credentials & Certifications */}
       <CertificationsSection />
