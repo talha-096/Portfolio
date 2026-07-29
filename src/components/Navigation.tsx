@@ -1,160 +1,148 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Instagram, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Command, Download, Menu, X, FileText } from "lucide-react";
 
-const Navigation = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+interface NavigationProps {
+  onOpenPalette: () => void;
+}
+
+export const Navigation = ({ onOpenPalette }: NavigationProps) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeTarget, setActiveTarget] = useState("about");
 
   const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/skills", label: "Skills" },
-    { path: "/projects", label: "Projects" },
-    { path: "/contact", label: "Contact" }
+    { id: "about", label: "about" },
+    { id: "skills", label: "skills" },
+    { id: "experience", label: "experience" },
+    { id: "projects", label: "projects" },
+    { id: "certifications", label: "certifications" },
+    { id: "education", label: "education" },
+    { id: "contact", label: "contact" }
   ];
 
-  const socialLinks = [
-    { 
-      icon: <Github className="h-4 w-4" />, 
-      url: "https://github.com/",
-      label: "GitHub"
-    },
-    { 
-      icon: <Linkedin className="h-4 w-4" />, 
-      url: "https://www.linkedin.com/in/talha-ghafoor-475aa926a",
-      label: "LinkedIn"
-    },
-    { 
-      icon: <Instagram className="h-4 w-4" />, 
-      url: "https://www.instagram.com/talha_9.91/",
-      label: "Instagram"
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+
+      const sections = navItems.map((item) => document.getElementById(item.id));
+      const mid = window.scrollY + window.innerHeight * 0.35;
+
+      let current = "about";
+      for (const s of sections) {
+        if (s && s.offsetTop <= mid) {
+          current = s.id;
+        }
+      }
+      setActiveTarget(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    setMobileOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
-  ];
+  };
 
   return (
-    <motion.nav 
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 glass-card m-4 rounded-2xl"
-    >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold hero-text">
-            Talha Ghafoor
-          </Link>
-          
-          <div className="hidden md:flex items-center space-x-2">
+    <>
+      <nav className={`nav ${isScrolled ? "scrolled" : ""}`}>
+        <div className="container nav-inner">
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollTo("about");
+            }}
+            className="logo"
+          >
+            <span className="logo-mark">TG</span>
+            <span>Talha Ghafoor</span>
+          </a>
+
+          <div className="nav-links">
             {navItems.map((item) => (
-              <Link key={item.path} to={item.path}>
-                <Button
-                  variant={location.pathname === item.path ? "default" : "ghost"}
-                  className={`relative overflow-hidden transition-all duration-300 ${
-                    location.pathname === item.path 
-                      ? "bg-gradient-primary text-primary-foreground glow-effect" 
-                      : "hover:bg-secondary/50"
-                  }`}
-                >
-                  {item.label}
-                  {location.pathname === item.path && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-gradient-primary rounded-md"
-                      style={{ zIndex: -1 }}
-                    />
-                  )}
-                </Button>
-              </Link>
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`nav-link ${activeTarget === item.id ? "active" : ""}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(item.id);
+                }}
+              >
+                {item.label}
+              </a>
             ))}
-            
-            {/* Social Links */}
-            <div className="flex items-center space-x-1 ml-4 pl-4 border-l border-border/20">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="hover:bg-primary/20 hover:text-primary transition-all duration-300"
-                    aria-label={social.label}
-                  >
-                    {social.icon}
-                  </Button>
-                </motion.a>
-              ))}
-            </div>
           </div>
 
-          {/* Mobile menu button */}
-          <Button 
-            variant="ghost" 
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden flex flex-col space-y-2 mt-4 pt-4 border-t border-border/20"
+          <div className="nav-actions">
+            <button
+              className="cmd-trigger-btn"
+              onClick={onOpenPalette}
+              title="Open Command Palette (Ctrl+K)"
             >
-              {navItems.map((item) => (
-                <Link key={item.path} to={item.path} onClick={() => setIsOpen(false)}>
-                  <Button
-                    variant={location.pathname === item.path ? "default" : "ghost"}
-                    className={`w-full justify-start text-left ${
-                      location.pathname === item.path 
-                        ? "bg-gradient-primary text-primary-foreground glow-effect" 
-                        : "hover:bg-secondary/50"
-                    }`}
-                  >
-                    {item.label}
-                  </Button>
-                </Link>
-              ))}
-              
-              <div className="flex items-center space-x-2 pt-2 pb-2">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="hover:bg-primary/20 hover:text-primary transition-all duration-300"
-                      aria-label={social.label}
-                    >
-                      {social.icon}
-                    </Button>
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <Command className="w-3.5 h-3.5" />
+              <span>Search</span>
+              <kbd className="cmd-kbd">Ctrl K</kbd>
+            </button>
+
+            <a
+              href="/CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-nav-cv"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>CV / Resume</span>
+            </a>
+
+            <button
+              className="nav-toggle"
+              aria-label="Toggle menu"
+              onClick={() => {
+                setMobileOpen(!mobileOpen);
+                document.body.classList.toggle("menu-open", !mobileOpen);
+              }}
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer */}
+      <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
+        <nav className="mobile-menu-inner">
+          {navItems.map((item, idx) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`m-link ${activeTarget === item.id ? "active" : ""}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.body.classList.remove("menu-open");
+                scrollTo(item.id);
+              }}
+            >
+              <span className="idx">0{idx + 1}</span>
+              <span>{item.label}</span>
+              <span className="m-arrow">→</span>
+            </a>
+          ))}
+          <div className="m-channels">
+            <a href="mailto:talhaghafoor096@gmail.com">talhaghafoor096@gmail.com</a>
+            <a href="https://github.com/talha-096" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/talha-ghafoor-475aa926a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </nav>
       </div>
-    </motion.nav>
+    </>
   );
 };
-
 export default Navigation;
