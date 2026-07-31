@@ -2,7 +2,7 @@
 
 > **Software Quality Assurance (SQA) Engineer · AI & Machine Learning Specialist · Full-Stack Developer**
 
-Welcome to my interactive personal portfolio website! This platform showcases my technical expertise, engineering projects, quality assurance test suites, and academic background.
+Welcome to my interactive personal portfolio and API telemetry system! This platform showcases my technical expertise, engineering projects, quality assurance test suites, FastAPI backend database automation, and academic background.
 
 ---
 
@@ -16,22 +16,59 @@ Welcome to my interactive personal portfolio website! This platform showcases my
 
 ---
 
-## ✨ Portfolio Highlights & Interactive Features
+## 🏗️ Architecture Overview
 
-- **Interactive Dev Console & AI Assistant:** Real-time query bot answering questions about projects, test runs, and architecture.
-- **Cypress & Postman Test Runner Simulation:** Live simulation displaying automated E2E and API contract test executions.
-- **Interactive Cloud Architecture Visualizer:** Node-graph breakdown for serverless microservices and AWS cloud deployments.
-- **Command Palette (`Ctrl + K` / `Cmd + K`):** Quick keyboard-driven navigation across all sections.
-- **Responsive Modern UI/UX:** Dark-mode visual architecture with glassmorphic cards, custom animations, and clean grid layouts.
+The system is structured as a decoupled **React 18 + Vite Frontend** and a **FastAPI + SQLModel / MS SQL Server Backend**:
+
+```
+talha-Portfolio/
+├── backend/                  # High-Performance FastAPI Backend
+│   ├── app/
+│   │   ├── api/              # API Routers (contact, nlp, analytics)
+│   │   ├── database.py       # MS SQL Server (\SQLEXPRESS) + SQLite Fallback
+│   │   ├── models.py         # SQLModel database schemas (portfolio schema)
+│   │   ├── schemas/          # Pydantic contract schemas
+│   │   └── services/         # Email notification & local JSON backups
+│   ├── main.py               # Entrypoint & Automated Request Logging Middleware
+│   ├── requirements.txt      # Python dependencies
+│   └── setup_sqlexpress.sql  # Complete MS SQL Server setup DDL script
+│
+├── frontend/                 # React 18 + TypeScript + Vite UI
+│   ├── src/
+│   │   ├── components/       # UI Components, AI Playground & Console Telemetry
+│   │   ├── data/             # Projects data & case studies
+│   │   ├── pages/            # Home, About, Skills, Projects, Contact pages
+│   │   └── App.tsx           # Route setup & automated visitor tracking
+│   ├── package.json          # Node dependencies
+│   └── vite.config.ts        # Vite configuration
+│
+├── .gitignore                # Protects secrets, .env files, & build outputs
+└── README.md                 # Project documentation
+```
 
 ---
 
-## 🛠️ Featured Projects
+## ✨ Key System & Database Automation Features
+
+- **⚡ Automated Request & Telemetry Logging (`portfolio.api_request_logs`)**:
+  - Custom HTTP middleware automatically logs method, path, query strings, execution latency (ms), status codes, client IP, and user agents in the database.
+- **📩 Contact Message Persistence & Email Notifications (`portfolio.contact_messages`)**:
+  - Saves all user contact submissions to database tables while dispatching email alerts and local JSON backups.
+- **🤖 AI Playground & Chat Prompt Storage (`portfolio.nlp_logs`)**:
+  - Interactive terminal chat & mental health NLP classification system. Every query, prompt, and SHAP explainability evaluation is stored in the database.
+- **📊 Visitor Traffic & Navigation Analytics (`portfolio.visitor_logs`)**:
+  - Automated frontend visitor tracker logs page navigation and user sessions.
+- **🛡️ Cyber Security & Rate Limiting**:
+  - Hardened with HTTP Security Headers (`X-Frame-Options`, `X-XSS-Protection`, `Strict-Transport-Security`, `nosniff`) and SlowAPI rate limiting.
+
+---
+
+## 🛠️ Featured Engineering Projects
 
 ### 1. 🌟 GenMark: AI-Powered Marketing Generation
 - **Dual Role:** AI & Full-Stack Engineer + SQA & Automation Lead
 - **Description:** Final Year Project. An advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration.
-- **Tech Stack:** React, Vite, TypeScript, TailwindCSS, Python, Flask, FastAPI, MongoDB, JWT, Gunicorn, Nginx, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Cypress, Postman
+- **Tech Stack:** React, Vite, TypeScript, TailwindCSS, Python, FastAPI, MongoDB, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Cypress, Postman
 - **Key Features:** LLM Marketing Copy Generation, Brand Kit Context Management, Microservices Architecture, Cypress E2E Test Suites, Postman API Contract Testing.
 
 ### 2. 🛒 Full-Stack Multi-Vendor E-Commerce Platform
@@ -39,38 +76,60 @@ Welcome to my interactive personal portfolio website! This platform showcases my
 - **Tech Stack:** Next.js 15, Hono.js, Supabase (PostgreSQL), Drizzle ORM, Stripe Webhooks, TailwindCSS
 - **Key Features:** Role-based dashboards (Customer, Vendor, Admin), OTP verification gates, real-time payment/order synchronization.
 
-### 3. 🧠 NLP Mental Health Classification System
+### 3. 🧠 NLP Mental Health Classification System & SHAP Explainer
 - **Role:** AI/ML Engineer & QA Analyst
-- **Tech Stack:** Python, scikit-learn, RoBERTa, TF-IDF, SMOTE, Logistic Regression
-- **Key Features:** ~84% F1-Score, SMOTE class-imbalance correction, regression testing verification.
+- **Tech Stack:** Python, PyTorch, scikit-learn, RoBERTa, TF-IDF, SMOTE, SHAP
+- **Key Features:** ~84% F1-Score, SMOTE class-imbalance correction, SHAP token impact explainer, regression testing verification.
 
 ---
 
-## 🛠️ Built With
+## 🚀 Quick Start / Local Setup
 
-- **Frontend:** React 18, Vite, TypeScript, Tailwind CSS, Lucide Icons, Shadcn UI
-- **Animations:** Framer Motion, Three.js / React Three Fiber
-- **Data & Testing:** TanStack React Query, Cypress, Postman API Testing
-
----
-
-## ⚡ Quick Start / Local Development
-
+### 1. Clone the repository
 ```bash
-# 1. Clone the repository
 git clone https://github.com/talha-096/Portfolio.git
 cd Portfolio
-
-# 2. Install dependencies
-npm install
-
-# 3. Start development server
-npm run dev
-
-# 4. Build for production
-npm run build
 ```
+
+### 2. Run Backend (FastAPI + Database)
+```bash
+cd backend
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On Linux/macOS:
+source venv/bin/activate
+
+pip install -r requirements.txt
+cp .env.example .env
+
+# Initialize DB & start backend API server
+python main.py
+```
+*Backend API will run at `http://localhost:8000` (Docs at `http://localhost:8000/docs`).*
+
+### 3. Run Frontend (React + Vite)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*Frontend will run at `http://localhost:5173`.*
 
 ---
 
-© 2026 Talha Ghafoor. Built for high performance & reliability.
+## 🌐 100% Free Live Deployment Guide (GitHub Student Pack)
+
+1. **Backend Deployment (Render.com)**:
+   - Create a Web Service connected to your repository.
+   - Root Directory: `backend` | Build: `pip install -r requirements.txt` | Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+2. **Frontend Deployment (Vercel.com)**:
+   - Import repository to Vercel.
+   - Root Directory: `frontend` | Env Var: `VITE_BACKEND_URL` = `https://your-backend-api.onrender.com`
+3. **Free Custom Domain Setup**:
+   - Claim a free domain on **Namecheap** (`.me`) or **Name.com** (`.tech`) via [GitHub Student Developer Pack](https://education.github.com/pack).
+   - Add Vercel DNS Records (`A Record @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`).
+
+---
+
+© 2026 Talha Ghafoor. Built for high performance, reliability, & automated quality assurance.
