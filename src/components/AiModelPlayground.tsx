@@ -64,14 +64,14 @@ export const AiModelPlayground = () => {
   const topClass = getTopClassification();
 
   return (
-    <div className="p-6 md:p-8 rounded-2xl border border-line bg-panel reveal mb-16">
+    <div className="p-4 sm:p-6 md:p-8 rounded-2xl border border-line bg-panel reveal mb-16 overflow-hidden">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4 pb-6 border-b border-line">
         <div>
           <div className="flex items-center gap-2 text-violet font-mono text-xs uppercase mb-1">
             <Brain className="w-4 h-4" />
             <span>// HYBRID TRANSFORMER + SHAP EXPLAINABILITY</span>
           </div>
-          <h3 className="text-2xl font-medium text-text">Mental Health NLP Model &amp; SHAP Playground</h3>
+          <h3 className="text-xl sm:text-2xl font-medium text-text">Mental Health NLP Model &amp; SHAP Playground</h3>
         </div>
         <div className="text-xs text-muted font-mono">
           PyTorch · RoBERTa · 83.83% F1-Score
@@ -79,12 +79,12 @@ export const AiModelPlayground = () => {
       </div>
 
       {/* Sample presets */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-2 mb-6">
         {samples.map((s, idx) => (
           <button
             key={idx}
             onClick={() => selectSample(s)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-center ${
               activeSample.label === s.label
                 ? "bg-violet/20 border border-violet text-violet font-semibold"
                 : "bg-panel border border-line text-muted hover:text-text"
@@ -98,7 +98,7 @@ export const AiModelPlayground = () => {
       {/* Input box */}
       <div className="mb-6">
         <label className="block text-xs font-mono text-muted mb-2 uppercase">Input Text for Affective Evaluation:</label>
-        <div className="p-4 rounded-xl bg-bg-2 border border-line text-text-2 text-sm leading-relaxed font-sans">
+        <div className="p-3.5 sm:p-4 rounded-xl bg-bg-2 border border-line text-text-2 text-xs sm:text-sm leading-relaxed font-sans break-words">
           "{inputText}"
         </div>
       </div>
@@ -106,8 +106,8 @@ export const AiModelPlayground = () => {
       {/* Model Probabilities & SHAP Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Classification Probability Gauges */}
-        <div className="p-5 rounded-xl bg-bg-2/70 border border-line space-y-4">
-          <div className="flex justify-between items-center pb-3 border-b border-line">
+        <div className="p-4 sm:p-5 rounded-xl bg-bg-2/70 border border-line space-y-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-line gap-2">
             <span className="text-xs font-mono text-muted uppercase">Model Probability Outputs</span>
             <span className={`text-xs font-mono px-2.5 py-1 rounded-full border ${topClass.badge}`}>
               {topClass.title}
@@ -158,8 +158,8 @@ export const AiModelPlayground = () => {
         </div>
 
         {/* SHAP Feature Token Explainer */}
-        <div className="p-5 rounded-xl bg-bg-2/70 border border-line">
-          <div className="flex justify-between items-center pb-3 border-b border-line mb-4">
+        <div className="p-4 sm:p-5 rounded-xl bg-bg-2/70 border border-line">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-line mb-4 gap-1">
             <span className="text-xs font-mono text-muted uppercase">SHAP Trigger Token Explainer</span>
             <span className="text-[10px] text-cyan font-mono">SHapley Additive exPlanations</span>
           </div>

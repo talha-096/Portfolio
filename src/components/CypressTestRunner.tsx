@@ -110,19 +110,19 @@ Summary:
   };
 
   return (
-    <div className="p-6 md:p-8 rounded-2xl border border-line bg-panel reveal mb-16">
+    <div className="p-4 sm:p-6 md:p-8 rounded-2xl border border-line bg-panel reveal mb-16 overflow-hidden">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4 pb-6 border-b border-line">
         <div>
           <div className="flex items-center gap-2 text-cyan font-mono text-xs uppercase mb-1">
             <Terminal className="w-4 h-4" />
             <span>// LIVE SQA AUTOMATION ENGINE</span>
           </div>
-          <h3 className="text-2xl font-medium text-text">Interactive Cypress &amp; Postman Test Runner</h3>
+          <h3 className="text-xl sm:text-2xl font-medium text-text">Interactive Cypress &amp; Postman Test Runner</h3>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-2 w-full lg:w-auto">
           <button
-            className={`px-4 py-2 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${
               activeSuite === "cypress" ? "bg-cyan/20 border border-cyan text-cyan font-semibold" : "bg-panel border border-line text-muted hover:text-text"
             }`}
             onClick={() => { setActiveSuite("cypress"); setCompletedLogs([]); setProgress(0); }}
@@ -130,7 +130,7 @@ Summary:
             Cypress E2E
           </button>
           <button
-            className={`px-4 py-2 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${
               activeSuite === "postman" ? "bg-violet/20 border border-violet text-violet font-semibold" : "bg-panel border border-line text-muted hover:text-text"
             }`}
             onClick={() => { setActiveSuite("postman"); setCompletedLogs([]); setProgress(0); }}
@@ -138,7 +138,7 @@ Summary:
             Postman API Contracts
           </button>
           <button
-            className={`px-4 py-2 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${
               activeSuite === "smote" ? "bg-mint/20 border border-mint text-mint font-semibold" : "bg-panel border border-line text-muted hover:text-text"
             }`}
             onClick={() => { setActiveSuite("smote"); setCompletedLogs([]); setProgress(0); }}
@@ -149,26 +149,26 @@ Summary:
       </div>
 
       {/* Target suite banner */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 rounded-xl bg-bg-2 border border-line mb-6 gap-3">
-        <div>
-          <div className="text-xs text-muted font-mono uppercase">CURRENT TARGET</div>
-          <div className="text-sm font-medium text-text font-mono">{currentSuiteData.target}</div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3.5 sm:p-4 rounded-xl bg-bg-2 border border-line mb-6 gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] sm:text-xs text-muted font-mono uppercase">CURRENT TARGET</div>
+          <div className="text-xs sm:text-sm font-medium text-text font-mono break-all">{currentSuiteData.target}</div>
         </div>
-        <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end shrink-0">
           <button
             onClick={startTestExecution}
             disabled={isRunning}
-            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-2"
+            className="btn btn-primary text-xs py-2 px-3 sm:px-4 flex items-center justify-center gap-2 flex-1 sm:flex-none"
           >
             {isRunning ? (
               <>
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                Executing Suite...
+                Executing...
               </>
             ) : (
               <>
                 <Play className="w-3.5 h-3.5" />
-                Run Automated Test Suite
+                Run Suite
               </>
             )}
           </button>
@@ -176,7 +176,7 @@ Summary:
           {completedLogs.length > 0 && !isRunning && (
             <button
               onClick={downloadQaReport}
-              className="btn btn-ghost text-xs py-2 px-3 flex items-center gap-1.5 text-mint border-mint/40 hover:bg-mint/10"
+              className="btn btn-ghost text-xs py-2 px-3 flex items-center gap-1.5 text-mint border-mint/40 hover:bg-mint/10 shrink-0"
               title="Download QA Report"
             >
               <Download className="w-3.5 h-3.5" />
@@ -201,23 +201,23 @@ Summary:
       </div>
 
       {/* Test Log Terminal */}
-      <div className="p-4 rounded-xl bg-bg-2/80 border border-line font-mono text-xs space-y-2 max-h-64 overflow-y-auto">
+      <div className="p-3 sm:p-4 rounded-xl bg-bg-2/80 border border-line font-mono text-xs space-y-2 max-h-64 overflow-y-auto">
         {completedLogs.length === 0 ? (
-          <div className="text-muted text-center py-6">
-            Click <b className="text-cyan">"Run Automated Test Suite"</b> above to observe real-time Cypress / Postman assertion passes.
+          <div className="text-muted text-center py-6 text-xs sm:text-sm">
+            Click <b className="text-cyan">"Run Suite"</b> above to observe real-time assertion passes.
           </div>
         ) : (
           completedLogs.map((log, idx) => (
-            <div key={idx} className="flex items-start gap-2.5 text-text-2 leading-relaxed">
+            <div key={idx} className="flex items-start gap-2 text-text-2 leading-relaxed">
               <CheckCircle2 className="w-4 h-4 text-mint shrink-0 mt-0.5" />
-              <span className="flex-1 text-text-2">{log.text}</span>
-              <span className="text-dim text-[10px] shrink-0">{log.time}</span>
+              <span className="flex-1 text-text-2 break-all">{log.text}</span>
+              <span className="text-dim text-[10px] shrink-0 ml-1">{log.time}</span>
             </div>
           ))
         )}
         {progress === 100 && (
-          <div className="p-3 mt-3 rounded-lg bg-mint/10 border border-mint/30 text-mint font-semibold flex items-center gap-2">
-            <FileCheck className="w-4 h-4" />
+          <div className="p-3 mt-3 rounded-lg bg-mint/10 border border-mint/30 text-mint font-semibold flex items-center gap-2 text-xs sm:text-sm flex-wrap">
+            <FileCheck className="w-4 h-4 shrink-0" />
             <span>SUITE PASSED — {currentSuiteData.steps.length}/{currentSuiteData.steps.length} ASSERTIONS VERIFIED (0 failures)</span>
           </div>
         )}

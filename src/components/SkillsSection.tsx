@@ -210,11 +210,11 @@ export const SkillsSection = () => {
         </div>
 
         {/* Skill Experience & Practical Competency Breakdown */}
-        <div className="p-8 border border-line rounded-2xl bg-panel reveal">
+        <div className="p-4 sm:p-6 md:p-8 border border-line rounded-2xl bg-panel reveal overflow-hidden">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 pb-6 border-b border-line">
             <div>
               <div className="text-cyan text-xs mono uppercase mb-1">// PRACTICAL COMPETENCY</div>
-              <h3 className="text-2xl font-medium text-text">Applied Skill Experience Matrix</h3>
+              <h3 className="text-xl sm:text-2xl font-medium text-text">Applied Skill Experience Matrix</h3>
             </div>
             <div className="text-xs text-muted mono">
               Verified through Internship &amp; Project Engineering

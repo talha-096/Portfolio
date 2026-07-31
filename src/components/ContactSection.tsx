@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Github, Linkedin, Instagram, Download, Send, CheckCircle } from "lucide-react";
+import { Mail, Github, Linkedin, Instagram, Download, Send, CheckCircle, FileText } from "lucide-react";
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -36,7 +36,7 @@ export const ContactSection = () => {
 
           <div className="contact-meta">
             <div className="item">
-              <span className="v mint">talhaghafoor84@gmail.com</span>
+              <span className="v mint break-all">talhaghafoor84@gmail.com</span>
               <span className="l">DIRECT EMAIL</span>
             </div>
             <div className="item">
@@ -95,10 +95,14 @@ export const ContactSection = () => {
             </button>
           </form>
 
-          <div className="contact-actions">
+          <div className="contact-actions flex flex-wrap justify-center gap-3">
             <a href="/CV.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               <Download className="w-4 h-4 mr-2" />
               Download CV (PDF)
+            </a>
+            <a href="/Talha_Ghafoor_CV_AIML.docx" download className="btn btn-ghost">
+              <FileText className="w-4 h-4 mr-2" />
+              Download CV (DOCX)
             </a>
           </div>
 
@@ -125,11 +129,11 @@ export const ContactSection = () => {
               <span className="ping" />
               <span>Designed &amp; Built for Talha Ghafoor</span>
             </div>
-            <div className="flex items-center gap-3">
-              <a href="mailto:talhaghafoor84@gmail.com" className="hover:text-cyan transition-colors">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+              <a href="mailto:talhaghafoor84@gmail.com" className="hover:text-cyan transition-colors break-all">
                 talhaghafoor84@gmail.com
               </a>
-              <span>·</span>
+              <span className="hidden sm:inline">·</span>
               <span>© {new Date().getFullYear()} Talha Ghafoor · SQA &amp; AI Specialist</span>
             </div>
           </div>

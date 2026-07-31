@@ -12,23 +12,21 @@ export const ProjectsSection = () => {
       catClass: "genai",
       tint: "tint-mint",
       category: "Generative AI & SQA",
-      title: "GenMark: AI-Powered Marketing Generation",
-      subtitle: "AI Model Integration & Microservices + Cypress & Postman SQA Suite",
+      title: "GenMark: AI-Powered Marketing Platform",
+      subtitle: "AI Microservices + Cypress E2E & Postman Contract Test Suite",
       img: "/projects/genmark/media__1782301041222.png",
       metrics: [
-        { label: "Primary Role", value: "AI & SQA Engineer" },
-        { label: "AI & Stack", value: "LLMs + Flask + React" },
-        { label: "QA & Infra", value: "Cypress + Postman + AWS" }
+        { label: "Role", value: "AI & SQA Engineer" },
+        { label: "Stack", value: "LLMs + Flask + React" },
+        { label: "Testing", value: "Cypress + Postman" }
       ],
       description:
-        "Final Year Project. GenMark is an advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration. Engineered with dual AI/Full-Stack and SQA responsibilities.",
+        "Final Year Project: AI marketing platform featuring automated content generation, brand kit orchestration, and serverless AWS microservices verified via Cypress E2E suites.",
       features: [
-        "AI Content Generation & Brand Kit Management: Leveraging LLMs for marketing copy, slogans, and consistent brand identity.",
-        "Decoupled Microservice Architecture built with React, Vite, TypeScript, Flask, FastAPI, MongoDB, JWT, Gunicorn, and Nginx.",
-        "Automated E2E Cypress test suites covering React UI authentication, project workflows, and content generation.",
-        "Postman API contract testing for backend services on AWS (ECS Fargate, Lambda, API Gateway, S3, ECR)."
+        "Automated Cypress E2E test coverage for React authentication and prompt workflows.",
+        "Postman API contract verification for FastAPI endpoints on AWS Fargate & Lambda."
       ],
-      tech: ["Python", "Flask", "FastAPI", "React", "TypeScript", "MongoDB", "JWT", "AWS", "Docker", "Cypress", "Postman", "Nginx"],
+      tech: ["Python", "Flask", "FastAPI", "React", "AWS", "Docker", "Cypress", "Postman"],
       github: "https://github.com/talha-096/GenMark",
       demo: "https://gen-mark-kappa.vercel.app/"
     },
@@ -38,8 +36,8 @@ export const ProjectsSection = () => {
       catClass: "fullstack",
       tint: "tint-cyan",
       category: "Full-Stack",
-      title: "Full-Stack Multi-Vendor E-Commerce",
-      subtitle: "Next.js 15 + Hono.js Serverless API + Supabase & Stripe Webhooks",
+      title: "Multi-Vendor E-Commerce Platform",
+      subtitle: "Next.js 15 + Hono.js Serverless API + Supabase & Stripe QA",
       img: "/banner.png",
       metrics: [
         { label: "Framework", value: "Next.js 15" },
@@ -47,12 +45,10 @@ export const ProjectsSection = () => {
         { label: "Database", value: "PostgreSQL / Drizzle" }
       ],
       description:
-        "Scalable multi-vendor e-commerce platform with role-based dashboards (admin, seller, customer), email verification gates, secure payment flows, and serverless Hono.js API routes.",
+        "Multi-vendor store featuring role-based dashboards (Admin, Vendor, Customer), serverless Hono.js routes, and verified Stripe checkout payment sync.",
       features: [
-        "Functional manual and automated testing across checkout, product discovery, and order management.",
-        "Stripe webhook integration validation ensuring real-time order/payment state synchronization.",
-        "Role-based authentication & session flow with Supabase Auth and custom Next.js Middleware.",
-        "PostgreSQL database models configured with Drizzle ORM and TanStack React Query."
+        "Stripe webhook test suite confirming real-time PostgreSQL order status updates.",
+        "Role-based Supabase authentication middleware with Drizzle ORM models."
       ],
       tech: ["Next.js 15", "Supabase", "Drizzle ORM", "Hono.js", "Stripe", "TailwindCSS"],
       github: "https://github.com/talha-096/E-commerce-Website",
@@ -64,8 +60,8 @@ export const ProjectsSection = () => {
       catClass: "ml",
       tint: "tint-violet",
       category: "Machine Learning",
-      title: "Hybrid Transformer Mental Health Detection",
-      subtitle: "Multiclass Affective NLP Model + SHAP Explainability & SMOTE",
+      title: "Mental Health NLP Affect Classifier",
+      subtitle: "PyTorch + RoBERTa Transformers + SHAP Explainability & SMOTE",
       img: "/banner.png",
       metrics: [
         { label: "Accuracy", value: "83.83% F1" },
@@ -73,14 +69,12 @@ export const ProjectsSection = () => {
         { label: "Imbalance Fix", value: "SMOTE Recall 83%" }
       ],
       description:
-        "Deep learning system for multiclass mental health detection from social media text using PyTorch, HuggingFace, RoBERTa embeddings, sentiment/emotion fusion, and SHAP explainability.",
+        "4-class mental health NLP model using PyTorch and RoBERTa embeddings, optimized with SMOTE resampling to fix minority class imbalance.",
       features: [
-        "4-Class Classification: Normal, Anxious, Depressed, and Suicidal crisis language detection.",
-        "Hybrid Architecture fusing RoBERTa embeddings (768-dim) with 7 emotion and 3 sentiment scores.",
-        "Class-imbalance defect correction using SMOTE, boosting minority recall from 71% to 83%.",
-        "SHAP explainability revealing exact clinical trigger keywords per classification."
+        "SMOTE class-imbalance fix boosting minority recall from 71% to 83%.",
+        "SHAP token interpretability highlighting key clinical indicator words."
       ],
-      tech: ["Python", "PyTorch", "RoBERTa", "SHAP", "SMOTE", "scikit-learn", "HuggingFace"],
+      tech: ["Python", "PyTorch", "RoBERTa", "SHAP", "SMOTE", "scikit-learn"],
       github: "https://github.com/talha-096/NLP-Mental-Health-Classification-System",
       demo: "#"
     },
@@ -91,19 +85,18 @@ export const ProjectsSection = () => {
       tint: "tint-mint",
       category: "Machine Learning",
       title: "Fake News Detection Engine",
-      subtitle: "NLP TF-IDF Classification + Interactive Streamlit Web Dashboard",
+      subtitle: "NLP TF-IDF Classification + Interactive Web App",
       img: "/banner.png",
       metrics: [
         { label: "Algorithm", value: "TF-IDF + LogReg" },
         { label: "Deployment", value: "Streamlit App" },
-        { label: "Validation", value: "Precision/Recall" }
+        { label: "Validation", value: "Precision / Recall" }
       ],
       description:
-        "Machine learning classifier for real-time fake news detection featuring full text preprocessing, TF-IDF vectorization, and a deployed Streamlit web dashboard.",
+        "Real-time news credibility classifier featuring text preprocessing, TF-IDF vectorization, and a deployed interactive Streamlit dashboard.",
       features: [
-        "Full ML pipeline with TF-IDF tokenization and Logistic Regression classifier.",
-        "Deployed Streamlit dashboard allowing visitors to paste articles for instant credibility scoring.",
-        "Precision, recall, and F1-score model validation across balanced dataset benchmarks."
+        "End-to-end text tokenization pipeline with Logistic Regression classifier.",
+        "Deployed web interface providing instant article credibility scoring."
       ],
       tech: ["Python", "NLP", "Streamlit", "scikit-learn", "TF-IDF"],
       github: "https://github.com/talha-096/Fake-News-Detector",

@@ -18,7 +18,8 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
     { id: "certifications", title: "Certifications & Credentials", tag: "Section", icon: <Award className="w-4 h-4" />, action: () => scrollToSection("certifications") },
     { id: "education", title: "Education & Degree", tag: "Section", icon: <GraduationCap className="w-4 h-4" />, action: () => scrollToSection("education") },
     { id: "contact", title: "Contact & Social Links", tag: "Section", icon: <Mail className="w-4 h-4" />, action: () => scrollToSection("contact") },
-    { id: "cv", title: "Download Talha Ghafoor CV (PDF)", tag: "Action", icon: <FileText className="w-4 h-4" />, action: () => window.open("/CV.pdf", "_blank") },
+    { id: "cv-pdf", title: "Download Talha Ghafoor CV (PDF)", tag: "Action", icon: <FileText className="w-4 h-4" />, action: () => window.open("/CV.pdf", "_blank") },
+    { id: "cv-docx", title: "Download Talha Ghafoor CV (Word DOCX)", tag: "Action", icon: <FileText className="w-4 h-4" />, action: () => window.open("/Talha_Ghafoor_CV_AIML.docx", "_blank") },
     { id: "github", title: "GitHub Profile (talha-096)", tag: "Link", icon: <Github className="w-4 h-4" />, action: () => window.open("https://github.com/talha-096", "_blank") },
     { id: "linkedin", title: "LinkedIn Profile (Talha Ghafoor)", tag: "Link", icon: <Linkedin className="w-4 h-4" />, action: () => window.open("https://www.linkedin.com/in/talha-ghafoor-475aa926a/", "_blank") }
   ];

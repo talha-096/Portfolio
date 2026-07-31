@@ -62,7 +62,7 @@ export const Navigation = ({ onOpenPalette }: NavigationProps) => {
             className="logo"
           >
             <span className="logo-mark">TG</span>
-            <span>Talha Ghafoor</span>
+            <span className="truncate max-w-[110px] xs:max-w-none">Talha Ghafoor</span>
           </a>
 
           <div className="nav-links">
@@ -96,18 +96,20 @@ export const Navigation = ({ onOpenPalette }: NavigationProps) => {
               href="/CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-nav-cv"
+              className="btn-nav-cv shrink-0"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>CV / Resume</span>
+              <span className="hidden sm:inline">CV / Resume</span>
+              <span className="inline sm:hidden">CV</span>
             </a>
 
             <button
-              className="nav-toggle"
+              className="nav-toggle shrink-0"
               aria-label="Toggle menu"
               onClick={() => {
-                setMobileOpen(!mobileOpen);
-                document.body.classList.toggle("menu-open", !mobileOpen);
+                const nextOpen = !mobileOpen;
+                setMobileOpen(nextOpen);
+                document.body.classList.toggle("menu-open", nextOpen);
               }}
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

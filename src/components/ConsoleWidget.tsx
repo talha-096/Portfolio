@@ -226,7 +226,8 @@ export const ConsoleWidget = () => {
             className={`console-tab-btn ${activeTab === "rag" ? "active" : ""}`}
             onClick={() => setActiveTab("rag")}
           >
-            RAG & QA Inspector
+            <span className="hidden sm:inline">RAG &amp; QA Inspector</span>
+            <span className="inline sm:hidden">RAG &amp; QA</span>
           </button>
         </div>
         <div className="console-tag">
@@ -341,11 +342,11 @@ export const ConsoleWidget = () => {
       {/* TAB 3: RAG & QA INSPECTOR */}
       <div className={`console-tab-panel ${activeTab === "rag" ? "active" : ""}`}>
         <div className="rag-inspector">
-          <div className="rag-head-bar">
-            <span className="rag-title">
+          <div className="rag-head-bar flex-col sm:flex-row items-start sm:items-center gap-1">
+            <span className="rag-title truncate max-w-full">
               Cypress &amp; Postman Test Runner: <code>talha-096/GenMark</code>
             </span>
-            <span className="rag-status">SMOTE Balanced · 83.8% F1</span>
+            <span className="rag-status shrink-0">SMOTE Balanced · 83.8% F1</span>
           </div>
 
           <div className="rag-query-box">
@@ -355,7 +356,7 @@ export const ConsoleWidget = () => {
 
           <div className="rag-matches">
             <div className="rag-match-item">
-              <div className="rag-match-top">
+              <div className="rag-match-top flex-col sm:flex-row">
                 <span className="chunk-id">suite_01 · GenMark Cypress E2E</span>
                 <span className="similarity-score">Status: PASS (14/14)</span>
               </div>
@@ -363,7 +364,7 @@ export const ConsoleWidget = () => {
             </div>
 
             <div className="rag-match-item">
-              <div className="rag-match-top">
+              <div className="rag-match-top flex-col sm:flex-row">
                 <span className="chunk-id">suite_02 · Mental Health SMOTE Fix</span>
                 <span className="similarity-score">Recall: 83.0%</span>
               </div>
@@ -371,7 +372,7 @@ export const ConsoleWidget = () => {
             </div>
 
             <div className="rag-match-item">
-              <div className="rag-match-top">
+              <div className="rag-match-top flex-col sm:flex-row">
                 <span className="chunk-id">suite_03 · Stripe Webhooks E-Commerce</span>
                 <span className="similarity-score">Sync: 100% Valid</span>
               </div>

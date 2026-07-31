@@ -33,11 +33,11 @@ export const CaseStudyModal = ({ project, onClose }: CaseStudyModalProps) => {
           <h2>{project.title}</h2>
           <div className="text-cyan text-sm mono mb-6">{project.subtitle}</div>
 
-          <div className="grid grid-cols-3 gap-4 p-4 rounded-xl bg-panel border border-line mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 sm:p-4 rounded-xl bg-panel border border-line mb-6">
             {project.metrics.map((m, idx) => (
               <div key={idx} className="flex flex-col">
-                <span className="text-xs text-muted mono uppercase">{m.label}</span>
-                <span className="text-lg font-bold text-cyan">{m.value}</span>
+                <span className="text-[10px] sm:text-xs text-muted mono uppercase">{m.label}</span>
+                <span className="text-base sm:text-lg font-bold text-cyan">{m.value}</span>
               </div>
             ))}
           </div>
@@ -49,7 +49,7 @@ export const CaseStudyModal = ({ project, onClose }: CaseStudyModalProps) => {
 
           <div className="modal-section">
             <h4>Key Features &amp; SQA Verification</h4>
-            <ul className="list-disc ml-5 space-y-1 text-sm text-text-2">
+            <ul className="list-disc ml-5 space-y-1 text-xs sm:text-sm text-text-2">
               {project.features.map((feat, i) => (
                 <li key={i}>{feat}</li>
               ))}
@@ -65,13 +65,13 @@ export const CaseStudyModal = ({ project, onClose }: CaseStudyModalProps) => {
             </div>
           </div>
 
-          <div className="flex gap-4 mt-8 pt-6 border-t border-line">
+          <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-4 border-t border-line">
             {project.github && (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-ghost text-sm py-2 px-4 inline-flex items-center gap-2"
+                className="btn btn-ghost text-xs sm:text-sm py-2.5 px-4 inline-flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <Github className="w-4 h-4" />
                 View Code on GitHub
@@ -82,7 +82,7 @@ export const CaseStudyModal = ({ project, onClose }: CaseStudyModalProps) => {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary text-sm py-2 px-4 inline-flex items-center gap-2"
+                className="btn btn-primary text-xs sm:text-sm py-2.5 px-4 inline-flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <ExternalLink className="w-4 h-4" />
                 Live Product Demo

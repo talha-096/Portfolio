@@ -3,15 +3,14 @@ import { ArrowUpRight, Download } from "lucide-react";
 import ConsoleWidget from "./ConsoleWidget";
 
 export const HeroSection = () => {
-  const [typedRole, setTypedRole] = useState("a QA Engineer");
-  const [scrambledText, setScrambledText] = useState("Engineering robust AI systems & automated test suites at scale.");
+  const [typedRole, setTypedRole] = useState("an AI/ML Engineer");
 
   const roles = [
-    "a QA Engineer",
     "an AI/ML Engineer",
-    "building automated test suites",
-    "designing ML pipelines",
-    "a passionate Software Engineer"
+    "a Machine Learning Engineer",
+    "building PyTorch & NLP models",
+    "deploying GenAI microservices",
+    "a Software Engineer"
   ];
 
   useEffect(() => {
@@ -78,10 +77,10 @@ export const HeroSection = () => {
               <span className="ring" title="Available for SQA & AI/ML Opportunities" />
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-8 items-start mb-6">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start mb-6">
               {/* Profile Headshot Featured Badge Card */}
-              <div className="relative group shrink-0">
-                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan/40 shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-105 group-hover:border-cyan">
+              <div className="relative group shrink-0 self-center sm:self-start">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-2xl overflow-hidden border-2 border-cyan/40 shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-105 group-hover:border-cyan">
                   <img
                     src="/profile.jpg"
                     alt="Talha Ghafoor Portrait"
@@ -91,9 +90,9 @@ export const HeroSection = () => {
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-primary opacity-30 blur-md group-hover:opacity-70 transition-opacity" />
               </div>
 
-              <div>
+              <div className="w-full">
                 <div className="hero-name mono">
-                  SOFTWARE QA · AUTOMATED TESTING · AI/ML ENGINEERING · FULL-STACK
+                  AI/ML ENGINEER · MACHINE LEARNING · FULL-STACK
                 </div>
 
                 <h1 className="hero-headline text-balance">
@@ -102,7 +101,7 @@ export const HeroSection = () => {
                   </span>
                   <span className="line">
                     <span>
-                      <em>verifying</em> AI systems
+                      <em>deploying</em> AI models
                     </span>
                   </span>
                   <span className="line">
@@ -123,9 +122,8 @@ export const HeroSection = () => {
               <span className="typed-cursor" />
             </div>
 
-            <p className="hero-desc">
-              BS in Software Engineering graduate (2022 – 2026) from HITEC University specializing in SQA automation, machine learning model evaluation, and full-stack API development. Experienced in Cypress, Postman, PyTorch, FastAPI, React, AWS, and Docker.{" "}
-              <span className="scramble">{scrambledText}</span>
+            <p className="hero-desc font-sans text-sm sm:text-base">
+              Software Engineering graduate (HITEC University, 2026) &amp; Machine Learning / AI Engineer specializing in PyTorch deep learning, NLP transformers, model serving on AWS, and full-stack applications.
             </p>
 
             <div className="hero-ctas">
