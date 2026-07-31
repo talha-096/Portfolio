@@ -26,23 +26,35 @@ if DATABASE_URL.startswith("sqlite"):
     )
     using_mssql = False
 else:
-    try:
-        print("Connecting to MS SQL Server instance (.\\SQLEXPRESS)...")
-        test_engine = create_engine(
-            PRIMARY_DATABASE_URL,
-            echo=False,
-            pool_size=20,
-            max_overflow=10,
-            pool_recycle=3600,
-            pool_pre_ping=True
-        )
-        with test_engine.connect() as conn:
-            conn.execute(text("SELECT 1"))
-        print("SUCCESS: Connected to MS SQL Server (portfolio_db, schema: portfolio)!")
-        engine = test_engine
-        using_mssql = True
-    except Exception as err:
-        print(f"MS SQL Server connection notice: {err}. Using SQLite fallback.")
+    # Try Primary MS SQL Server (.\SQLEXPRESS or custom DATABASE_URL)
+    connection_urls = [
+        PRIMARY_DATABASE_URL,
+        r"mssql+pyodbc:///?odbc_connect=Driver={ODBC Driver 17 for SQL Server};Server=.\SQLEXPRESS01;Database=portfolio_db;Trusted_Connection=yes;TrustServerCertificate=yes"
+    ]
+    connected = False
+    for target_url in connection_urls:
+        try:
+            print(f"Connecting to MS SQL Server instance ({target_url[:60]}...)...")
+            test_engine = create_engine(
+                target_url,
+                echo=False,
+                pool_size=20,
+                max_overflow=10,
+                pool_recycle=3600,
+                pool_pre_ping=True
+            )
+            with test_engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            print("SUCCESS: Connected to MS SQL Server (portfolio_db, schema: portfolio)!")
+            engine = test_engine
+            using_mssql = True
+            connected = True
+            break
+        except Exception as err:
+            print(f"Connection attempt notice: {err}")
+
+    if not connected:
+        print("MS SQL Server connection unavailable. Using SQLite fallback.")
         os.makedirs("./data", exist_ok=True)
         engine = create_engine(
             FALLBACK_DATABASE_URL,
@@ -51,6 +63,7 @@ else:
             pool_pre_ping=True
         )
         using_mssql = False
+
 
 
 
