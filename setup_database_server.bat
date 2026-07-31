@@ -31,18 +31,19 @@ net start "MSSQL$SQLEXPRESS01" 2>nul
 
 echo.
 echo ==============================================================================
-echo [4/4] Testing sa Connection & portfolio_db Schema Verification...
+echo [4/4] Testing sa Connection and portfolio_db Schema Verification...
 echo ==============================================================================
 
 sqlcmd -S 127.0.0.1,1433 -U sa -P PortfolioPassword123! -Q "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'portfolio_db') CREATE DATABASE portfolio_db; USE portfolio_db; IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'portfolio') EXEC('CREATE SCHEMA portfolio'); SELECT name FROM sys.databases WHERE name = 'portfolio_db';"
 
 echo.
 echo ==============================================================================
-echo 🎉 SUCCESS! Your PC is fully configured as a Dedicated MS SQL Database Server!
+echo SUCCESS! Your PC is fully configured as a Dedicated MS SQL Database Server!
 echo ------------------------------------------------------------------------------
 echo Server: 127.0.0.1,1433 (or .\SQLEXPRESS)
 echo Database: portfolio_db (Schema: portfolio)
 echo Username: sa
 echo Password: PortfolioPassword123!
 echo ==============================================================================
+
 pause
