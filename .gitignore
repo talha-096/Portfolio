@@ -3,6 +3,10 @@
 .env.*
 *.env
 !.env.example
+setup_database_server.bat
+Database Login and password.txt
+*password*.txt
+
 
 # Python & Bytecode
 __pycache__/
