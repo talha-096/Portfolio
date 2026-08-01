@@ -18,20 +18,19 @@ Welcome to my interactive personal portfolio and API telemetry system! This plat
 
 ## 🏗️ Architecture Overview
 
-The system is structured as a decoupled **React 18 + Vite Frontend** and a **FastAPI + SQLModel / MS SQL Server Backend**:
+The system is structured as a decoupled **React 18 + Vite Frontend** and a **FastAPI + SQLModel / Supabase PostgreSQL Backend**:
 
 ```
 talha-Portfolio/
 ├── backend/                  # High-Performance FastAPI Backend
 │   ├── app/
 │   │   ├── api/              # API Routers (contact, nlp, analytics)
-│   │   ├── database.py       # MS SQL Server (\SQLEXPRESS) + SQLite Fallback
-│   │   ├── models.py         # SQLModel database schemas (portfolio schema)
+│   │   ├── models.py         # Data models and schemas
 │   │   ├── schemas/          # Pydantic contract schemas
+│   │   ├── storage.py        # Telemetry & storage management
 │   │   └── services/         # Email notification & local JSON backups
 │   ├── main.py               # Entrypoint & Automated Request Logging Middleware
-│   ├── requirements.txt      # Python dependencies
-│   └── setup_sqlexpress.sql  # Complete MS SQL Server setup DDL script
+│   └── requirements.txt      # Python dependencies
 │
 ├── frontend/                 # React 18 + TypeScript + Vite UI
 │   ├── src/
@@ -48,15 +47,15 @@ talha-Portfolio/
 
 ---
 
-## ✨ Key System & Database Automation Features
+## ✨ Key System Features
 
-- **⚡ Automated Request & Telemetry Logging (`portfolio.api_request_logs`)**:
-  - Custom HTTP middleware automatically logs method, path, query strings, execution latency (ms), status codes, client IP, and user agents in the database.
-- **📩 Contact Message Persistence & Email Notifications (`portfolio.contact_messages`)**:
-  - Saves all user contact submissions to database tables while dispatching email alerts and local JSON backups.
-- **🤖 AI Playground & Chat Prompt Storage (`portfolio.nlp_logs`)**:
-  - Interactive terminal chat & mental health NLP classification system. Every query, prompt, and SHAP explainability evaluation is stored in the database.
-- **📊 Visitor Traffic & Navigation Analytics (`portfolio.visitor_logs`)**:
+- **⚡ Automated Request & Telemetry Logging**:
+  - Custom HTTP middleware automatically logs method, path, query strings, execution latency (ms), status codes, client IP, and user agents.
+- **📩 Contact Message Handling & Email Notifications**:
+  - Processes contact submissions while dispatching email alerts and local JSON backups.
+- **🤖 AI Playground & Chat Prompt Telemetry**:
+  - Interactive terminal chat & mental health NLP classification system. Every query, prompt, and SHAP explainability evaluation is logged.
+- **📊 Visitor Traffic & Navigation Analytics**:
   - Automated frontend visitor tracker logs page navigation and user sessions.
 - **🛡️ Cyber Security & Rate Limiting**:
   - Hardened with HTTP Security Headers (`X-Frame-Options`, `X-XSS-Protection`, `Strict-Transport-Security`, `nosniff`) and SlowAPI rate limiting.

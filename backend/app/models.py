@@ -1,16 +1,10 @@
 from sqlmodel import SQLModel, Field
 from datetime import datetime
 from typing import Optional
-from app.database import using_mssql
-
-# Only apply 'portfolio' schema for MS SQL Server.
-# SQLite fallback uses default schema (no schema prefix).
-DB_SCHEMA_ARGS = {"schema": "portfolio"} if using_mssql else {}
 
 
 class ContactMessage(SQLModel, table=True):
     __tablename__ = "contact_messages"
-    __table_args__ = DB_SCHEMA_ARGS
 
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
@@ -25,7 +19,6 @@ class ContactMessage(SQLModel, table=True):
 
 class NlpLog(SQLModel, table=True):
     __tablename__ = "nlp_logs"
-    __table_args__ = DB_SCHEMA_ARGS
 
     id: Optional[int] = Field(default=None, primary_key=True)
     input_text: str
@@ -37,7 +30,6 @@ class NlpLog(SQLModel, table=True):
 
 class VisitorLog(SQLModel, table=True):
     __tablename__ = "visitor_logs"
-    __table_args__ = DB_SCHEMA_ARGS
 
     id: Optional[int] = Field(default=None, primary_key=True)
     page_visited: str
@@ -49,7 +41,6 @@ class VisitorLog(SQLModel, table=True):
 
 class ApiRequestLog(SQLModel, table=True):
     __tablename__ = "api_request_logs"
-    __table_args__ = DB_SCHEMA_ARGS
 
     id: Optional[int] = Field(default=None, primary_key=True)
     method: str
@@ -60,5 +51,3 @@ class ApiRequestLog(SQLModel, table=True):
     ip_address: Optional[str] = None
     user_agent: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
-
-

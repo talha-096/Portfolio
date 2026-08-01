@@ -7,6 +7,7 @@ from app.database import get_session
 from app.models import ContactMessage
 from app.schemas.contact_schema import ContactCreate, ContactResponse
 from app.services.email_service import send_contact_notification
+from app.storage import contact_messages_store, get_next_id
 
 limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/api/contact", tags=["Contact"])
@@ -20,9 +21,8 @@ def submit_contact_form(
     session: Session = Depends(get_session)
 ):
     """
-    Saves user message to Database (MS SQL Server portfolio.contact_messages),
-    dispatches an email notification, and creates a local JSON backup.
-    Rate limited to 5 submissions/min to prevent spam & DDoS.
+    Saves user message to Supabase PostgreSQL database, dispatches an email notification,
+    and creates a local JSON backup.
     """
     client_ip = request.client.host if request.client else None
 
@@ -34,7 +34,6 @@ def submit_contact_form(
         message=payload.message
     )
 
-    # 2. Store in Database
     db_message = ContactMessage(
         name=payload.name,
         email=payload.email,
@@ -44,9 +43,19 @@ def submit_contact_form(
         is_emailed=is_sent
     )
 
-    session.add(db_message)
-    session.commit()
-    session.refresh(db_message)
+    # 2. Save in Supabase PostgreSQL database if connected
+    if session:
+        try:
+            session.add(db_message)
+            session.commit()
+            session.refresh(db_message)
+        except Exception as e:
+            print(f"Notice: Supabase save fallback: {e}")
+            db_message.id = get_next_id()
+            contact_messages_store.insert(0, db_message)
+    else:
+        db_message.id = get_next_id()
+        contact_messages_store.insert(0, db_message)
 
     return db_message
 
@@ -55,9 +64,11 @@ def submit_contact_form(
 @limiter.limit("20/minute")
 def get_all_messages(request: Request, session: Session = Depends(get_session)):
     """
-    Retrieve all contact messages saved in portfolio.contact_messages.
+    Retrieve all contact messages saved in Supabase database.
     """
-    messages = session.exec(
-        select(ContactMessage).order_by(ContactMessage.created_at.desc())
-    ).all()
-    return messages
+    if session:
+        try:
+            return session.exec(select(ContactMessage).order_by(ContactMessage.created_at.desc())).all()
+        except Exception as e:
+            print(f"Notice retrieving messages from DB: {e}")
+    return contact_messages_store

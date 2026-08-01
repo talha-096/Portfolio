@@ -7,7 +7,7 @@ contact_data = json.dumps({
     "name": "Talha Ghafoor",
     "email": "talhaghafoor84@gmail.com",
     "subject": "Portfolio Backend Verification",
-    "message": "Backend testing successful: SQL Server storage + Gmail notification active!"
+    "message": "Backend testing successful: In-memory storage & notification active!"
 }).encode("utf-8")
 
 req = urllib.request.Request(

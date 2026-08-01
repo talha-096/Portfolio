@@ -1,85 +1,49 @@
 import os
-from sqlmodel import create_engine, SQLModel, Session
+import urllib.parse
+from sqlmodel import create_engine, Session, SQLModel
 from sqlalchemy import text
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# MS SQL Server connection string for local instance .\SQLEXPRESS
-# Uses portfolio_db database with 'portfolio' schema for all tables
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 
-PRIMARY_DATABASE_URL = DATABASE_URL or r"mssql+pyodbc:///?odbc_connect=Driver={ODBC Driver 17 for SQL Server};Server=.\SQLEXPRESS;Database=portfolio_db;Trusted_Connection=yes;TrustServerCertificate=yes"
-FALLBACK_DATABASE_URL = os.getenv("FALLBACK_DATABASE_URL", "sqlite:///./data/portfolio.db")
-
 engine = None
-using_mssql = False
+using_supabase = False
 
-if DATABASE_URL.startswith("sqlite"):
-    print("Using SQLite database mode...")
-    os.makedirs("./data", exist_ok=True)
-    engine = create_engine(
-        DATABASE_URL,
-        echo=False,
-        connect_args={"check_same_thread": False},
-        pool_pre_ping=True
-    )
-    using_mssql = False
-else:
-    # Try Primary MS SQL Server (.\SQLEXPRESS or custom DATABASE_URL)
-    connection_urls = [
-        PRIMARY_DATABASE_URL,
-        r"mssql+pyodbc:///?odbc_connect=Driver={ODBC Driver 17 for SQL Server};Server=.\SQLEXPRESS01;Database=portfolio_db;Trusted_Connection=yes;TrustServerCertificate=yes"
-    ]
-    connected = False
-    for target_url in connection_urls:
-        try:
-            print(f"Connecting to MS SQL Server instance ({target_url[:60]}...)...")
-            test_engine = create_engine(
-                target_url,
-                echo=False,
-                pool_size=20,
-                max_overflow=10,
-                pool_recycle=3600,
-                pool_pre_ping=True
-            )
-            with test_engine.connect() as conn:
-                conn.execute(text("SELECT 1"))
-            print("SUCCESS: Connected to MS SQL Server (portfolio_db, schema: portfolio)!")
-            engine = test_engine
-            using_mssql = True
-            connected = True
-            break
-        except Exception as err:
-            print(f"Connection attempt notice: {err}")
-
-    if not connected:
-        print("MS SQL Server connection unavailable. Using SQLite fallback.")
-        os.makedirs("./data", exist_ok=True)
+if DATABASE_URL:
+    try:
+        print("Connecting to Supabase PostgreSQL Database...")
         engine = create_engine(
-            FALLBACK_DATABASE_URL,
+            DATABASE_URL,
             echo=False,
-            connect_args={"check_same_thread": False},
-            pool_pre_ping=True
+            pool_size=10,
+            max_overflow=5,
+            pool_recycle=300,
+            pool_pre_ping=True,
+            connect_args={"connect_timeout": 10}
         )
-        using_mssql = False
-
-
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        print("SUCCESS: Connected to Supabase PostgreSQL Database!")
+        using_supabase = True
+    except Exception as err:
+        print(f"Notice: Supabase PostgreSQL direct connection error ({err}). Operating in hybrid storage mode.")
+        using_supabase = False
 
 
 def init_db():
-    from app.models import ContactMessage, NlpLog, VisitorLog, ApiRequestLog  # noqa: F401
-    if not using_mssql:
-        # Only create tables via SQLModel for SQLite fallback.
-        # For MS SQL Server, tables were created by setup SQL scripts.
-        SQLModel.metadata.create_all(engine)
-        print("Database tables initialized via SQLite fallback.")
-    else:
-        # Also ensure tables exist in MS SQL Server if created dynamically
-        SQLModel.metadata.create_all(engine)
-        print("MS SQL Server tables initialized / verified in portfolio schema.")
+    if engine and using_supabase:
+        try:
+            SQLModel.metadata.create_all(engine)
+            print("Supabase database tables verified / synchronized.")
+        except Exception as e:
+            print(f"Notice during DB table sync: {e}")
 
 
 def get_session():
-    with Session(engine) as session:
-        yield session
+    if engine and using_supabase:
+        with Session(engine) as session:
+            yield session
+    else:
+        yield None

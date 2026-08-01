@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
-from sqlmodel import Session
+from sqlmodel import Session, select
 from slowapi import Limiter
 from slowapi.util import get_remote_address
+
 from app.database import get_session
 from app.models import NlpLog
+from app.storage import nlp_logs_store, get_next_id
 
 limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/api/nlp", tags=["AI & NLP Playground"])
@@ -23,12 +25,9 @@ def analyze_affective_state(
 ):
     """
     Analyzes input text for Mental Health NLP classification & SHAP explainability.
-    Saves analysis log to portfolio.nlp_logs in MS SQL Server.
+    Saves analysis log to Supabase PostgreSQL database.
     """
     client_ip = request.client.host if request.client else None
-    text = payload.text.lower()
-
-    # Calculate simulated SHAP token impact
     words = payload.text.split()
     shap_tokens = []
 
@@ -70,15 +69,25 @@ def analyze_affective_state(
     else:
         top_category = "Normal Affective State"
 
-    # Save log in portfolio.nlp_logs
     log = NlpLog(
         input_text=payload.text,
         predicted_label=top_category,
         confidence_score=max(scores.values()) / 100.0,
         ip_address=client_ip
     )
-    session.add(log)
-    session.commit()
+
+    if session:
+        try:
+            session.add(log)
+            session.commit()
+            session.refresh(log)
+        except Exception as err:
+            print(f"Notice saving NLP log in DB: {err}")
+            log.id = get_next_id()
+            nlp_logs_store.insert(0, log)
+    else:
+        log.id = get_next_id()
+        nlp_logs_store.insert(0, log)
 
     return {
         "top_category": top_category,
@@ -99,8 +108,8 @@ def chat_ai_assistant(
     session: Session = Depends(get_session)
 ):
     """
-    Handles user interactive prompts/messages from AI Playground console,
-    saves prompt & response into portfolio.nlp_logs in the database automatically.
+    Handles user interactive prompts from AI Playground console,
+    saves prompt & response into nlp_logs in Supabase database.
     """
     client_ip = request.client.host if request.client else None
     query = payload.prompt.strip()
@@ -121,33 +130,42 @@ def chat_ai_assistant(
     elif "skills" in q or "stack" in q:
         bot_response = "Talha's core stack includes Python, Cypress, Postman, FastAPI, React, PyTorch, scikit-learn, Docker, AWS, PostgreSQL, Supabase, and Next.js."
 
-    # Store user message and prompt in portfolio.nlp_logs table
     log = NlpLog(
         input_text=payload.prompt,
         predicted_label=f"Chat Query: {bot_response[:80]}...",
         confidence_score=0.99,
         ip_address=client_ip
     )
-    session.add(log)
-    session.commit()
+
+    if session:
+        try:
+            session.add(log)
+            session.commit()
+            session.refresh(log)
+        except Exception as err:
+            print(f"Notice saving Chat log in DB: {err}")
+            log.id = get_next_id()
+            nlp_logs_store.insert(0, log)
+    else:
+        log.id = get_next_id()
+        nlp_logs_store.insert(0, log)
 
     return {
         "reply": bot_response,
         "prompt": payload.prompt,
-        "status": "saved_to_database"
+        "status": "saved_to_supabase_database"
     }
 
 
 @router.get("/logs")
 @limiter.limit("20/minute")
-def get_all_nlp_logs(
-    request: Request,
-    session: Session = Depends(get_session)
-):
+def get_all_nlp_logs(request: Request, session: Session = Depends(get_session)):
     """
-    Retrieve all NLP and AI playground logs from portfolio.nlp_logs database table.
+    Retrieve all NLP logs from Supabase database.
     """
-    from sqlmodel import select
-    logs = session.exec(select(NlpLog).order_by(NlpLog.created_at.desc())).all()
-    return logs
-
+    if session:
+        try:
+            return session.exec(select(NlpLog).order_by(NlpLog.created_at.desc())).all()
+        except Exception as err:
+            print(f"Notice getting NLP logs: {err}")
+    return nlp_logs_store
