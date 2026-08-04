@@ -1,29 +1,27 @@
-import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useLocation, Link } from "react-router-dom";
 
 const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
+    console.warn("404: no route matches", location.pathname);
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-mountain">
-      <div className="text-center glass-card p-12 rounded-2xl max-w-md mx-4">
-        <h1 className="text-8xl font-bold mb-4 hero-text">404</h1>
-        <p className="text-xl text-muted-foreground mb-6">Oops! Page not found</p>
-        <p className="text-muted-foreground mb-8">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <Link to="/">
-          <Button className="bg-gradient-primary hover:shadow-glow transition-all duration-300">
-            Return to Home
-          </Button>
+    // The previous markup used `glass-card` and `hero-text` — leftovers from the
+    // starter template that are defined nowhere in this project, so the card had
+    // no background and the heading no styling. These are the site's own tokens.
+    <div className="min-h-screen bg-bg text-text flex items-center justify-center px-4">
+      <div className="max-w-md w-full text-center rounded-2xl border border-line bg-panel p-10">
+        <div className="font-mono text-xs uppercase tracking-widest text-cyan mb-3">
+          Error 404
+        </div>
+        <h1 className="text-7xl font-medium mb-4">404</h1>
+        <p className="text-lg mb-2">This page doesn&apos;t exist or has been moved.</p>
+        <p className="text-muted mb-8 break-all font-mono text-sm">{location.pathname}</p>
+        <Link to="/" className="btn btn-primary justify-center">
+          Return to Home
         </Link>
       </div>
     </div>

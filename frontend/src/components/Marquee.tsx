@@ -1,18 +1,17 @@
 export const Marquee = () => {
   const items = [
-    "Python",
-    "Cypress QA",
-    "Postman API",
-    "FastAPI",
-    "React & Vite",
-    "AWS Serverless",
-    "Docker",
-    "PyTorch",
-    "scikit-learn",
-    "Next.js 15",
-    "Supabase",
-    "TailwindCSS",
-    "Streamlit"
+    "ML/AI",
+    "Python Developer",
+    "QA Engineer",
+    "Full Stack Web Developer",
+    "PyTorch & Transformers",
+    "FastAPI & Flask",
+    "Cypress E2E",
+    "Postman API QA",
+    "React & Next.js",
+    "Laravel 7 & PHP",
+    "scikit-learn & SHAP",
+    "PostgreSQL & MongoDB"
   ];
 
   return (

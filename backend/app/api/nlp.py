@@ -1,19 +1,43 @@
-from fastapi import APIRouter, Depends, Request
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, Query, Request
+from pydantic import BaseModel, Field, field_validator
 from sqlmodel import Session, select
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 from app.database import get_session
 from app.models import NlpLog
-from app.storage import nlp_logs_store, get_next_id
+from app.security import limiter, require_admin_key
+from app.storage import nlp_logs_store, store_append
 
-limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/api/nlp", tags=["AI & NLP Playground"])
+
+# Bounded so a single request cannot push an unlimited blob into the database
+# or spend unbounded time tokenising.
+MAX_TEXT_LENGTH = 5000
 
 
 class NlpRequest(BaseModel):
-    text: str
+    text: str = Field(min_length=1, max_length=MAX_TEXT_LENGTH)
+
+    @field_validator("text")
+    @classmethod
+    def not_blank(cls, value: str) -> str:
+        cleaned = value.strip()
+        if not cleaned:
+            raise ValueError("Text cannot be empty or blank space.")
+        return cleaned
+
+
+def _persist(session, log: NlpLog) -> None:
+    if session:
+        try:
+            session.add(log)
+            session.commit()
+            session.refresh(log)
+            return
+        except Exception as err:
+            print(f"Notice saving NLP log in DB: {err}")
+            session.rollback()
+            session.expunge(log)
+    store_append(nlp_logs_store, log)
 
 
 @router.post("/analyze")
@@ -69,25 +93,12 @@ def analyze_affective_state(
     else:
         top_category = "Normal Affective State"
 
-    log = NlpLog(
+    _persist(session, NlpLog(
         input_text=payload.text,
         predicted_label=top_category,
         confidence_score=max(scores.values()) / 100.0,
         ip_address=client_ip
-    )
-
-    if session:
-        try:
-            session.add(log)
-            session.commit()
-            session.refresh(log)
-        except Exception as err:
-            print(f"Notice saving NLP log in DB: {err}")
-            log.id = get_next_id()
-            nlp_logs_store.insert(0, log)
-    else:
-        log.id = get_next_id()
-        nlp_logs_store.insert(0, log)
+    ))
 
     return {
         "top_category": top_category,
@@ -97,7 +108,7 @@ def analyze_affective_state(
 
 
 class ChatRequest(BaseModel):
-    prompt: str
+    prompt: str = Field(min_length=1, max_length=MAX_TEXT_LENGTH)
 
 
 @router.post("/chat")
@@ -130,42 +141,37 @@ def chat_ai_assistant(
     elif "skills" in q or "stack" in q:
         bot_response = "Talha's core stack includes Python, Cypress, Postman, FastAPI, React, PyTorch, scikit-learn, Docker, AWS, PostgreSQL, Supabase, and Next.js."
 
-    log = NlpLog(
-        input_text=payload.prompt,
+    _persist(session, NlpLog(
+        input_text=query,
         predicted_label=f"Chat Query: {bot_response[:80]}...",
         confidence_score=0.99,
         ip_address=client_ip
-    )
-
-    if session:
-        try:
-            session.add(log)
-            session.commit()
-            session.refresh(log)
-        except Exception as err:
-            print(f"Notice saving Chat log in DB: {err}")
-            log.id = get_next_id()
-            nlp_logs_store.insert(0, log)
-    else:
-        log.id = get_next_id()
-        nlp_logs_store.insert(0, log)
+    ))
 
     return {
         "reply": bot_response,
-        "prompt": payload.prompt,
-        "status": "saved_to_supabase_database"
+        "prompt": query,
+        "status": "stored"
     }
 
 
-@router.get("/logs")
+@router.get("/logs", dependencies=[Depends(require_admin_key)])
 @limiter.limit("20/minute")
-def get_all_nlp_logs(request: Request, session: Session = Depends(get_session)):
+def get_all_nlp_logs(
+    request: Request,
+    limit: int = Query(default=50, ge=1, le=200),
+    session: Session = Depends(get_session),
+):
     """
-    Retrieve all NLP logs from Supabase database.
+    Retrieve stored NLP logs. Requires the X-API-Key header: these rows contain
+    free-text mental-health input paired with the submitter's IP address.
     """
     if session:
         try:
-            return session.exec(select(NlpLog).order_by(NlpLog.created_at.desc())).all()
+            return session.exec(
+                select(NlpLog).order_by(NlpLog.created_at.desc()).limit(limit)
+            ).all()
         except Exception as err:
             print(f"Notice getting NLP logs: {err}")
-    return nlp_logs_store
+            session.rollback()
+    return nlp_logs_store[:limit]

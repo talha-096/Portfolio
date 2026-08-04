@@ -70,10 +70,11 @@ talha-Portfolio/
 - **Tech Stack:** React, Vite, TypeScript, TailwindCSS, Python, FastAPI, MongoDB, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Cypress, Postman
 - **Key Features:** LLM Marketing Copy Generation, Brand Kit Context Management, Microservices Architecture, Cypress E2E Test Suites, Postman API Contract Testing.
 
-### 2. 🛒 Full-Stack Multi-Vendor E-Commerce Platform
-- **Role:** Full-Stack Developer & QA Engineer
-- **Tech Stack:** Next.js 15, Hono.js, Supabase (PostgreSQL), Drizzle ORM, Stripe Webhooks, TailwindCSS
-- **Key Features:** Role-based dashboards (Customer, Vendor, Admin), OTP verification gates, real-time payment/order synchronization.
+### 2. 🛒 E-Commerce Web Application
+- **Role:** Full-Stack Developer
+- **GitHub Repository:** [github.com/talha-096/Ecommerce-Project](https://github.com/talha-096/Ecommerce-Project)
+- **Tech Stack:** PHP (Laravel 7), SQLite/MySQL, HTML5, CSS3, JavaScript, Bootstrap 4
+- **Key Features:** Localized shopping in PKR, nationwide Cash on Delivery (COD) & express city shipping, product catalog with live search, discount coupons, order tracking, and comprehensive Admin Dashboard (stock management, order status, PDF invoices).
 
 ### 3. 🧠 NLP Mental Health Classification System & SHAP Explainer
 - **Role:** AI/ML Engineer & QA Analyst

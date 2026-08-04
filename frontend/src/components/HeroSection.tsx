@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
 import ConsoleWidget from "./ConsoleWidget";
 
+// Module scope: a new array identity on every render would either restart the
+// typing loop or (as before) force the effect to lie about its dependencies.
+const roles = [
+  "an AI/ML Engineer",
+  "a Machine Learning Engineer",
+  "building PyTorch & NLP models",
+  "deploying GenAI microservices",
+  "a Software Engineer"
+];
+
 export const HeroSection = () => {
   const [typedRole, setTypedRole] = useState("an AI/ML Engineer");
-
-  const roles = [
-    "an AI/ML Engineer",
-    "a Machine Learning Engineer",
-    "building PyTorch & NLP models",
-    "deploying GenAI microservices",
-    "a Software Engineer"
-  ];
 
   useEffect(() => {
     let roleIdx = 0;
@@ -92,7 +94,7 @@ export const HeroSection = () => {
 
               <div className="w-full">
                 <div className="hero-name mono">
-                  AI/ML ENGINEER · MACHINE LEARNING · FULL-STACK
+                  ML/AI · PYTHON DEVELOPER · QA ENGINEER · FULL STACK WEB
                 </div>
 
                 <h1 className="hero-headline text-balance">

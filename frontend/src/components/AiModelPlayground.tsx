@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Brain, Sparkles, AlertTriangle, CheckCircle, Search, HelpCircle } from "lucide-react";
+import { Brain } from "lucide-react";
 
 export const AiModelPlayground = () => {
   const [inputText, setInputText] = useState("Feeling extremely anxious about my upcoming exams and overwhelmed by stress.");
-  const [analyzed, setAnalyzed] = useState(true);
 
   // Simulated SHAP token scores
   const samples = [
@@ -51,7 +50,6 @@ export const AiModelPlayground = () => {
   const selectSample = async (sample: typeof samples[0]) => {
     setActiveSample(sample);
     setInputText(sample.text);
-    setAnalyzed(true);
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
     try {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Play, CheckCircle2, AlertCircle, RefreshCw, FileCheck, Terminal, Download } from "lucide-react";
+import { Play, CheckCircle2, RefreshCw, FileCheck, Terminal, Download } from "lucide-react";
 
 export const CypressTestRunner = () => {
   const [activeSuite, setActiveSuite] = useState<"cypress" | "postman" | "smote">("cypress");

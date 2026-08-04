@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { Send, Play, Terminal, Cpu, Database, CheckCircle2 } from "lucide-react";
+
+// Static display values: nothing ever reassigns them, so they stay out of state
+// and off the re-render path.
+const ACTIVE_MODELS = 7;
+const UPTIME = "142h 38m";
 
 export const ConsoleWidget = () => {
   const [activeTab, setActiveTab] = useState<"telemetry" | "playground" | "rag">("telemetry");
-  
+
   // Telemetry Metrics
   const [tps, setTps] = useState(1284);
   const [latency, setLatency] = useState(142);
-  const [activeModels, setActiveModels] = useState(7);
-  const [requests, setRequests] = useState(3.4);
-  const [uptime, setUptime] = useState("142h 38m");
   const [loss, setLoss] = useState(0.0042);
   const [epoch, setEpoch] = useState(142);
 
@@ -26,7 +27,6 @@ export const ConsoleWidget = () => {
   const [inputPrompt, setInputPrompt] = useState("");
 
   // RAG / Test Inspector State
-  const [inspectorMode, setInspectorMode] = useState<"rag" | "cypress">("cypress");
   const [testLog, setTestLog] = useState<string[]>([]);
   const [isTesting, setIsTesting] = useState(false);
 
@@ -47,8 +47,6 @@ export const ConsoleWidget = () => {
       { lvl: "ok", msg: "aws ecs fargate · lazy load model · sub-150ms" },
       { lvl: "inf", msg: 'shap explainer · text_tokens=["hopeless", "anxious"]' }
     ];
-
-    const labelMap: Record<string, string> = { ok: "OK", warn: "WRN", req: "REQ", inf: "INF" };
 
     const initialLogs = Array.from({ length: 8 }).map((_, i) => {
       const item = LOG_LINES[i % LOG_LINES.length];
@@ -73,7 +71,6 @@ export const ConsoleWidget = () => {
     const tick = setInterval(() => {
       setTps((v) => Math.max(900, Math.min(2200, Math.round(v + (Math.random() - 0.5) * 120))));
       setLatency((v) => Math.max(80, Math.min(240, Math.round(v + (Math.random() - 0.5) * 15))));
-      setRequests((v) => Math.max(2.1, Math.min(4.9, parseFloat((v + (Math.random() - 0.5) * 0.2).toFixed(1)))));
       setEpoch((v) => v + 1);
       setLoss((v) => Math.max(0.0012, parseFloat((v - 0.00001).toFixed(4))));
     }, 1500);
@@ -89,8 +86,8 @@ export const ConsoleWidget = () => {
     if (!ctx) return;
 
     let animId: number;
-    let width = (canvas.width = canvas.parentElement?.clientWidth || 300);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 150);
+    const width = (canvas.width = canvas.parentElement?.clientWidth || 300);
+    const height = (canvas.height = canvas.parentElement?.clientHeight || 150);
 
     const nodes: Array<{ x: number; y: number; vx: number; vy: number; radius: number; color: string }> = [];
     const colors = ["#57bdda", "#9f86e0", "#62cdba"];
@@ -274,7 +271,7 @@ export const ConsoleWidget = () => {
           <div className="metric-cell">
             <div className="lbl">ACTIVE MODELS</div>
             <div className="val">
-              <span>0{activeModels}</span>
+              <span>0{ACTIVE_MODELS}</span>
             </div>
           </div>
           <div className="metric-cell">
@@ -351,6 +348,7 @@ export const ConsoleWidget = () => {
               placeholder="Type a prompt to test Talha's assistant..."
               value={inputPrompt}
               onChange={(e) => setInputPrompt(e.target.value)}
+              className="bg-white text-black font-semibold placeholder:text-gray-500 placeholder:font-normal"
             />
             <button type="submit" className="pg-send-btn">
               Send ➔
@@ -393,10 +391,10 @@ export const ConsoleWidget = () => {
 
             <div className="rag-match-item">
               <div className="rag-match-top flex-col sm:flex-row">
-                <span className="chunk-id">suite_03 · Stripe Webhooks E-Commerce</span>
-                <span className="similarity-score">Sync: 100% Valid</span>
+                <span className="chunk-id">suite_03 · E-Commerce Web Application (Laravel 7)</span>
+                <span className="similarity-score">Status: PASS</span>
               </div>
-              <div className="rag-match-body">"Tested multi-vendor order placement and validated real-time Stripe checkout webhook triggers in PostgreSQL."</div>
+              <div className="rag-match-body">"Verified localized PKR checkout, city COD shipping calculations, and PDF invoice generation in Laravel 7."</div>
             </div>
 
             {testLog.map((log, idx) => (
@@ -428,7 +426,7 @@ export const ConsoleWidget = () => {
         <span className="grow"></span>
         <span className="seg">
           <span className="lbl">uptime</span>
-          <span className="v uptime">{uptime}</span>
+          <span className="v uptime">{UPTIME}</span>
         </span>
       </div>
     </div>

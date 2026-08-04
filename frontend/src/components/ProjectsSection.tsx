@@ -1,11 +1,73 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CaseStudyModal, { ProjectData } from "./CaseStudyModal";
+
+// The card grid needs the presentational fields on top of ProjectData, and `img`
+// is required here (unlike on ProjectData) because every card renders a thumbnail.
+type ProjectCard = ProjectData & {
+  id: string;
+  num: string;
+  catClass: string;
+  tint: string;
+  img: string;
+};
+
+const ProjectCardImage = ({ p, onOpenModal }: { p: ProjectCard; onOpenModal: () => void }) => {
+  const images = p.images && p.images.length > 0 ? p.images : [p.img];
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  const nextImg = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIdx((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevImg = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIdx((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  return (
+    <div className="project-img-wrap group cursor-pointer relative" onClick={onOpenModal}>
+      <span className="project-cat">{p.category}</span>
+      <span className="project-num">{p.num}</span>
+      <img
+        loading="lazy"
+        decoding="async"
+        src={images[currentIdx]}
+        alt={p.title}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = "/banner.png";
+        }}
+      />
+      {images.length > 1 && (
+        <div className="absolute inset-x-0 bottom-2.5 flex justify-between items-center px-3 z-10">
+          <button
+            onClick={prevImg}
+            className="w-7 h-7 rounded-full bg-black/80 text-white hover:bg-cyan hover:text-black transition-all shadow-md flex items-center justify-center font-bold text-sm"
+            title="Previous picture"
+          >
+            ‹
+          </button>
+          <span className="text-[10px] font-mono bg-black/80 text-cyan px-2.5 py-0.5 rounded-full border border-cyan/30 font-bold backdrop-blur-sm">
+            Pic {currentIdx + 1} of {images.length}
+          </span>
+          <button
+            onClick={nextImg}
+            className="w-7 h-7 rounded-full bg-black/80 text-white hover:bg-cyan hover:text-black transition-all shadow-md flex items-center justify-center font-bold text-sm"
+            title="Next picture"
+          >
+            ›
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const ProjectsSection = () => {
   const [activePFilter, setActivePFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
-  const projects: Array<ProjectData & { id: string; num: string; catClass: string; tint: string; img: string }> = [
+  const projects: ProjectCard[] = [
     {
       id: "genmark",
       num: "01",
@@ -15,6 +77,13 @@ export const ProjectsSection = () => {
       title: "GenMark: AI-Powered Marketing Platform",
       subtitle: "AI Microservices + Cypress E2E & Postman Contract Test Suite",
       img: "/projects/genmark/media__1782301041222.png",
+      images: [
+        "/projects/genmark/media__1782301041222.png",
+        "/projects/genmark/media__1782301049086.png",
+        "/projects/genmark/media__1782301055994.png",
+        "/projects/genmark/media__1782301063284.png",
+        "/projects/genmark/media__1782301072169.png"
+      ],
       metrics: [
         { label: "Role", value: "AI & SQA Engineer" },
         { label: "Stack", value: "LLMs + Flask + React" },
@@ -36,23 +105,30 @@ export const ProjectsSection = () => {
       catClass: "fullstack",
       tint: "tint-cyan",
       category: "Full-Stack",
-      title: "Multi-Vendor E-Commerce Platform",
-      subtitle: "Next.js 15 + Hono.js Serverless API + Supabase & Stripe QA",
-      img: "/banner.png",
+      title: "E-Commerce Web Application",
+      subtitle: "PHP (Laravel 7) + SQLite/MySQL + Localized Shipping & Nationwide COD",
+      img: "/projects/ecommerce/homepage.png",
+      images: [
+        "/projects/ecommerce/homepage.png",
+        "/projects/ecommerce/about.png",
+        "/projects/ecommerce/shop-grid.png",
+        "/projects/ecommerce/shop-list.png"
+      ],
       metrics: [
-        { label: "Framework", value: "Next.js 15" },
-        { label: "Payment QA", value: "Stripe Webhooks" },
-        { label: "Database", value: "PostgreSQL / Drizzle" }
+        { label: "Framework", value: "Laravel 7" },
+        { label: "Location", value: "Islamabad, PK" },
+        { label: "Payment", value: "Nationwide COD" }
       ],
       description:
-        "Multi-vendor store featuring role-based dashboards (Admin, Vendor, Customer), serverless Hono.js routes, and verified Stripe checkout payment sync.",
+        "Full-featured online shopping platform built specifically for the Pakistani e-commerce market, providing localized shipping options and nationwide Cash on Delivery (COD).",
       features: [
-        "Stripe webhook test suite confirming real-time PostgreSQL order status updates.",
-        "Role-based Supabase authentication middleware with Drizzle ORM models."
+        "Localized shopping with prices in PKR and city-tailored shipping options across Pakistan.",
+        "Complete product catalog with live search, category filtering, cart, wishlist & discount coupons.",
+        "Comprehensive Admin Dashboard for stock management, order status, PDF invoices & analytics."
       ],
-      tech: ["Next.js 15", "Supabase", "Drizzle ORM", "Hono.js", "Stripe", "TailwindCSS"],
-      github: "https://github.com/talha-096/E-commerce-Website",
-      demo: "#"
+      tech: ["PHP", "Laravel 7", "SQLite", "MySQL", "Bootstrap 4", "JavaScript", "HTML5", "CSS3"],
+      github: "https://github.com/talha-096/Ecommerce-Project",
+      demo: "https://github.com/talha-096/Ecommerce-Project"
     },
     {
       id: "nlp",
@@ -62,7 +138,14 @@ export const ProjectsSection = () => {
       category: "Machine Learning",
       title: "Mental Health NLP Affect Classifier",
       subtitle: "PyTorch + RoBERTa Transformers + SHAP Explainability & SMOTE",
-      img: "/banner.png",
+      img: "/projects/nlp/classification-metrics.jpg",
+      images: [
+        "/projects/nlp/classification-metrics.jpg",
+        "/projects/nlp/confusion-matrix-normalized.png",
+        "/projects/nlp/confusion-matrix-counts.png",
+        "/projects/nlp/shap-feature-importance.jpg",
+        "/projects/nlp/shap-waterfall.png"
+      ],
       metrics: [
         { label: "Accuracy", value: "83.83% F1" },
         { label: "Explainability", value: "SHAP Interpret" },
@@ -79,28 +162,30 @@ export const ProjectsSection = () => {
       demo: "#"
     },
     {
-      id: "fakenews",
+      id: "keythm",
       num: "04",
-      catClass: "ml",
+      catClass: "web",
       tint: "tint-mint",
-      category: "Machine Learning",
-      title: "Fake News Detection Engine",
-      subtitle: "NLP TF-IDF Classification + Interactive Web App",
-      img: "/banner.png",
+      category: "Frontend Web",
+      title: "Keythm – Mechanical Typing Speed App",
+      subtitle: "Next.js 16 + React 19 + Web Audio API + Tailwind CSS v4",
+      img: "/projects/keythm/keythm.png",
+      images: ["/projects/keythm/keythm.png"],
       metrics: [
-        { label: "Algorithm", value: "TF-IDF + LogReg" },
-        { label: "Deployment", value: "Streamlit App" },
-        { label: "Validation", value: "Precision / Recall" }
+        { label: "Framework", value: "Next.js 16" },
+        { label: "Audio Engine", value: "Web Audio API" },
+        { label: "UI Library", value: "React 19 / Base UI" }
       ],
       description:
-        "Real-time news credibility classifier featuring text preprocessing, TF-IDF vectorization, and a deployed interactive Streamlit dashboard.",
+        "Sleek frontend typing speed web application featuring realistic mechanical keyboard audio synthesis, real-time WPM/accuracy tracking, interactive virtual keyboard, and custom theme presets.",
       features: [
-        "End-to-end text tokenization pipeline with Logistic Regression classifier.",
-        "Deployed web interface providing instant article credibility scoring."
+        "Web Audio API per-key audio synthesis with realistic mechanical feedback.",
+        "Interactive virtual keyboard with live key highlighting and WPM analytics charts.",
+        "Multiple test modes (Time, Words, Quotes, Zen) and 6 customizable color themes."
       ],
-      tech: ["Python", "NLP", "Streamlit", "scikit-learn", "TF-IDF"],
-      github: "https://github.com/talha-096/Fake-News-Detector",
-      demo: "#"
+      tech: ["Next.js 16", "React 19", "Tailwind CSS v4", "Web Audio API", "Base UI", "Recharts", "Motion"],
+      github: "https://github.com/talha-096/Keythm",
+      demo: "https://github.com/talha-096/Keythm"
     }
   ];
 
@@ -122,7 +207,7 @@ export const ProjectsSection = () => {
               Verified systems, <span className="gradient">proven performance</span>
             </h2>
           </div>
-          <div className="section-meta">GenAI · SQA · Full-Stack · ML</div>
+          <div className="section-meta">GenAI · Frontend · Full-Stack · ML</div>
         </div>
 
         {/* Project Filter Bar */}
@@ -132,6 +217,12 @@ export const ProjectsSection = () => {
             onClick={() => setActivePFilter("all")}
           >
             All Projects
+          </button>
+          <button
+            className={`pfilter-btn ${activePFilter === "web" ? "active" : ""}`}
+            onClick={() => setActivePFilter("web")}
+          >
+            Frontend / Web
           </button>
           <button
             className={`pfilter-btn ${activePFilter === "genai" ? "active" : ""}`}
@@ -156,19 +247,7 @@ export const ProjectsSection = () => {
         <div className="projects-stack">
           {filteredProjects.map((p) => (
             <article key={p.id} className={`project-card ${p.tint} reveal`}>
-              <div className="project-img-wrap">
-                <span className="project-cat">{p.category}</span>
-                <span className="project-num">{p.num}</span>
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={p.img}
-                  alt={p.title}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/banner.png";
-                  }}
-                />
-              </div>
+              <ProjectCardImage p={p} onOpenModal={() => setSelectedProject(p)} />
 
               <div className="project-body">
                 <h3>{p.title}</h3>

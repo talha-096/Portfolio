@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Server, Cpu, Database, ShieldCheck, Cloud, Globe, ArrowRight, Layers } from "lucide-react";
+import { Server, Cpu, Database, ShieldCheck, Cloud, Globe, ArrowRight } from "lucide-react";
 
 export const ArchitectureVisualizer = () => {
   const [activeArch, setActiveArch] = useState<"genmark" | "ecommerce">("genmark");
@@ -41,36 +41,36 @@ export const ArchitectureVisualizer = () => {
       ]
     },
     ecommerce: {
-      title: "Full-Stack Multi-Vendor E-Commerce Architecture",
-      desc: "Serverless Next.js 15 & Hono.js architecture connected to Supabase PostgreSQL, Drizzle ORM, and Stripe webhooks.",
+      title: "E-Commerce Architecture (Laravel 7)",
+      desc: "Full-stack PHP Laravel 7 architecture with SQLite/MySQL database, Bootstrap 4 frontend, localized Pakistani shipping logic, and Cash on Delivery (COD) checkout.",
       nodes: [
         {
-          id: "nextjs",
-          icon: <Globe className="w-5 h-5 text-cyan" />,
-          title: "Next.js 15 App Router",
-          badge: "SSR & Client Layer",
-          detail: "Server-side rendered multi-vendor store with role-based middleware routing (Customer, Vendor, Admin)."
+          id: "laravel",
+          icon: <Server className="w-5 h-5 text-cyan" />,
+          title: "Laravel 7 Backend Framework",
+          badge: "MVC Core",
+          detail: "PHP 7/8 MVC framework managing authentication, order tracking, coupon calculations, and PDF invoice generation."
         },
         {
-          id: "hono",
-          icon: <Server className="w-5 h-5 text-violet" />,
-          title: "Hono.js Serverless API",
-          badge: "Backend Controller",
-          detail: "Ultra-fast lightweight TypeScript backend API endpoints mounted on Next.js serverless routes."
-        },
-        {
-          id: "supabase",
+          id: "database",
           icon: <Database className="w-5 h-5 text-mint" />,
-          title: "Supabase PostgreSQL & Drizzle",
-          badge: "Database Layer",
-          detail: "Relational PostgreSQL database schema defined with Drizzle ORM managing users, products, carts, orders, and reviews."
+          title: "SQLite / MySQL Database",
+          badge: "Relational Storage",
+          detail: "Relational database schema managing users, products, categories, subcategories, tags, carts, wishlist, and orders."
         },
         {
-          id: "stripe",
+          id: "bootstrap",
+          icon: <Globe className="w-5 h-5 text-violet" />,
+          title: "Bootstrap 4 & HTML5/CSS3",
+          badge: "Responsive UI",
+          detail: "Responsive e-commerce storefront with live search, price range filter, cart modal, and shop grid/list views."
+        },
+        {
+          id: "shipping",
           icon: <ShieldCheck className="w-5 h-5 text-amber" />,
-          title: "Stripe Payment Gateway",
-          badge: "Payment & Webhook QA",
-          detail: "Verified webhook listener ensuring real-time order-status synchronization between Stripe and PostgreSQL."
+          title: "Pakistani Shipping & COD Engine",
+          badge: "Localized Checkout",
+          detail: "City-tailored shipping rate matrix for Pakistani cities (Islamabad, Rawalpindi, Lahore, Karachi) with Cash on Delivery (COD) processing."
         }
       ]
     }
@@ -92,20 +92,18 @@ export const ArchitectureVisualizer = () => {
 
         <div className="grid grid-cols-1 sm:flex gap-2 w-full lg:w-auto">
           <button
-            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${
-              activeArch === "genmark" ? "bg-amber/20 border border-amber text-amber font-semibold" : "bg-panel border border-line text-muted hover:text-text"
-            }`}
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${activeArch === "genmark" ? "bg-amber/20 border border-amber text-amber font-semibold" : "bg-panel border border-line text-muted hover:text-text"
+              }`}
             onClick={() => { setActiveArch("genmark"); setSelectedNode("fargate"); }}
           >
             GenMark (AWS Serverless)
           </button>
           <button
-            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${
-              activeArch === "ecommerce" ? "bg-cyan/20 border border-cyan text-cyan font-semibold" : "bg-panel border border-line text-muted hover:text-text"
-            }`}
-            onClick={() => { setActiveArch("ecommerce"); setSelectedNode("hono"); }}
+            className={`px-3 sm:px-4 py-2 rounded-lg text-xs font-mono transition-all text-center ${activeArch === "ecommerce" ? "bg-cyan/20 border border-cyan text-cyan font-semibold" : "bg-panel border border-line text-muted hover:text-text"
+              }`}
+            onClick={() => { setActiveArch("ecommerce"); setSelectedNode("laravel"); }}
           >
-            E-Commerce (Next.js + Stripe)
+            E-Commerce Web Application (Laravel 7)
           </button>
         </div>
       </div>
@@ -120,11 +118,10 @@ export const ArchitectureVisualizer = () => {
           <div
             key={node.id}
             onClick={() => setSelectedNode(node.id)}
-            className={`p-3.5 sm:p-4 rounded-xl border cursor-pointer transition-all ${
-              selectedNode === node.id
+            className={`p-3.5 sm:p-4 rounded-xl border cursor-pointer transition-all ${selectedNode === node.id
                 ? "bg-bg-2 border-cyan shadow-glow scale-[1.02]"
                 : "bg-bg-2/50 border-line hover:border-line-2"
-            }`}
+              }`}
           >
             <div className="flex justify-between items-center mb-2 gap-2">
               {node.icon}

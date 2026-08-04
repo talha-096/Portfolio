@@ -7,85 +7,103 @@ export const SkillsSection = () => {
 
   const skillCategories = [
     {
-      id: "sqa",
-      title: "Quality Assurance & Automated Testing",
-      count: "07",
-      headClass: "",
-      category: "sqa",
-      skills: [
-        "Cypress (E2E/Frontend)",
-        "Postman API Testing",
-        "AI-Assisted Automation",
-        "Test Case Design",
-        "Regression Testing",
-        "Model/Data Evaluation (F1, Recall, AUC-ROC)",
-        "SMOTE Class-Imbalance Fix"
-      ]
-    },
-    {
-      id: "ml",
-      title: "AI & Machine Learning",
-      count: "09",
+      id: "ml_ai",
+      title: "ML/AI",
+      count: "08",
       headClass: "violet",
-      category: "ml",
+      category: "ml_ai",
       skills: [
-        "Python",
+        "PyTorch & TensorFlow",
         "scikit-learn",
         "NLP & Tokenization",
-        "Computer Vision & CNN",
         "HuggingFace Transformers",
-        "Stable Diffusion",
-        "Qwen LLM",
-        "PyTorch & TensorFlow",
-        "SHAP Explainability"
+        "SHAP Explainability & Interpretability",
+        "Computer Vision & CNNs",
+        "Generative AI & LLMs",
+        "SMOTE Class-Imbalance Modeling"
       ]
     },
     {
-      id: "web",
-      title: "Core Languages & Full-Stack Web",
-      count: "10",
+      id: "python_dev",
+      title: "Python Developer",
+      count: "07",
       headClass: "mint",
-      category: "web",
+      category: "python_dev",
       skills: [
-        "Python & JavaScript",
-        "React & Vite",
-        "Next.js 15",
-        "FastAPI & Flask",
-        "Laravel & PHP",
-        "REST APIs",
-        "Tailwind CSS",
-        "Java, C++, Dart"
+        "Python (v3.10+)",
+        "FastAPI",
+        "Flask",
+        "Async Python & Coroutines",
+        "RESTful API Development",
+        "Pandas & NumPy Data Processing",
+        "Python Scripting & Automation"
       ]
     },
     {
-      id: "infra",
-      title: "Databases, Cloud & MLOps",
+      id: "qa_engineer",
+      title: "QA Engineer",
+      count: "07",
+      headClass: "",
+      category: "qa_engineer",
+      skills: [
+        "Cypress (E2E & UI Automation)",
+        "Postman API Contract Testing",
+        "Test Case Design & Execution",
+        "Functional & Manual Testing",
+        "Regression Testing & Bug Tracking",
+        "Integration & Webhook Validation",
+        "Model Evaluation (F1, Precision, Recall)"
+      ]
+    },
+    {
+      id: "fullstack_dev",
+      title: "Full Stack Web Developer",
       count: "08",
       headClass: "amber",
-      category: "infra",
+      category: "fullstack_dev",
       skills: [
-        "PostgreSQL (Supabase)",
-        "MongoDB & MySQL",
-        "AWS (ECS Fargate, Lambda, API Gateway)",
-        "AWS S3 & ECR",
-        "Oracle Cloud (OCI)",
-        "Docker & Nginx",
-        "Git & GitHub",
-        "Jupyter Notebook & VS Code"
+        "React & Vite",
+        "Next.js 15 (App Router)",
+        "TypeScript & JavaScript",
+        "PHP & Laravel 7",
+        "Tailwind CSS & Bootstrap 4",
+        "HTML5 & CSS3",
+        "PostgreSQL (Supabase) & Drizzle ORM",
+        "MongoDB & SQLite / MySQL"
       ]
     }
   ];
 
-  // Skill experience proficiency matrix
+  // Skill experience proficiency matrix mapped strictly to the 4 domains
   const skillExperienceMatrix = [
-    { name: "Cypress & E2E Test Automation", category: "sqa", experience: "2+ Years Hands-on", level: 90, detail: "Wrote & executed E2E Cypress test suites for React frontends & GenMark platform." },
-    { name: "Postman API Contract Testing", category: "sqa", experience: "2+ Years Hands-on", level: 92, detail: "Validated FastAPI & REST API request/response schemas, status codes & payload routes." },
-    { name: "Model Evaluation (F1, Precision, Recall, AUC-ROC)", category: "sqa", experience: "Practical AI QA", level: 88, detail: "Evaluated TF-IDF + LogReg & CNN classifiers, applied SMOTE to boost recall from 71% → 83%." },
-    { name: "Python & Machine Learning (scikit-learn, PyTorch)", category: "ml", experience: "Academic & Projects", level: 86, detail: "Developed multi-class NLP Mental Health Detection, Fake News Classifier, and image vision pipelines." },
-    { name: "Generative AI & LLMs (Transformers, Qwen, Stable Diffusion)", category: "ml", experience: "Applied GenAI", level: 84, detail: "Built on-demand lazy-loaded model inference for multi-modal marketing content generation." },
-    { name: "React, Next.js & Frontend Engineering", category: "web", experience: "Full-Stack Dev", level: 88, detail: "Built responsive UI components, state management, and modern glassmorphic web apps." },
-    { name: "FastAPI, Flask & Laravel REST APIs", category: "web", experience: "Backend Systems", level: 85, detail: "Built decoupled microservice backends, authentication middleware, and database ORM routes." },
-    { name: "Cloud & MLOps (AWS Fargate, Lambda, Docker, Supabase)", category: "infra", experience: "Cloud Deployment", level: 82, detail: "Deployed containerized serverless API gateways, S3 storage buckets, and PostgreSQL DBs." }
+    {
+      name: "PyTorch, Transformers & ML/AI Models",
+      category: "ml_ai",
+      experience: "ML/AI Specialist",
+      level: 90,
+      detail: "Developed 4-class mental health detection with RoBERTa embeddings, SHAP explainability plots, and SMOTE imbalance correction."
+    },
+    {
+      name: "FastAPI, Flask & Python Backend Systems",
+      category: "python_dev",
+      experience: "Python Developer",
+      level: 92,
+      detail: "Built high-performance FastAPI/Flask microservices, custom Pydantic contract schemas, and automated request logging telemetry."
+    },
+    {
+      name: "Cypress E2E & Postman API Automation",
+      category: "qa_engineer",
+      experience: "QA Engineer",
+      level: 94,
+      detail: "Authored end-to-end Cypress test suites for React workflows and executed Postman API contract verification suites."
+    },
+    {
+      name: "React, Next.js, Laravel & Full Stack Web",
+      category: "fullstack_dev",
+      experience: "Full Stack Developer",
+      level: 88,
+      detail: "Built responsive web applications including localized Laravel 7 e-commerce, Next.js serverless routes, and interactive UI dashboards."
+    }
   ];
 
   const filteredCategories = skillCategories.filter((cat) => {
@@ -124,13 +142,13 @@ export const SkillsSection = () => {
           <div>
             <div className="section-tag">
               <span className="square" />
-              02 / Toolkit &amp; Skill Experience
+              02 / Technical Stack &amp; Domains
             </div>
             <h2>
-              The stack &amp; experience behind <span className="gradient">production AI &amp; QA</span>
+              Core technical stack across <span className="gradient">ML/AI, Python, QA &amp; Full Stack</span>
             </h2>
           </div>
-          <div className="section-meta">~ 30+ tools across SQA, ML &amp; Web Engineering</div>
+          <div className="section-meta">Targeted expertise in ML/AI · Python · QA · Full Stack Web</div>
         </div>
 
         {/* Filter & Search Bar */}
@@ -143,35 +161,35 @@ export const SkillsSection = () => {
               All Tech Stack
             </button>
             <button
-              className={`filter-btn ${activeFilter === "sqa" ? "active" : ""}`}
-              onClick={() => setActiveFilter("sqa")}
+              className={`filter-btn ${activeFilter === "ml_ai" ? "active" : ""}`}
+              onClick={() => setActiveFilter("ml_ai")}
             >
-              SQA &amp; Testing
+              ML/AI
             </button>
             <button
-              className={`filter-btn ${activeFilter === "ml" ? "active" : ""}`}
-              onClick={() => setActiveFilter("ml")}
+              className={`filter-btn ${activeFilter === "python_dev" ? "active" : ""}`}
+              onClick={() => setActiveFilter("python_dev")}
             >
-              AI &amp; Machine Learning
+              Python Developer
             </button>
             <button
-              className={`filter-btn ${activeFilter === "web" ? "active" : ""}`}
-              onClick={() => setActiveFilter("web")}
+              className={`filter-btn ${activeFilter === "qa_engineer" ? "active" : ""}`}
+              onClick={() => setActiveFilter("qa_engineer")}
             >
-              Full-Stack &amp; Web
+              QA Engineer
             </button>
             <button
-              className={`filter-btn ${activeFilter === "infra" ? "active" : ""}`}
-              onClick={() => setActiveFilter("infra")}
+              className={`filter-btn ${activeFilter === "fullstack_dev" ? "active" : ""}`}
+              onClick={() => setActiveFilter("fullstack_dev")}
             >
-              Cloud &amp; MLOps
+              Full Stack Web Developer
             </button>
           </div>
 
           <div className="skill-search-wrap">
             <input
               type="text"
-              placeholder="Search technology (e.g. Cypress, Postman, PyTorch)..."
+              placeholder="Search technology (e.g. PyTorch, FastAPI, Cypress, React)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -214,10 +232,10 @@ export const SkillsSection = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 pb-6 border-b border-line">
             <div>
               <div className="text-cyan text-xs mono uppercase mb-1">// PRACTICAL COMPETENCY</div>
-              <h3 className="text-xl sm:text-2xl font-medium text-text">Applied Skill Experience Matrix</h3>
+              <h3 className="text-xl sm:text-2xl font-medium text-text">Domain Experience Matrix</h3>
             </div>
             <div className="text-xs text-muted mono">
-              Verified through Internship &amp; Project Engineering
+              Verified across ML/AI, Python, QA &amp; Full Stack Development
             </div>
           </div>
 

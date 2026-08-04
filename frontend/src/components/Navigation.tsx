@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
-import { Command, Download, Menu, X, FileText } from "lucide-react";
+import { Command, Menu, X, FileText } from "lucide-react";
 
 interface NavigationProps {
   onOpenPalette: () => void;
 }
 
+const navItems = [
+  { id: "about", label: "about" },
+  { id: "skills", label: "skills" },
+  { id: "experience", label: "experience" },
+  { id: "projects", label: "projects" },
+  { id: "certifications", label: "certifications" },
+  { id: "education", label: "education" },
+  { id: "contact", label: "contact" }
+];
+
 export const Navigation = ({ onOpenPalette }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeTarget, setActiveTarget] = useState("about");
-
-  const navItems = [
-    { id: "about", label: "about" },
-    { id: "skills", label: "skills" },
-    { id: "experience", label: "experience" },
-    { id: "projects", label: "projects" },
-    { id: "certifications", label: "certifications" },
-    { id: "education", label: "education" },
-    { id: "contact", label: "contact" }
-  ];
 
   useEffect(() => {
     const handleScroll = () => {

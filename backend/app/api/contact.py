@@ -1,15 +1,13 @@
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, Depends, Query, Request, status
 from sqlmodel import Session, select
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 from app.database import get_session
 from app.models import ContactMessage
 from app.schemas.contact_schema import ContactCreate, ContactResponse
+from app.security import limiter, require_admin_key
 from app.services.email_service import send_contact_notification
-from app.storage import contact_messages_store, get_next_id
+from app.storage import contact_messages_store, store_append
 
-limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/api/contact", tags=["Contact"])
 
 
@@ -49,26 +47,41 @@ def submit_contact_form(
             session.add(db_message)
             session.commit()
             session.refresh(db_message)
+            return db_message
         except Exception as e:
             print(f"Notice: Supabase save fallback: {e}")
-            db_message.id = get_next_id()
-            contact_messages_store.insert(0, db_message)
-    else:
-        db_message.id = get_next_id()
-        contact_messages_store.insert(0, db_message)
+            # A failed commit leaves the session in a state where every later
+            # statement raises PendingRollbackError.
+            session.rollback()
+            session.expunge(db_message)
 
+    store_append(contact_messages_store, db_message)
     return db_message
 
 
-@router.get("/messages", response_model=list[ContactResponse])
+@router.get(
+    "/messages",
+    response_model=list[ContactResponse],
+    dependencies=[Depends(require_admin_key)],
+)
 @limiter.limit("20/minute")
-def get_all_messages(request: Request, session: Session = Depends(get_session)):
+def get_all_messages(
+    request: Request,
+    limit: int = Query(default=50, ge=1, le=200),
+    session: Session = Depends(get_session),
+):
     """
-    Retrieve all contact messages saved in Supabase database.
+    Retrieve stored contact messages. Requires the X-API-Key header: the payload
+    contains names, email addresses, message bodies and submitter IP addresses.
     """
     if session:
         try:
-            return session.exec(select(ContactMessage).order_by(ContactMessage.created_at.desc())).all()
+            return session.exec(
+                select(ContactMessage)
+                .order_by(ContactMessage.created_at.desc())
+                .limit(limit)
+            ).all()
         except Exception as e:
             print(f"Notice retrieving messages from DB: {e}")
-    return contact_messages_store
+            session.rollback()
+    return contact_messages_store[:limit]

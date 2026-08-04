@@ -1,9 +1,5 @@
 import { useEffect } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Skills from "./pages/Skills";
@@ -11,43 +7,47 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 const VisitorTracker = () => {
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
-    fetch(`${backendUrl}/api/analytics/visitor`, {
+    // Keyed on pathname: with an empty dependency array this only ever logged
+    // the landing page, so every client-side navigation went unrecorded.
+    const controller = new AbortController();
+
+    fetch(`${BACKEND_URL}/api/analytics/visitor`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        page_visited: window.location.pathname || "/",
+        page_visited: pathname || "/",
         referrer: document.referrer || undefined,
       }),
-    }).catch((err) => console.warn("Visitor DB logging notice:", err));
-  }, []);
+      signal: controller.signal,
+    }).catch((err) => {
+      if (err?.name !== "AbortError") console.warn("Visitor DB logging notice:", err);
+    });
+
+    return () => controller.abort();
+  }, [pathname]);
 
   return null;
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <VisitorTracker />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <BrowserRouter>
+    <VisitorTracker />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/skills" element={<Skills />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/contact" element={<Contact />} />
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;

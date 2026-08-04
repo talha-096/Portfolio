@@ -1,78 +1,71 @@
-import urllib.request
+"""
+Manual smoke check against a locally running server: python test_api.py
+
+Everything is inside functions and a __main__ guard so that importing this file
+(pytest collects `test_*.py` by default) does not fire live HTTP requests. The
+helpers are named check_* rather than test_* for the same reason.
+"""
 import json
+import urllib.error
+import urllib.request
 
-# Test Contact API
-print("--- 1. Testing Contact API ---")
-contact_data = json.dumps({
-    "name": "Talha Ghafoor",
-    "email": "talhaghafoor84@gmail.com",
-    "subject": "Portfolio Backend Verification",
-    "message": "Backend testing successful: In-memory storage & notification active!"
-}).encode("utf-8")
+BASE_URL = "http://localhost:8000"
 
-req = urllib.request.Request(
-    "http://localhost:8000/api/contact",
-    data=contact_data,
-    headers={"Content-Type": "application/json"},
-    method="POST"
-)
 
-try:
-    resp = urllib.request.urlopen(req)
-    res = json.loads(resp.read())
-    print("Contact API Response:", json.dumps(res, indent=2))
-except Exception as e:
-    print("Contact API Error:", e)
+def call(path: str, payload=None, method: str = "GET"):
+    data = json.dumps(payload).encode("utf-8") if payload is not None else None
+    req = urllib.request.Request(
+        f"{BASE_URL}{path}",
+        data=data,
+        headers={"Content-Type": "application/json"} if data else {},
+        method=method,
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            print(f"{method} {path} -> {resp.status}")
+            print(json.dumps(json.loads(resp.read()), indent=2))
+    except urllib.error.HTTPError as e:
+        # Without this branch a 4xx prints as a bare "HTTP Error 422" and the
+        # validation detail explaining *why* is thrown away.
+        print(f"{method} {path} -> {e.code}")
+        print(e.read().decode("utf-8", errors="replace"))
+    except Exception as e:
+        print(f"{method} {path} -> failed: {e}")
 
-# Test NLP Chat API
-print("\n--- 3. Testing AI Chat Playground API ---")
-chat_data = json.dumps({
-    "prompt": "What Cypress and SQA test suites have you automated?"
-}).encode("utf-8")
 
-req_chat = urllib.request.Request(
-    "http://localhost:8000/api/nlp/chat",
-    data=chat_data,
-    headers={"Content-Type": "application/json"},
-    method="POST"
-)
+def check_contact():
+    print("\n--- 1. Testing Contact API ---")
+    call("/api/contact", {
+        "name": "Talha Ghafoor",
+        "email": "talhaghafoor84@gmail.com",
+        "subject": "Portfolio Backend Verification",
+        "message": "Backend testing successful: storage & notification active!",
+    }, "POST")
 
-try:
-    resp_chat = urllib.request.urlopen(req_chat)
-    res_chat = json.loads(resp_chat.read())
-    print("Chat API Response:", json.dumps(res_chat, indent=2))
-except Exception as e:
-    print("Chat API Error:", e)
 
-# Test Visitor Log API
-print("\n--- 4. Testing Visitor Analytics API ---")
-visitor_data = json.dumps({
-    "page_visited": "/projects",
-    "referrer": "http://localhost:5173"
-}).encode("utf-8")
+def check_chat():
+    print("\n--- 2. Testing AI Chat Playground API ---")
+    call("/api/nlp/chat", {"prompt": "What Cypress and SQA test suites have you automated?"}, "POST")
 
-req_visitor = urllib.request.Request(
-    "http://localhost:8000/api/analytics/visitor",
-    data=visitor_data,
-    headers={"Content-Type": "application/json"},
-    method="POST"
-)
 
-try:
-    resp_visitor = urllib.request.urlopen(req_visitor)
-    res_visitor = json.loads(resp_visitor.read())
-    print("Visitor API Response:", json.dumps(res_visitor, indent=2))
-except Exception as e:
-    print("Visitor API Error:", e)
+def check_visitor():
+    print("\n--- 3. Testing Visitor Analytics API ---")
+    call("/api/analytics/visitor", {"page_visited": "/projects", "referrer": "http://localhost:5173"}, "POST")
 
-# Test Database Summary API
-print("\n--- 5. Testing Database Summary & Telemetry API ---")
-req_summary = urllib.request.Request("http://localhost:8000/api/analytics/summary", method="GET")
 
-try:
-    resp_summary = urllib.request.urlopen(req_summary)
-    res_summary = json.loads(resp_summary.read())
-    print("Database Summary Response:", json.dumps(res_summary, indent=2))
-except Exception as e:
-    print("Database Summary Error:", e)
+def check_summary():
+    print("\n--- 4. Testing Database Summary & Telemetry API ---")
+    call("/api/analytics/summary")
 
+
+def check_health():
+    print("\n--- 5. Testing Health Endpoint ---")
+    call("/health")
+
+
+if __name__ == "__main__":
+    check_health()
+    check_contact()
+    check_chat()
+    check_visitor()
+    check_summary()

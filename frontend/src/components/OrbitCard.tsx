@@ -1,9 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const OrbitCard = () => {
-  const stageRef = useRef<HTMLDivElement | null>(null);
-
-  const nodes = [
+const nodes = [
     // Inner Ring (r1)
     { name: "Python", ring: 0.55, angle: 0, ringClass: "r1" },
     { name: "Cypress", ring: 0.55, angle: 120, ringClass: "r1" },
@@ -21,7 +18,10 @@ export const OrbitCard = () => {
     { name: "Supabase", ring: 1.0, angle: 155, ringClass: "r3" },
     { name: "scikit", ring: 1.0, angle: 225, ringClass: "r3" },
     { name: "Tailwind", ring: 1.0, angle: 295, ringClass: "r3" }
-  ];
+];
+
+export const OrbitCard = () => {
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const stage = stageRef.current;

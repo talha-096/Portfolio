@@ -1,38 +1,61 @@
 import { useState } from "react";
 import { Mail, Github, Linkedin, Instagram, Download, Send, CheckCircle, FileText } from "lucide-react";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+const OWNER_EMAIL = "talhaghafoor84@gmail.com";
+
 export const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const updateField = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    // Previously the button stayed on "Message Received!" forever, so a second
+    // message looked like it had already been sent.
+    if (submitted) setSubmitted(false);
+    if (error) setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    
+
     setLoading(true);
-    setErrorMsg("");
+    setError(null);
 
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
-      const response = await fetch(`${backendUrl}/api/contact`, {
+      const response = await fetch(`${BACKEND_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, subject: "Portfolio Contact" }),
       });
 
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
+        return;
+      }
+
+      // The server answered and rejected the request. Reporting "Message
+      // Received!" here — and hijacking the tab with a mailto: — meant a
+      // rate-limited or invalid submission looked like a success.
+      if (response.status === 429) {
+        setError("Too many messages sent. Please wait a minute and try again.");
+      } else if (response.status === 422) {
+        setError("Please check your name, email and message, then try again.");
       } else {
-        throw new Error("Server returned error");
+        setError("The server could not accept the message. Please email me directly.");
       }
     } catch (err) {
-      console.warn("Backend API unavailable, triggering mailto fallback", err);
-      // Fallback to mailto link if API server is not running
-      setSubmitted(true);
-      window.location.href = `mailto:talhaghafoor84@gmail.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+      // Only a genuine network failure (server down, DNS, CORS) lands here,
+      // which is the one case where the mailto fallback makes sense.
+      console.warn("Backend API unreachable, offering mailto fallback", err);
+      setError("Could not reach the server. Opening your email client instead…");
+      window.location.href = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(
+        `Contact from ${formData.name}`
+      )}&body=${encodeURIComponent(formData.message)}`;
     } finally {
       setLoading(false);
     }
@@ -44,16 +67,16 @@ export const ContactSection = () => {
         <div className="contact-card reveal">
           <div className="availability">
             <span className="ring" />
-            Available for SQA &amp; AI/ML Opportunities
+            Available for ML/AI, Python, QA &amp; Full Stack Opportunities
           </div>
 
           <h2>
             Let's build &amp; verify <br />
-            <em>something intelligent.</em>
+            <em>something extraordinary.</em>
           </h2>
 
           <p>
-            Whether you have a Software Quality Assurance role, an AI/ML project to validate, or an innovative product to build — feel free to reach out.
+            Whether you need custom ML/AI models, high-performance Python backend systems, Cypress/Postman QA automation, or full-stack web applications — feel free to get in touch.
           </p>
 
           <div className="contact-meta">
@@ -62,7 +85,7 @@ export const ContactSection = () => {
               <span className="l">DIRECT EMAIL</span>
             </div>
             <div className="item">
-              <span className="v">Pakistan</span>
+              <span className="v">Islamabad, Pakistan</span>
               <span className="l">LOCATION</span>
             </div>
             <div className="item">
@@ -71,32 +94,32 @@ export const ContactSection = () => {
             </div>
           </div>
 
-          {/* Form */}
+          {/* Contact Form */}
           <form className="max-w-xl mx-auto mb-10 space-y-4 text-left" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="text"
                 placeholder="Your Name"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-panel border border-line text-text focus:border-cyan outline-none transition-colors"
+                onChange={(e) => updateField("name", e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white text-black font-semibold placeholder:text-gray-500 placeholder:font-normal border border-line focus:border-cyan outline-none transition-colors shadow-sm"
                 required
               />
               <input
                 type="email"
                 placeholder="Your Email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-panel border border-line text-text focus:border-cyan outline-none transition-colors"
+                onChange={(e) => updateField("email", e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white text-black font-semibold placeholder:text-gray-500 placeholder:font-normal border border-line focus:border-cyan outline-none transition-colors shadow-sm"
                 required
               />
             </div>
             <textarea
-              placeholder="Tell me about your project or inquiry..."
+              placeholder="Tell me about your project, role, or technical inquiry..."
               rows={4}
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-panel border border-line text-text focus:border-cyan outline-none transition-colors"
+              onChange={(e) => updateField("message", e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-white text-black font-semibold placeholder:text-gray-500 placeholder:font-normal border border-line focus:border-cyan outline-none transition-colors shadow-sm"
               required
             />
             <button
@@ -105,11 +128,11 @@ export const ContactSection = () => {
               className="btn btn-primary w-full justify-center text-base py-3 disabled:opacity-50"
             >
               {loading ? (
-                <span>Sending...</span>
+                <span>Sending Message...</span>
               ) : submitted ? (
                 <>
                   <CheckCircle className="w-5 h-5 mr-2 text-mint" />
-                  Message Saved &amp; Sent!
+                  Message Received!
                 </>
               ) : (
                 <>
@@ -118,6 +141,12 @@ export const ContactSection = () => {
                 </>
               )}
             </button>
+
+            {error && (
+              <p role="alert" className="text-sm text-rose text-center">
+                {error}
+              </p>
+            )}
           </form>
 
           <div className="contact-actions flex flex-wrap justify-center gap-3">
@@ -144,6 +173,10 @@ export const ContactSection = () => {
               <Instagram className="w-4 h-4" />
               <span className="label">Instagram:</span> @talha_9.91
             </a>
+            <a href="mailto:talhaghafoor84@gmail.com">
+              <Mail className="w-4 h-4" />
+              <span className="label">Email:</span> talhaghafoor84@gmail.com
+            </a>
           </div>
         </div>
 
@@ -152,14 +185,14 @@ export const ContactSection = () => {
           <div className="footer-inner">
             <div className="signature">
               <span className="ping" />
-              <span>Designed &amp; Built for Talha Ghafoor</span>
+              <span>Designed &amp; Developed for Talha Ghafoor</span>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
               <a href="mailto:talhaghafoor84@gmail.com" className="hover:text-cyan transition-colors break-all">
                 talhaghafoor84@gmail.com
               </a>
               <span className="hidden sm:inline">·</span>
-              <span>© {new Date().getFullYear()} Talha Ghafoor · SQA &amp; AI Specialist</span>
+              <span>© {new Date().getFullYear()} Talha Ghafoor · ML/AI · Python · QA · Full Stack</span>
             </div>
           </div>
         </footer>
