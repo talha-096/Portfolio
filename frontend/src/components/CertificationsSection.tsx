@@ -1,42 +1,33 @@
 export const CertificationsSection = () => {
   const certs = [
-    {
-      icon: "🧠",
-      badge: "Oracle Cloud",
-      badgeClass: "",
-      title: "OCI 2025 Certified AI Foundations Associate",
-      desc: "Validated expertise in AI foundations, machine learning concepts, deep neural networks, and Oracle Cloud AI infrastructure.",
-      issuer: "Oracle Corporation",
-      status: "Verified ✓"
-    },
-    {
-      icon: "🐍",
-      badge: "Python & ML",
-      badgeClass: "violet",
-      title: "Certified Python & Machine Learning",
-      desc: "Hands-on training in Python programming, data structures, scikit-learn models, data preprocessing, and model evaluation metrics.",
-      issuer: "Mars Computer Academy",
-      status: "Verified ✓"
-    },
-    {
-      icon: "🧪",
-      badge: "Software QA",
-      badgeClass: "mint",
-      title: "Software QA & Automation Testing",
-      desc: "Manual and automated test suite design (Cypress, Postman), test case execution, regression testing, and defect logging.",
-      issuer: "HITEC University CS Department",
-      status: "Honor ★"
-    },
-    {
-      icon: "☁️",
-      badge: "AWS & Cloud",
-      badgeClass: "amber",
-      title: "AWS Cloud & Microservices Deployment",
-      desc: "Building and verifying containerized serverless microservices on AWS ECS Fargate, Lambda, API Gateway, and Docker.",
-      issuer: "Amazon Web Services / HITEC",
-      status: "Verified ✓"
-    }
-  ];
+  {
+    "icon": "🧠",
+    "badge": "Oracle Cloud",
+    "badgeClass": "",
+    "title": "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    "desc": "AI and machine learning foundations.",
+    "issuer": "Oracle University",
+    "status": "Certification"
+  },
+  {
+    "icon": "🐍",
+    "badge": "Python & ML",
+    "badgeClass": "violet",
+    "title": "Certified Python & Machine Learning",
+    "desc": "Python programming and machine learning training.",
+    "issuer": "Mars Computer Academy",
+    "status": "Certification"
+  },
+  {
+    "icon": "🎮",
+    "badge": "Product Management",
+    "badgeClass": "mint",
+    "title": "Electronic Arts Product Management Job Simulation",
+    "desc": "Completed the Electronic Arts virtual job simulation in August 2025.",
+    "issuer": "Forage",
+    "status": "Job Simulation"
+  }
+];
 
   return (
     <section id="certifications" className="section-pad" data-screen-label="05 Certifications">
@@ -48,10 +39,10 @@ export const CertificationsSection = () => {
               05 / Credentials
             </div>
             <h2>
-              Validated expertise &amp; <span className="gradient">certifications</span>
+              Continued learning &amp; <span className="gradient">certifications</span>
             </h2>
           </div>
-          <div className="section-meta">Verified Cloud &amp; AI Credentials</div>
+          <div className="section-meta">Certifications &amp; Professional Learning</div>
         </div>
 
         <div className="certs-grid">

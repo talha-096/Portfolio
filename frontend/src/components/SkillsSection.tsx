@@ -33,10 +33,10 @@ export const SkillsSection = () => {
         "Python (v3.10+)",
         "FastAPI",
         "Flask",
-        "Async Python & Coroutines",
+        "Celery & Redis Task Queues",
         "RESTful API Development",
         "Pandas & NumPy Data Processing",
-        "Python Scripting & Automation"
+        "Docker & Git"
       ]
     },
     {
@@ -46,7 +46,7 @@ export const SkillsSection = () => {
       headClass: "",
       category: "qa_engineer",
       skills: [
-        "Cypress (E2E & UI Automation)",
+        "Selenium & Cypress Automation",
         "Postman API Contract Testing",
         "Test Case Design & Execution",
         "Functional & Manual Testing",
@@ -79,32 +79,31 @@ export const SkillsSection = () => {
     {
       name: "PyTorch, Transformers & ML/AI Models",
       category: "ml_ai",
-      experience: "ML/AI Specialist",
-      level: 90,
-      detail: "Developed 4-class mental health detection with RoBERTa embeddings, SHAP explainability plots, and SMOTE imbalance correction."
+      experience: "Machine Learning Projects",
+      detail: "Developed 4-class mental health detection with RoBERTa, sentiment and emotion features, SHAP explanations, and class-weighted loss."
     },
     {
       name: "FastAPI, Flask & Python Backend Systems",
       category: "python_dev",
       experience: "Python Developer",
-      level: 92,
-      detail: "Built high-performance FastAPI/Flask microservices, custom Pydantic contract schemas, and automated request logging telemetry."
+      detail: "Built Flask REST APIs, MongoDB data flows and Celery/Redis tasks for GenMark; used FastAPI for this portfolio backend."
     },
     {
-      name: "Cypress E2E & Postman API Automation",
+      name: "Selenium, Cypress & Postman Testing",
       category: "qa_engineer",
       experience: "QA Engineer",
-      level: 94,
-      detail: "Authored end-to-end Cypress test suites for React workflows and executed Postman API contract verification suites."
+      detail: "Served as the sole GenMark tester, using Selenium, Cypress and Postman for functional and API testing."
     },
     {
       name: "React, Next.js, Laravel & Full Stack Web",
       category: "fullstack_dev",
       experience: "Full Stack Developer",
-      level: 88,
       detail: "Built responsive web applications including localized Laravel 7 e-commerce, Next.js serverless routes, and interactive UI dashboards."
     }
   ];
+
+  const categoryOrder = ["python_dev", "qa_engineer", "ml_ai", "fullstack_dev"];
+  skillCategories.sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
 
   const filteredCategories = skillCategories.filter((cat) => {
     if (activeFilter !== "all" && cat.category !== activeFilter) return false;
@@ -145,10 +144,10 @@ export const SkillsSection = () => {
               02 / Technical Stack &amp; Domains
             </div>
             <h2>
-              Core technical stack across <span className="gradient">ML/AI, Python, QA &amp; Full Stack</span>
+              Tools for <span className="gradient">Python backend development &amp; SQA</span>
             </h2>
           </div>
-          <div className="section-meta">Targeted expertise in ML/AI · Python · QA · Full Stack Web</div>
+          <div className="section-meta">Flask · FastAPI · REST APIs · Selenium · API Testing</div>
         </div>
 
         {/* Filter & Search Bar */}
@@ -202,7 +201,7 @@ export const SkillsSection = () => {
             {filteredCategories.map((cat) => (
               <div
                 key={cat.id}
-                className="skill-card reveal"
+                className="skill-card"
                 onMouseMove={handleMouseMove}
               >
                 <div className={`skill-card-head ${cat.headClass}`}>
@@ -235,7 +234,7 @@ export const SkillsSection = () => {
               <h3 className="text-xl sm:text-2xl font-medium text-text">Domain Experience Matrix</h3>
             </div>
             <div className="text-xs text-muted mono">
-              Verified across ML/AI, Python, QA &amp; Full Stack Development
+              Applied in projects and internships
             </div>
           </div>
 
@@ -245,14 +244,6 @@ export const SkillsSection = () => {
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium text-text text-sm">{item.name}</span>
                   <span className="text-xs text-cyan mono font-semibold">{item.experience}</span>
-                </div>
-
-                {/* Progress bar */}
-                <div className="w-full h-1.5 bg-line rounded-full overflow-hidden mb-3">
-                  <div
-                    className="h-full bg-gradient-primary rounded-full transition-all duration-1000"
-                    style={{ width: `${item.level}%` }}
-                  />
                 </div>
 
                 <p className="text-xs text-text-2 leading-relaxed">{item.detail}</p>

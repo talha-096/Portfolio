@@ -1,9 +1,9 @@
 export const Marquee = () => {
   const items = [
-    "ML/AI",
-    "Python Developer",
+    "Software Engineer",
+    "Python Backend",
     "QA Engineer",
-    "Full Stack Web Developer",
+    "Selenium",
     "PyTorch & Transformers",
     "FastAPI & Flask",
     "Cypress E2E",

@@ -67,7 +67,7 @@ export const ContactSection = () => {
         <div className="contact-card reveal">
           <div className="availability">
             <span className="ring" />
-            Available for ML/AI, Python, QA &amp; Full Stack Opportunities
+            Open to Software Engineering, Python Backend &amp; SQA Roles
           </div>
 
           <h2>
@@ -76,7 +76,7 @@ export const ContactSection = () => {
           </h2>
 
           <p>
-            Whether you need custom ML/AI models, high-performance Python backend systems, Cypress/Postman QA automation, or full-stack web applications — feel free to get in touch.
+            I welcome opportunities in Python backend development, Software Quality Assurance, QA automation, and API development and testing. Open to full-time roles and internships.
           </p>
 
           <div className="contact-meta">
@@ -85,12 +85,12 @@ export const ContactSection = () => {
               <span className="l">DIRECT EMAIL</span>
             </div>
             <div className="item">
-              <span className="v">Islamabad, Pakistan</span>
+              <span className="v">Wah Cantt, Pakistan</span>
               <span className="l">LOCATION</span>
             </div>
             <div className="item">
-              <span className="v">&lt; 24 Hours</span>
-              <span className="l">RESPONSE TIME</span>
+              <span className="v">On-site · Hybrid · Remote</span>
+              <span className="l">WORK PREFERENCES</span>
             </div>
           </div>
 
@@ -192,7 +192,7 @@ export const ContactSection = () => {
                 talhaghafoor84@gmail.com
               </a>
               <span className="hidden sm:inline">·</span>
-              <span>© {new Date().getFullYear()} Talha Ghafoor · ML/AI · Python · QA · Full Stack</span>
+              <span>© {new Date().getFullYear()} Talha Ghafoor · Software Engineer · Python Backend · SQA</span>
             </div>
           </div>
         </footer>

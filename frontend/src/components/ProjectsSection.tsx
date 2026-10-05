@@ -74,8 +74,8 @@ export const ProjectsSection = () => {
       catClass: "genai",
       tint: "tint-mint",
       category: "Generative AI & SQA",
-      title: "GenMark: AI-Powered Marketing Platform",
-      subtitle: "AI Microservices + Cypress E2E & Postman Contract Test Suite",
+      title: "GenMark — Multi-Modal AI Marketing Content Platform",
+      subtitle: "Final-Year Project · 2025–2026 · Three-member team",
       img: "/projects/genmark/media__1782301041222.png",
       images: [
         "/projects/genmark/media__1782301041222.png",
@@ -85,17 +85,17 @@ export const ProjectsSection = () => {
         "/projects/genmark/media__1782301072169.png"
       ],
       metrics: [
-        { label: "Role", value: "AI & SQA Engineer" },
+        { label: "Role", value: "Backend Developer & Sole Tester" },
         { label: "Stack", value: "LLMs + Flask + React" },
-        { label: "Testing", value: "Cypress + Postman" }
+        { label: "Testing", value: "Selenium · Cypress · Postman" }
       ],
       description:
-        "Final Year Project: AI marketing platform featuring automated content generation, brand kit orchestration, and serverless AWS microservices verified via Cypress E2E suites.",
+        "Built Python backend services and served as the sole tester in a three-member team developing an AI marketing content platform at HITEC University.",
       features: [
-        "Automated Cypress E2E test coverage for React authentication and prompt workflows.",
-        "Postman API contract verification for FastAPI endpoints on AWS Fargate & Lambda."
+        "Developed Flask REST APIs with MongoDB and asynchronous tasks using Celery and Redis.",
+        "Performed functional and API testing with Selenium, Cypress and Postman; contributed to Docker packaging, CI/CD and technical documentation."
       ],
-      tech: ["Python", "Flask", "FastAPI", "React", "AWS", "Docker", "Cypress", "Postman"],
+      tech: ["Python", "Flask", "REST APIs", "MongoDB", "Celery", "Redis", "Docker", "React", "Selenium", "Cypress", "Postman"],
       github: "https://github.com/talha-096/GenMark",
       demo: "https://gen-mark-kappa.vercel.app/"
     },
@@ -127,8 +127,7 @@ export const ProjectsSection = () => {
         "Comprehensive Admin Dashboard for stock management, order status, PDF invoices & analytics."
       ],
       tech: ["PHP", "Laravel 7", "SQLite", "MySQL", "Bootstrap 4", "JavaScript", "HTML5", "CSS3"],
-      github: "https://github.com/talha-096/Ecommerce-Project",
-      demo: "https://github.com/talha-096/Ecommerce-Project"
+      github: "https://github.com/talha-096/Ecommerce-Project"
     },
     {
       id: "nlp",
@@ -136,8 +135,8 @@ export const ProjectsSection = () => {
       catClass: "ml",
       tint: "tint-violet",
       category: "Machine Learning",
-      title: "Mental Health NLP Affect Classifier",
-      subtitle: "PyTorch + RoBERTa Transformers + SHAP Explainability & SMOTE",
+      title: "Hybrid Transformer–Affective Mental Health Classification",
+      subtitle: "RoBERTa + Sentiment + Emotion Features · Personal Project · 2025",
       img: "/projects/nlp/classification-metrics.jpg",
       images: [
         "/projects/nlp/classification-metrics.jpg",
@@ -147,17 +146,17 @@ export const ProjectsSection = () => {
         "/projects/nlp/shap-waterfall.png"
       ],
       metrics: [
-        { label: "Accuracy", value: "83.83% F1" },
-        { label: "Explainability", value: "SHAP Interpret" },
-        { label: "Imbalance Fix", value: "SMOTE Recall 83%" }
+        { label: "Accuracy", value: "83.83%" },
+        { label: "Macro F1", value: "83.73%" },
+        { label: "Dataset", value: "~10,000 Posts" }
       ],
       description:
-        "4-class mental health NLP model using PyTorch and RoBERTa embeddings, optimized with SMOTE resampling to fix minority class imbalance.",
+        "Research project combining RoBERTa with sentiment and emotion features to classify approximately 10,000 Reddit posts across four categories. Achieved 83.83% accuracy and 83.73% macro F1-score.",
       features: [
-        "SMOTE class-imbalance fix boosting minority recall from 71% to 83%.",
-        "SHAP token interpretability highlighting key clinical indicator words."
+        "Used class-weighted loss to address class imbalance; achieved 94% F1-score for the Anxious category.",
+        "Explored model predictions with SHAP and documented the work in a research manuscript."
       ],
-      tech: ["Python", "PyTorch", "RoBERTa", "SHAP", "SMOTE", "scikit-learn"],
+      tech: ["Python", "PyTorch", "RoBERTa", "SHAP", "Class-weighted Loss", "scikit-learn"],
       github: "https://github.com/talha-096/NLP-Mental-Health-Classification-System",
       demo: "#"
     },
@@ -184,8 +183,7 @@ export const ProjectsSection = () => {
         "Multiple test modes (Time, Words, Quotes, Zen) and 6 customizable color themes."
       ],
       tech: ["Next.js 16", "React 19", "Tailwind CSS v4", "Web Audio API", "Base UI", "Recharts", "Motion"],
-      github: "https://github.com/talha-096/Keythm",
-      demo: "https://github.com/talha-096/Keythm"
+      github: "https://github.com/talha-096/Keythm"
     }
   ];
 
@@ -204,7 +202,7 @@ export const ProjectsSection = () => {
               04 / Selected work
             </div>
             <h2>
-              Verified systems, <span className="gradient">proven performance</span>
+              Software built, <span className="gradient">tested &amp; documented</span>
             </h2>
           </div>
           <div className="section-meta">GenAI · Frontend · Full-Stack · ML</div>
@@ -246,7 +244,7 @@ export const ProjectsSection = () => {
 
         <div className="projects-stack">
           {filteredProjects.map((p) => (
-            <article key={p.id} className={`project-card ${p.tint} reveal`}>
+            <article key={p.id} className={`project-card ${p.tint}`}>
               <ProjectCardImage p={p} onOpenModal={() => setSelectedProject(p)} />
 
               <div className="project-body">
@@ -287,6 +285,9 @@ export const ProjectsSection = () => {
                     </a>
                   )}
 
+                  {p.demo && p.demo !== "#" && (
+                    <a className="project-link" href={p.demo} target="_blank" rel="noopener noreferrer">live demo →</a>
+                  )}
                   <button
                     className="btn-case-study"
                     onClick={() => setSelectedProject(p)}
@@ -297,6 +298,14 @@ export const ProjectsSection = () => {
               </div>
             </article>
           ))}
+        </div>
+        <div className="mt-10 p-6 border border-line rounded-2xl bg-panel">
+          <h3 className="text-xl mb-5">Additional projects</h3>
+          <div className="grid md:grid-cols-3 gap-6 text-sm text-text-2">
+            <div><h4 className="text-text font-medium mb-2">Fake News Detector</h4><p>Python, TF-IDF, Logistic Regression and scikit-learn, with a Streamlit interface.</p></div>
+            <div><h4 className="text-text font-medium mb-2">Heart Disease Prediction Pipeline</h4><p>Python and scikit-learn pipeline using SMOTE to address class imbalance. Minority-class recall improved from approximately 71% to 83%.</p></div>
+            <div><h4 className="text-text font-medium mb-2">Flutter Fitness App</h4><p>Mobile fitness application built with Dart and Flutter, including a chatbot integrated with the Claude API.</p></div>
+          </div>
         </div>
       </div>
 

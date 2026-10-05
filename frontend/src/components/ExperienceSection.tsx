@@ -1,40 +1,72 @@
 export const ExperienceSection = () => {
   const experiences = [
-    {
-      role: "AI and Machine Learning Engineering Intern",
-      company: "Digital Empowerment Network",
-      period: "JUL 2025 - SEP 2025",
-      isCurrent: true,
-      points: [
-        "Designed and executed test cases to validate a mental health detection model (TF-IDF + Logistic Regression), achieving ~84% F1-score through threshold tuning.",
-        "Identified class-imbalance defect in heart disease detection pipeline; applied SMOTE as corrective fix and verified improvement via regression testing (minority recall ~71% → 83%).",
-        "Authored structured QA evaluation reports (precision, recall, AUC-ROC) and presented findings to engineering leadership."
-      ],
-      impactTags: [
-        "⚡ ~84% F1-Score Achieved",
-        "🎯 SMOTE Class-Imbalance Fix",
-        "📊 Regression & AUC-ROC QA"
-      ],
-      tech: ["Python", "scikit-learn", "TF-IDF", "Logistic Regression", "SMOTE", "Postman", "QA Metrics"]
-    },
-    {
-      role: "AI and Machine Learning Engineering Intern",
-      company: "DevelopersHub Corporation",
-      period: "JUN 2025 - JUL 2025",
-      isCurrent: false,
-      points: [
-        "Conducted systematic testing and validation of a CNN-based image classifier, confirming ~89% validation accuracy against target benchmarks.",
-        "Performed data quality testing on a ~6,000-image dataset (cleaning, labeling, flagging inconsistencies) to prevent overfitting.",
-        "Documented test results and error patterns across training runs in structured progress reports."
-      ],
-      impactTags: [
-        "🖼️ CNN Image Classifier QA",
-        "🧹 6,000-Image Data Cleaning",
-        "📈 ~89% Accuracy Benchmark"
-      ],
-      tech: ["Python", "PyTorch", "CNN", "Data Quality QA", "OpenCV", "Image Classification"]
-    }
-  ];
+  {
+    "role": "WordPress Developer & SEO Intern",
+    "company": "Alev Digital",
+    "period": "AUG 2026 - PRESENT",
+    "isCurrent": true,
+    "points": [
+      "Build and maintain client WordPress websites and responsive pages.",
+      "Apply on-page SEO through page titles, meta descriptions, heading structure and internal linking.",
+      "Support ongoing website updates and maintenance."
+    ],
+    "impactTags": [
+      "Client Websites",
+      "Responsive Pages",
+      "On-page SEO"
+    ],
+    "tech": [
+      "WordPress",
+      "HTML",
+      "CSS",
+      "SEO"
+    ]
+  },
+  {
+    "role": "Machine Learning Intern",
+    "company": "Digital Empowerment Network",
+    "period": "JUL 2025 - SEP 2025",
+    "isCurrent": false,
+    "points": [
+      "Built a mental-health text classifier using TF-IDF and Logistic Regression, achieving approximately 84% F1-score.",
+      "Applied SMOTE to a heart-disease prediction pipeline, improving minority-class recall from approximately 71% to 83%.",
+      "Prepared data, evaluated accuracy, precision, recall, F1 and AUC-ROC, and documented and presented findings."
+    ],
+    "impactTags": [
+      "~84% F1-score",
+      "Heart-disease recall ~71% → 83%"
+    ],
+    "tech": [
+      "Python",
+      "scikit-learn",
+      "TF-IDF",
+      "Logistic Regression",
+      "SMOTE"
+    ]
+  },
+  {
+    "role": "Machine Learning Intern",
+    "company": "DevelopersHub Corporation",
+    "period": "JUN 2025 - JUL 2025",
+    "isCurrent": false,
+    "points": [
+      "Developed and evaluated a CNN image classifier, achieving approximately 89% validation accuracy.",
+      "Preprocessed and labeled approximately 6,000 images for model training and evaluation.",
+      "Tracked experiments and documented results in weekly reports, using Git and GitHub for version control."
+    ],
+    "impactTags": [
+      "~89% Validation Accuracy",
+      "~6,000 Images"
+    ],
+    "tech": [
+      "Python",
+      "CNN",
+      "Image Classification",
+      "Git",
+      "GitHub"
+    ]
+  }
+];
 
   return (
     <section id="experience" className="section-pad" data-screen-label="03 Experience">
@@ -46,10 +78,10 @@ export const ExperienceSection = () => {
               03 / Track record
             </div>
             <h2>
-              From model validation to <span className="gradient">production QA</span>
+              Practical experience in <span className="gradient">web development &amp; ML</span>
             </h2>
           </div>
-          <div className="section-meta">2025 · 2 Engineering Internships</div>
+          <div className="section-meta">2025–2026 · 3 Internships</div>
         </div>
 
         <div className="timeline">
@@ -61,7 +93,7 @@ export const ExperienceSection = () => {
                   {exp.period}
                   {exp.isCurrent && (
                     <div>
-                      <span className="badge">● INTERNSHIP</span>
+                      <span className="badge">● CURRENT</span>
                     </div>
                   )}
                 </div>

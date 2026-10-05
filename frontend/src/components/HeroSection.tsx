@@ -5,15 +5,14 @@ import ConsoleWidget from "./ConsoleWidget";
 // Module scope: a new array identity on every render would either restart the
 // typing loop or (as before) force the effect to lie about its dependencies.
 const roles = [
-  "an AI/ML Engineer",
-  "a Machine Learning Engineer",
-  "building PyTorch & NLP models",
-  "deploying GenAI microservices",
-  "a Software Engineer"
+  "a Software Engineer",
+  "a Python Backend Developer",
+  "focused on Software Quality Assurance",
+  "building and testing REST APIs"
 ];
 
 export const HeroSection = () => {
-  const [typedRole, setTypedRole] = useState("an AI/ML Engineer");
+  const [typedRole, setTypedRole] = useState(roles[0]);
 
   useEffect(() => {
     let roleIdx = 0;
@@ -76,7 +75,7 @@ export const HeroSection = () => {
               <span>Pakistan</span>
               <span className="sep">/</span>
               <span className="text-cyan font-mono text-xs">BS SE (2022 – 2026)</span>
-              <span className="ring" title="Available for SQA & AI/ML Opportunities" />
+              <span className="ring" title="Available for Python Backend & SQA Opportunities" />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start mb-6">
@@ -94,24 +93,24 @@ export const HeroSection = () => {
 
               <div className="w-full">
                 <div className="hero-name mono">
-                  ML/AI · PYTHON DEVELOPER · QA ENGINEER · FULL STACK WEB
+                  SOFTWARE ENGINEER · PYTHON BACKEND · SQA
                 </div>
 
                 <h1 className="hero-headline text-balance">
                   <span className="line">
-                    <span>Architecting &amp;</span>
+                    <span>Building &amp;</span>
                   </span>
                   <span className="line">
                     <span>
-                      <em>deploying</em> AI models
+                      <em>testing</em> software
                     </span>
                   </span>
                   <span className="line">
-                    <span>built to perform in</span>
+                    <span>from APIs to</span>
                   </span>
                   <span className="line">
                     <span>
-                      <em>production.</em>
+                      <em>applications.</em>
                     </span>
                   </span>
                 </h1>
@@ -125,7 +124,7 @@ export const HeroSection = () => {
             </div>
 
             <p className="hero-desc font-sans text-sm sm:text-base">
-              Software Engineering graduate (HITEC University, 2026) &amp; Machine Learning / AI Engineer specializing in PyTorch deep learning, NLP transformers, model serving on AWS, and full-stack applications.
+              Software Engineer focused on Python backend development and Software Quality Assurance. I build REST APIs with Flask and FastAPI, test applications with Selenium, Cypress and Postman, and bring hands-on experience in AI-powered projects.
             </p>
 
             <div className="hero-ctas">
@@ -166,12 +165,12 @@ export const HeroSection = () => {
             {/* Stats Row */}
             <div className="hero-stats">
               <div className="hero-stat">
-                <div className="num">84%</div>
-                <div className="lbl">ML F1-Score</div>
+                <div className="num">3</div>
+                <div className="lbl">Internships</div>
               </div>
               <div className="hero-stat">
                 <div className="num">2</div>
-                <div className="lbl">AI Internships</div>
+                <div className="lbl">ML Internships</div>
               </div>
               <div className="hero-stat">
                 <div className="num">2</div>
@@ -187,16 +186,16 @@ export const HeroSection = () => {
           {/* Right Column: Interactive Console Widget */}
           <div className="hero-right">
             <div className="hero-chip chip-1">
-              <span className="dot" /> cypress::pass ✓
+              <span className="dot" /> Selenium + Cypress
             </div>
             <div className="hero-chip chip-2">
               <span className="dot violet" /> PyTorch + RoBERTa
             </div>
             <div className="hero-chip chip-3">
-              <span className="dot mint" /> Postman API contract
+              <span className="dot mint" /> Flask + REST APIs
             </div>
             <div className="hero-chip chip-4">
-              <span className="dot amber" /> aws:fargate ✓
+              <span className="dot amber" /> Celery + Redis
             </div>
 
             <ConsoleWidget />

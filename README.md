@@ -1,18 +1,24 @@
 # Talha Ghafoor — Portfolio 🚀
 
-> **Software Quality Assurance (SQA) Engineer · AI & Machine Learning Specialist · Full-Stack Developer**
+> **Software Engineer · Python Backend Developer · SQA Engineer**
 
-Welcome to my interactive personal portfolio and API telemetry system! This platform showcases my technical expertise, engineering projects, quality assurance test suites, FastAPI backend with database automation, and academic background.
+A portfolio focused on Python backend development and Software Quality Assurance, with supporting machine learning and web projects. The profile, internship dates and project results are aligned with my LinkedIn profile.
 
 ---
 
 ## 👤 About Me
 
 - **Degree:** Bachelor of Science in Software Engineering (2022 – 2026) — HITEC University, Taxila
-- **Location:** Pakistan
+- **Location:** Wah Cantt, Punjab, Pakistan
 - **Email:** [talhaghafoor84@gmail.com](mailto:talhaghafoor84@gmail.com)
 - **GitHub:** [github.com/talha-096](https://github.com/talha-096)
 - **LinkedIn:** [Talha Ghafoor](https://www.linkedin.com/in/talha-ghafoor-475aa926a/)
+
+## Experience
+
+- **Alev Digital — WordPress Developer & SEO Intern:** August 2026–present. Client websites, responsive pages, on-page SEO and maintenance.
+- **Digital Empowerment Network — Machine Learning Intern:** July–September 2025. TF-IDF/Logistic Regression mental-health classifier (~84% F1); separate heart-disease pipeline using SMOTE (~71% to 83% minority recall).
+- **DevelopersHub Corporation — Machine Learning Intern:** June–July 2025. CNN image classifier (~89% validation accuracy), approximately 6,000 images and experiment reporting.
 
 ---
 
@@ -75,16 +81,16 @@ talha-Portfolio/
   - Centralized `config.py` prevents env-var load-order issues across modules.
 
 - **🎨 Premium Interactive UI**
-  Glassmorphism cards, animated orbit effects, command palette, architecture visualizer, Cypress test runner demo, and image carousels for project case studies.
+  Glassmorphism cards, animated orbit effects, command palette, factual project highlights and image carousels for project case studies. Legacy simulation components remain in the source but are not presented as live project evidence on the homepage.
 
 ---
 
 ## 🛠️ Featured Engineering Projects
 
 ### 1. 🌟 GenMark: AI-Powered Marketing Platform
-- **Role:** AI & Full-Stack Engineer + SQA & Automation Lead
+- **Role:** Backend Developer & Sole Tester (three-member team)
 - **Description:** Final Year Project. An advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration.
-- **Tech Stack:** React, Vite, TypeScript, TailwindCSS, Python, Flask, FastAPI, MongoDB, AWS (ECS Fargate, Lambda, API Gateway, S3, ECR), Docker, Cypress, Postman
+- **Tech Stack:** Python, Flask, REST APIs, MongoDB, Celery, Redis, Docker, React, TypeScript, Selenium, Cypress, Postman
 - **Key Features:** LLM Marketing Copy Generation, Brand Kit Context Management, Microservices Architecture, Cypress E2E Test Suites, Postman API Contract Testing.
 - **Links:** [GitHub](https://github.com/talha-096/GenMark) · [Live Demo](https://gen-mark-kappa.vercel.app/)
 
@@ -96,8 +102,8 @@ talha-Portfolio/
 
 ### 3. 🧠 NLP Mental Health Affect Classifier & SHAP Explainer
 - **Role:** AI/ML Engineer & QA Analyst
-- **Tech Stack:** Python, PyTorch, scikit-learn, RoBERTa, TF-IDF, SMOTE, SHAP
-- **Key Features:** ~84% F1-Score, 4-class classification, SMOTE class-imbalance correction (minority recall 71% → 83%), SHAP token impact explainer, regression testing verification.
+- **Tech Stack:** Python, PyTorch, scikit-learn, RoBERTa, sentiment and emotion features, class-weighted loss, SHAP
+- **Key Features:** 83.83% accuracy, 83.73% macro F1, four-category classification of approximately 10,000 Reddit posts, class-weighted loss, SHAP explanations and a research manuscript.
 - **Links:** [GitHub](https://github.com/talha-096/NLP-Mental-Health-Classification-System)
 
 ### 4. ⌨️ Keythm – Mechanical Typing Speed App

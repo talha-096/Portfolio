@@ -55,16 +55,16 @@ export const OrbitCard = () => {
     <div className="orbit-card reveal reveal-delay-2">
       <div className="label-top">
         <span>// CORE_LOOP</span>
-        <span style={{ color: "var(--cyan)" }}>● live</span>
+        <span style={{ color: "var(--cyan)" }}>● toolkit</span>
       </div>
-      <div className="title-mid">Daily Tech Orbit</div>
+      <div className="title-mid">Technical Toolkit</div>
 
       <div className="orbit-stage" ref={stageRef}>
         <div className="orbit-ring r3" />
         <div className="orbit-ring r2" />
         <div className="orbit-ring r1" />
 
-        <div className="orbit-core">AI/QA</div>
+        <div className="orbit-core">DEV/QA</div>
 
         {nodes.map((n, i) => (
           <div key={i} className={`orbit-node ${n.ringClass}`}>
@@ -75,7 +75,7 @@ export const OrbitCard = () => {
 
       <div className="label-top" style={{ marginTop: "auto" }}>
         <span>tools_in_motion = 12</span>
-        <span>verified daily</span>
+        <span>project experience</span>
       </div>
     </div>
   );
