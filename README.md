@@ -1,201 +1,59 @@
-# Talha Ghafoor — Portfolio 🚀
+# Talha — Portfolio
 
-> **Software Engineer | Full-Cycle Developer | Backend Architect | SQA & SEO Expert**
+![OG image](public/og.jpg)
 
-A high-performance portfolio showcasing a complete software development lifecycle approach: from architecting scalable Python backends and intuitive user interfaces to ensuring production-grade reliability via rigorous SQA and search engine optimization.
+**Live demo:** [talha-portfolio.vercel.app](https://talha-portfolio.vercel.app)
 
----
+> Talha — I build solutions for a better tomorrow. A cinematic, single-page developer portfolio built with Next.js 16, featuring full-bleed video backgrounds, scroll-reveal motion, and a production-grade contact API.
 
-## 👤 About Me
+## Tech stack
 
-- **Degree:** Bachelor of Science in Software Engineering (2022 – 2026) — HITEC University, Taxila
-- **Location:** Taxila, Pakistan
-- **Email:** [talhaghafoor84@gmail.com](mailto:talhaghafoor84@gmail.com)
-- **GitHub:** [github.com/talha-096](https://github.com/talha-096)
-- **LinkedIn:** [Talha Ghafoor](https://www.linkedin.com/in/talha-ghafoor-475aa926a/)
-- **Resume:** [View Markdown CV](./CV.md)
+- **Framework:** Next.js 16 (App Router, Turbopack) + TypeScript
+- **Styling:** Tailwind CSS v4
+- **Motion:** framer-motion (with `MotionConfig reducedMotion="user"`)
+- **Contact API:** Resend + Zod validation + in-memory rate limiting
+- **Deployment:** Vercel
 
-## Experience
+## Features
 
-- **Alev Digital — WordPress Developer & SEO Intern:** August 2026–present. Client websites, responsive pages, on-page SEO and maintenance.
-- **Digital Empowerment Network — Machine Learning Intern:** July–September 2025. TF-IDF/Logistic Regression mental-health classifier (~84% F1); separate heart-disease pipeline using SMOTE (~71% to 83% minority recall).
-- **DevelopersHub Corporation — Machine Learning Intern:** June–July 2025. CNN image classifier (~89% validation accuracy), approximately 6,000 images and experiment reporting.
+- **Six sections** — Hero, About, Projects (3D tilt cards + filters), Skills (category tabs), Contact, Footer
+- **Contact API** (`POST /api/contact`) — Zod-validated, HTML-escaped emails via Resend, 5 req/min/IP sliding-window rate limit, honeypot-free with in-flight dedupe on the client
+- **Accessibility** — global `:focus-visible` outline, `aria-expanded` nav toggle, `role="status"` form feedback, `aria-hidden` decorative videos, reduced-motion pauses all background videos
+- **SEO** — canonical + Open Graph + Twitter cards, `Person`/`WebSite` JSON-LD, `robots.ts`, `sitemap.ts`, branded favicon/apple-icon/manifest
+- **Performance** — 1080p audio-stripped background videos (−86% bytes), WebP posters, `preload="metadata"`, mobile poster fallbacks that skip video entirely
 
----
+## Getting started
 
-## 🏗️ Architecture Overview
-
-The system is structured as a decoupled **React 18 + Vite Frontend** and a **FastAPI + SQLModel / Supabase PostgreSQL Backend**:
-
-```
-talha-Portfolio/
-├── backend/                    # High-Performance FastAPI Backend
-│   ├── app/
-│   │   ├── api/                # API Routers (contact, nlp, analytics)
-│   │   ├── schemas/            # Pydantic contract schemas
-│   │   ├── services/           # Email notification & local JSON backups
-│   │   ├── config.py           # Centralized env-var loader (single source of truth)
-│   │   ├── security.py         # Rate limiter & admin-key guard
-│   │   ├── models.py           # SQLModel data models
-│   │   ├── database.py         # DB engine & session management
-│   │   └── storage.py          # Telemetry & in-memory fallback storage
-│   ├── main.py                 # Entrypoint & automated request-logging middleware
-│   ├── setup_supabase.py       # Supabase table bootstrapper
-│   ├── test_api.py             # API smoke tests
-│   └── requirements.txt        # Python dependencies
-│
-├── frontend/                   # React 18 + TypeScript + Vite UI
-│   ├── public/
-│   │   └── projects/           # Project screenshots (genmark, ecommerce, keythm, nlp)
-│   ├── src/
-│   │   ├── components/         # 17 UI components (Hero, Skills, Projects, AI Playground, Console, etc.)
-│   │   ├── pages/              # Route pages (Home, NotFound)
-│   │   └── App.tsx             # Route setup & automated visitor tracking
-│   ├── package.json            # Node dependencies
-│   └── vite.config.ts          # Vite configuration
-│
-├── vercel.json                 # Vercel deployment config
-├── .gitignore                  # Protects secrets, .env files, & build outputs
-└── README.md                   # Project documentation (you are here)
-```
-
----
-
-## ✨ Key System Features
-
-- **⚡ Automated Request & Telemetry Logging**
-  Custom HTTP middleware automatically logs method, path, query strings, execution latency (ms), status codes, client IP, and user agents.
-
-- **📩 Contact Message Handling & Email Notifications**
-  Processes contact form submissions while dispatching email alerts and persisting local JSON backups.
-
-- **🤖 AI Playground & Chat Prompt Telemetry**
-  Interactive terminal chat & mental health NLP classification system. Every query, prompt, and SHAP explainability evaluation is logged.
-
-- **📊 Visitor Traffic & Navigation Analytics**
-  Automated frontend visitor tracker logs page navigation and user sessions.
-
-- **🛡️ Centralized Security & Rate Limiting**
-  - Hardened with HTTP Security Headers (`X-Frame-Options`, `X-XSS-Protection`, `Strict-Transport-Security`, `nosniff`).
-  - SlowAPI rate limiting via a single shared `Limiter` instance across all routers.
-  - Admin API key guard (`secrets.compare_digest`) protecting sensitive read-back endpoints.
-  - Centralized `config.py` prevents env-var load-order issues across modules.
-
-- **🎨 Premium Interactive UI**
-  Glassmorphism cards, animated orbit effects, command palette, factual project highlights and image carousels for project case studies. Legacy simulation components remain in the source but are not presented as live project evidence on the homepage.
-
----
-
-## 🛠️ Featured Engineering Projects
-
-### 1. 🌟 GenMark: AI-Powered Marketing Platform
-- **Role:** Backend Developer & Sole Tester (three-member team)
-- **Description:** Final Year Project. An advanced platform designed to streamline marketing workflows through AI-driven content generation, brand identity management, and automated project orchestration.
-- **Tech Stack:** Python, Flask, REST APIs, MongoDB, Celery, Redis, Docker, React, TypeScript, Selenium, Cypress, Postman
-- **Key Features:** LLM Marketing Copy Generation, Brand Kit Context Management, Microservices Architecture, Cypress E2E Test Suites, Postman API Contract Testing.
-- **Links:** [GitHub](https://github.com/talha-096/GenMark) · [Live Demo](https://gen-mark-kappa.vercel.app/)
-
-### 2. 🛒 E-Commerce Web Application
-- **Role:** Full-Stack Developer
-- **Tech Stack:** PHP (Laravel 7), SQLite/MySQL, HTML5, CSS3, JavaScript, Bootstrap 4
-- **Key Features:** Localized shopping in PKR, nationwide Cash on Delivery (COD) & express city shipping, product catalog with live search, discount coupons, order tracking, and comprehensive Admin Dashboard (stock management, order status, PDF invoices).
-- **Links:** [GitHub](https://github.com/talha-096/Ecommerce-Project)
-
-### 3. 🧠 NLP Mental Health Affect Classifier & SHAP Explainer
-- **Role:** AI/ML Engineer & QA Analyst
-- **Tech Stack:** Python, PyTorch, scikit-learn, RoBERTa, sentiment and emotion features, class-weighted loss, SHAP
-- **Key Features:** 83.83% accuracy, 83.73% macro F1, four-category classification of approximately 10,000 Reddit posts, class-weighted loss, SHAP explanations and a research manuscript.
-- **Links:** [GitHub](https://github.com/talha-096/NLP-Mental-Health-Classification-System)
-
-### 4. ⌨️ Keythm – Mechanical Typing Speed App
-- **Role:** Frontend Developer
-- **Tech Stack:** Next.js 16, React 19, Tailwind CSS v4, Web Audio API, Base UI, Recharts, Motion
-- **Key Features:** Web Audio API per-key mechanical audio synthesis, real-time WPM/accuracy tracking, interactive virtual keyboard with live highlighting, multiple test modes (Time, Words, Quotes, Zen), and 6 customizable color themes.
-- **Links:** [GitHub](https://github.com/talha-096/Keythm)
-
----
-
-## 🚀 Quick Start / Local Setup
-
-### 1. Clone the repository
 ```bash
-git clone https://github.com/talha-096/Portfolio.git
-cd Portfolio
-```
-
-### 2. Run Backend (FastAPI + Database)
-```bash
-cd backend
-python -m venv venv
-
-# On Windows:
-venv\Scripts\activate
-# On Linux/macOS:
-source venv/bin/activate
-
-pip install -r requirements.txt
-cp .env.example .env      # Fill in your env vars
-
-# Initialize DB & start backend API server
-python main.py
-```
-*Backend API will run at `http://localhost:8000` (Docs at `http://localhost:8000/docs`).*
-
-### 3. Run Frontend (React + Vite)
-```bash
-cd frontend
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
-*Frontend will run at `http://localhost:5173`.*
 
----
+Other scripts:
 
-## ⚙️ Environment Variables
+```bash
+npm run lint       # ESLint
+npm run typecheck  # tsc --noEmit
+npm run test       # Vitest unit tests
+npm run build      # production build
+```
 
-Create a `.env` file in `backend/` (see `.env.example`):
+## Environment variables
 
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | Supabase / PostgreSQL connection string |
-| `ALLOWED_ORIGINS` | Comma-separated CORS origins |
-| `ADMIN_API_KEY` | Secret key for admin read-back endpoints |
-| `OWNER_EMAIL` | Email address for contact notifications |
-| `SMTP_HOST` | SMTP server (default: `smtp.gmail.com`) |
-| `SMTP_PORT` | SMTP port (default: `587`) |
-| `SMTP_USER` | SMTP login username |
-| `SMTP_PASSWORD` | SMTP login password / app password |
-| `MAX_STORE_ENTRIES` | In-memory store size limit (default: `500`) |
+Copy `.env.example` and fill in (server-side only — never expose with a `NEXT_PUBLIC_` prefix):
 
----
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Resend API key for sending contact emails |
+| `CONTACT_EMAIL` | Inbox that receives contact submissions |
+| `RESEND_FROM` | Optional From address (falls back to `onboarding@resend.dev`) |
 
-## 🌐 Free Live Deployment Guide (GitHub Student Pack)
+## Deployment
 
-1. **Backend Deployment (Render.com)**:
-   - Create a Web Service connected to your repository.
-   - Root Directory: `backend` | Build: `pip install -r requirements.txt` | Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+Pushes to `main` run the [CI workflow](.github/workflows/ci.yml) (lint → typecheck → build). Production deploys run on Vercel.
 
-2. **Frontend Deployment (Vercel.com)**:
-   - Import repository to Vercel.
-   - Root Directory: `frontend` | Env Var: `VITE_BACKEND_URL` = `https://your-backend-api.onrender.com`
+## Links
 
-3. **Free Custom Domain Setup**:
-   - Claim a free domain on **Namecheap** (`.me`) or **Name.com** (`.tech`) via [GitHub Student Developer Pack](https://education.github.com/pack).
-   - Add Vercel DNS Records (`A Record @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com`).
-
----
-
-## 📂 Tech Stack Summary
-
-| Layer | Technologies |
-|---|---|
-| **Frontend** | React 18, TypeScript, Vite, Vanilla CSS |
-| **Backend** | Python, FastAPI, SQLModel, Pydantic |
-| **Database** | Supabase PostgreSQL |
-| **Security** | SlowAPI Rate Limiting, Admin Key Auth, Security Headers |
-| **DevOps** | Vercel (Frontend), Render (Backend), GitHub Actions |
-| **Testing** | Cypress E2E, Postman API Contracts, pytest |
-
----
-
-© 2026 Talha Ghafoor. Built for high performance, reliability, & automated quality assurance.
+- [GitHub](https://github.com/talha-096)
+- [LinkedIn](https://www.linkedin.com/in/talha-ghafoor-475aa926a)
+- [Resume (PDF)](https://talha-portfolio.vercel.app/resume.pdf)

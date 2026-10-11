@@ -23,7 +23,6 @@ export type SkillCategory =
   | "Databases"
   | "DevOps"
   | "Architecture"
-  | "Computer Science"
   | "CMS";
 
 export interface Skill {
@@ -66,6 +65,5 @@ export const SKILL_FILTERS: { label: string; value: SkillCategory | "All" }[] = 
   { label: "Databases", value: "Databases" },
   { label: "DevOps", value: "DevOps" },
   { label: "Architecture", value: "Architecture" },
-  { label: "Computer Science", value: "Computer Science" },
   { label: "CMS", value: "CMS" },
 ];
