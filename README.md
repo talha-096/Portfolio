@@ -1,18 +1,19 @@
 # Talha Ghafoor — Portfolio 🚀
 
-> **Software Engineer · Python Backend Developer · SQA Engineer**
+> **Software Engineer | Full-Cycle Developer | Backend Architect | SQA & SEO Expert**
 
-A portfolio focused on Python backend development and Software Quality Assurance, with supporting machine learning and web projects. The profile, internship dates and project results are aligned with my LinkedIn profile.
+A high-performance portfolio showcasing a complete software development lifecycle approach: from architecting scalable Python backends and intuitive user interfaces to ensuring production-grade reliability via rigorous SQA and search engine optimization.
 
 ---
 
 ## 👤 About Me
 
 - **Degree:** Bachelor of Science in Software Engineering (2022 – 2026) — HITEC University, Taxila
-- **Location:** Wah Cantt, Punjab, Pakistan
+- **Location:** Taxila, Pakistan
 - **Email:** [talhaghafoor84@gmail.com](mailto:talhaghafoor84@gmail.com)
 - **GitHub:** [github.com/talha-096](https://github.com/talha-096)
 - **LinkedIn:** [Talha Ghafoor](https://www.linkedin.com/in/talha-ghafoor-475aa926a/)
+- **Resume:** [View Markdown CV](./CV.md)
 
 ## Experience
 
