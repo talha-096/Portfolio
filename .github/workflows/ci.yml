@@ -1,18 +1,26 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  test-and-build:
+    name: Test & Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
@@ -20,16 +28,44 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
+      - name: Lint checks
         run: npm run lint
 
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Test
+      - name: Run unit tests
         run: npm test
 
-      - name: Build
+      - name: Build Next.js production bundle
         run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: "1"
+
+  deploy:
+    name: Deploy to Vercel
+    needs: [test-and-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        if: env.VERCEL_TOKEN != ''
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deployment status
+        if: env.VERCEL_TOKEN == ''
+        run: |
+          echo "VERCEL_TOKEN not configured in GitHub Secrets."
+          echo "Automated git-push deployment is active via Vercel GitHub Integration."
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
