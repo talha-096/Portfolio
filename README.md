@@ -1,7 +1,5 @@
 # Talha — Portfolio
 
-![OG image](public/og.jpg)
-
 **Live demo:** [talha-portfolio.vercel.app](https://talha-portfolio.vercel.app)
 
 > Talha — I build solutions for a better tomorrow. A cinematic, single-page developer portfolio built with Next.js 16, featuring full-bleed video backgrounds, scroll-reveal motion, and a production-grade contact API.
